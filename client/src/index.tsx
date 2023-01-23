@@ -18,6 +18,9 @@ import { PersistGate } from 'redux-persist/integration/react';
 import Sell from './routes/Sell';
 import Login from './routes/Login';
 import Register from './routes/Register';
+import Checkout from './routes/Checkout';
+import SinglePokemon from './routes/SinglePokemon';
+import Profile from './routes/Profile';
 
 
 const router = createBrowserRouter([
@@ -41,6 +44,18 @@ const router = createBrowserRouter([
       {
         path: "/Register",
         element: <Register />,
+      },
+      {
+        path: "/Checkout",
+        element: <Checkout />,
+      },
+      {
+        path: "/SinglePokemon/:id",
+        element: <SinglePokemon />,
+      },
+      {
+        path: "/Profile",
+        element: <Profile />,
       },
     ],
   },

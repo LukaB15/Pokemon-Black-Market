@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
-import { Counter } from './features/counter/Counter';
 import Navbar from './components/header/Navbar';
 import { Outlet } from "react-router-dom";
 

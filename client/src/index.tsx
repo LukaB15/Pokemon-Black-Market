@@ -59,10 +59,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   path: "/Helloworld",
-  //   element: <Helloworld />,
-  // },
 ]);
 const container = document.getElementById('root')!;
 const root = createRoot(container);

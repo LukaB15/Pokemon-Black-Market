@@ -17,8 +17,8 @@ export default function Home() {
         <div className="w-full md:w-1/2 p-8">
           <h1 className="mb-6 text-2xl md:text-4xl lg:text-6xl font-bold font-heading md:max-w-xl leading-none title_home">Welcome to </h1>
           <h1 className="mb-6 text-2xl md:text-4xl lg:text-6xl font-bold font-heading md:max-w-xl leading-none title_home">PokeMarket</h1>
-          <p className="mb-1 text-lg text-gray-900 font-medium md:max-w-md">Buy every Pokemon to become the best trainor in the ligue.</p>
-          <p className="mb-11 text-lg text-gray-900 font-medium md:max-w-md">Sell your Pokemon to become the richest trainor in the ligue.</p>
+          <p className="mb-1 text-lg text-gray-900 font-medium md:max-w-md">Buy every Pokemon to become the best trainer in the league.</p>
+          <p className="mb-11 text-lg text-gray-900 font-medium md:max-w-md">Sell your Pokemon to become the richest trainer in the league.</p>
           <div className="flex flex-wrap -m-2.5 mb-20">
             <div className="w-full md:w-auto p-2.5">
               <div className="block">
@@ -41,7 +41,10 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <p className="mb-6 text-sm text-gray-500 font-semibold uppercase">Trusted and loved by the team ROCKET</p>
+          <div className='flex flex-row items-center'>
+         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-pokeball" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <circle cx="9" cy="9" r="9" transform="translate(3 3)" /> <circle cx="12" cy="12" r="3" /> <path d="M3 12h6m6 0h6" /> </svg>
+         <p className="text-sm text-gray-500 font-semibold uppercase pl-2">Trusted and loved by the team ROCKET </p>
+          </div>
           <div className="flex flex-wrap -m-3">
             <div className="w-auto p-3">
               <img src="flaro-assets/logos/brands/brand.png" alt="" />
@@ -64,7 +67,7 @@ export default function Home() {
 
 {/* Certifications */}
 
-<div className=' w-screen h-96 mt-8 flex lg:flex-row md:flex-col md:pt-8 md:pb-8 place-content-evenly items-center flex-col certif_container'>
+<div className=' w-full h-96 mt-8 flex lg:flex-row md:flex-col md:pt-8 md:pb-8 place-content-evenly items-center flex-col certif_container'>
       <div>
             <p className='text-3xl hover:scale-125 transition ease-in-out duration-1000 certif_txt '><CountUp end={100} />% QUALITY</p>
       </div>

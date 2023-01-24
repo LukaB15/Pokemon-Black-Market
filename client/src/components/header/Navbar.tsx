@@ -57,16 +57,16 @@ export default function Navbar() {
             </div>
             <ul className="flex flex-col items-center justify-between min-h-[250px]">
               <li className="border-b border-gray-400 my-8 uppercase">
-                <Link to={`/Buy`} onClick={() => setIsNavOpen(false)} className="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 md:p-0 md:hover:bg-transparent md:hover:text-blue-700" aria-current="page">Buy</Link>
+                <Link to={`/Buy`} onClick={() => setIsNavOpen(false)} className="block rounded py-2 pl-3 pr-4 text-red-rocket  md:p-0 " aria-current="page">Buy</Link>
               </li>
               <li className="border-b border-gray-400 my-8 uppercase">
-                <Link to={`/Sell`} onClick={() => setIsNavOpen(false)} className="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 md:p-0 md:hover:bg-transparent md:hover:text-blue-700" aria-current="page">Sell</Link>
+                <Link to={`/Sell`} onClick={() => setIsNavOpen(false)} className="block rounded py-2 pl-3 pr-4 text-red-rocket  md:p-0  " aria-current="page">Sell</Link>
               </li>
               <li className="border-b border-gray-400 my-8 uppercase">
-                <Link to={`/Login`} onClick={() => setIsNavOpen(false)} className="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 md:p-0 md:hover:bg-transparent md:hover:text-blue-700" aria-current="page">Login</Link>
+                <Link to={`/Login`} onClick={() => setIsNavOpen(false)} className="block rounded py-2 pl-3 pr-4 text-red-rocket  md:p-0  " aria-current="page">Login</Link>
               </li>
               <li className="border-b border-gray-400 my-8 uppercase">
-                <Link to={`/Register`} onClick={() => setIsNavOpen(false)} className="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 md:p-0 md:hover:bg-transparent md:hover:text-blue-700" aria-current="page">Register</Link>
+                <Link to={`/Register`} onClick={() => setIsNavOpen(false)} className="block rounded py-2 pl-3 pr-4 text-red-rocket  md:p-0 " aria-current="page">Register</Link>
               </li>
             </ul>
           </div>

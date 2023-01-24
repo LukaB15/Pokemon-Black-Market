@@ -67,15 +67,15 @@ export default function Home() {
 
 {/* Certifications */}
 
-<div className=' w-full h-96 mt-8 flex lg:flex-row md:flex-col md:pt-8 md:pb-8 place-content-evenly items-center flex-col certif_container'>
+<div className=' xl:static w-full h-96 mt-8 flex lg:flex-row md:flex-col md:pt-8 md:pb-8 place-content-evenly items-center flex-col certif_container'>
       <div>
-            <p className='text-3xl hover:scale-125 transition ease-in-out duration-1000 certif_txt '><CountUp end={100} />% QUALITY</p>
+            <p className='text-3xl hover:scale-125 transition ease-in-out duration-1000 md-32 certif_txt '><CountUp end={100} />% QUALITY</p>
+      </div>
+      <div className='xl:absolute xl:bottom-50 xl:right-50'>
+            <img className=' md:pt-8 md:pb-8 md:w-40 lg:w-full w-32 hover:scale-75 transition ease-in-out duration-1000' src='Original_Nintendo_Seal_of_Quality.png' />
       </div>
       <div>
-            <img className='md:pt-8 md:pb-8 md:w-40 lg:w-full w-32 hover:scale-75 transition ease-in-out duration-1000' src='Original_Nintendo_Seal_of_Quality.png' />
-      </div>
-      <div>
-            <p className='text-3xl text-center hover:scale-125 transition ease-in-out duration-1000 certif_txt '>+ <CountUp end={1200} /> POKEMON<br/>AVAILAIBLE</p>
+            <p className='text-3xl text-center hover:scale-125 transition ease-in-out duration-1000 2xl:ml-32  certif_txt '>+ <CountUp end={1200} /> POKEMON<br/>AVAILAIBLE</p>
       </div>
 </div>
 

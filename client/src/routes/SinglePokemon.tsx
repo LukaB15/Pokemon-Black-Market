@@ -17,7 +17,7 @@ export default function SinglePokemon() {
     fetchPokemon(id);
     console.log(pokemon);
     
-    })
+    },[]);
   return (
     <div>SinglePokemon</div>
   )

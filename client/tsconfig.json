@@ -27,7 +27,7 @@
   },
   "include": [
     "src/**/*.ts*"
-  ],
+, "src/error-page.js"  ],
   "exclude": [
     "node_modules", "dist", "lib"
   ]

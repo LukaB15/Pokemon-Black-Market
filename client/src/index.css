@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+      @font-face {
+        font-family: Pokemon;
+        src: url(../public/Pokemon\ Classic.ttf);
+      }
+      @font-face {
+            font-family: Evolite;
+            src: url(../public/evollite.ttf);
+          }
+    }

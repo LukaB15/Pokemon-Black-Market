@@ -1,0 +1,7 @@
+[type='checkbox']:focus,[type='password']:focus,[type='text']:focus{
+      border-color: #EC4962 !important;
+      box-shadow: none !important;
+}
+.title_form{
+      font-family: Pokemon;
+}

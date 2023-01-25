@@ -1,6 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
+import Navbar from './components/header/Navbar';
+import { Outlet } from "react-router-dom";
+import Footer from './components/footer/Footer';
 
 function App() {
   const [data, setData] = useState(null);
@@ -11,12 +13,11 @@ function App() {
       .then((data) => setData(data.message));
   }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? "Loading..." : data}</p>
-      </header>
-    </div>
+    <>
+    <Navbar />
+    <Outlet />
+    <Footer />
+    </>
   );
 }
 

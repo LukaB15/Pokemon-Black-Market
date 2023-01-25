@@ -1,0 +1,36 @@
+.title_home{
+      font-family: Pokemon;
+}
+.buy_btn{
+      background-color: #EC4962;
+      border: 1px solid #EC4962;
+}
+.buy_btn:hover{
+      background-color: white;
+      border: 1px solid #EC4962;
+      color: #EC4962;
+}
+.sell_btn{
+      background-color: #C0D2CE;
+      color: #2E2A34;
+      border: 1px solid #C0D2CE;
+}
+.sell_btn:hover{
+      background-color: white;
+      border: 1px solid #2E2A34;
+}
+.certif_container{
+      background-color: #C0D2CE;
+      border-top: 5px solid#2E2A34;
+      border-bottom: 5px solid #2E2A34;
+}
+.certif_txt{
+      color: #2E2A34;
+      font-family: Pokemon;
+}
+.team_title{
+      color: #EC4962;
+      font-family: Pokemon;
+}
+
+    

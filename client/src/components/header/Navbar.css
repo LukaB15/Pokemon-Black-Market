@@ -1,0 +1,41 @@
+.icon-tabler-pokeball{
+      color:#EC4962;
+}
+button.btn_login.rounde.mr-3.hidden.border.py-1\.5.px-6.text-center.text-sm.font-medium.focus\:outline-none.focus\:ring-4.md\:inline-block.rounded-lg {
+      background-color: #C0D2CE;
+      color: #2E2A34;
+      border: 1px solid #C0D2CE;
+  }
+  button.btn_login.rounde.mr-3.hidden.border.py-1\.5.px-6.text-center.text-sm.font-medium.focus\:outline-none.focus\:ring-4.md\:inline-block.rounded-lg:hover {
+      background-color: white;
+    border: 1px solid #2E2A34
+  }
+  button.rounde.mr-3.hidden.bg-blue-700.py-1\.5.px-6.text-center.text-sm.font-medium.text-white.hover\:bg-blue-800.focus\:outline-none.focus\:ring-4.focus\:ring-blue-300.md\:mr-0.md\:inline-block.rounded-lg.btn_register{
+      background-color: #EC4962;
+      border: 1px solid #EC4962;
+  }
+  button.rounde.mr-3.hidden.bg-blue-700.py-1\.5.px-6.text-center.text-sm.font-medium.text-white.hover\:bg-blue-800.focus\:outline-none.focus\:ring-4.focus\:ring-blue-300.md\:mr-0.md\:inline-block.rounded-lg.btn_register:hover{
+      background-color: white;
+      border: 1px solid #EC4962;
+      color: #EC4962;
+}
+.btn_buy{
+      font-family: Pokemon;
+}
+.btn_buy:hover{
+      color:#EC4962 !important;
+}
+.btn_buy:focus{
+      color:#EC4962 !important;
+}
+.btn_sell{
+      font-family: Pokemon;
+}
+.btn_sell:hover{
+      color:#EC4962 !important;
+}
+.btn_sell:focus{
+      color:#EC4962 !important;
+}
+  
+  

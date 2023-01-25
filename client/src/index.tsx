@@ -21,14 +21,18 @@ import Register from './routes/Register';
 import Checkout from './routes/Checkout';
 import SinglePokemon from './routes/SinglePokemon';
 import Profile from './routes/Profile';
+import Home from './routes/Home';
 
 
 const router = createBrowserRouter([
   {
-    path: "/",
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
       {
         path: "/Buy",
         element: <Buy />,

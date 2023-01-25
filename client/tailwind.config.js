@@ -11,7 +11,7 @@ module.exports = {
         'light': '#95ABA3',
         'dark': '#4A4759',
         'darkest': '#2E2A34',
-        'red-rocket': '#EC4962'
+        'red-rocket': '#EC4962',
       },
       scale:{
         '0':'0',

@@ -24,10 +24,6 @@ export const singlePokeballGoAsync = createAsyncThunk(
     'singlePkmn/fetchSinglePkmn',
     async (id:string | undefined) => {
         const response = await fetchSinglePkmn(id);
-        console.log("inside pokeballgo after await");
-        console.log(response);
-        
-        
         return response;
     }
 );

@@ -22,14 +22,18 @@ const initialState:SinglePkmnState = {
 
 export const singlePokeballGoAsync = createAsyncThunk(
     'singlePkmn/fetchSinglePkmn',
-    async (id:string) => {
+    async (id:string | undefined) => {
         const response = await fetchSinglePkmn(id);
+        console.log("inside pokeballgo after await");
+        console.log(response);
+        
+        
         return response;
     }
 );
 
 
-const singlePkmnSlice = createSlice({
+export const singlePkmnSlice = createSlice({
   name: 'SinglePkmn',
   initialState,
   reducers: {},
@@ -39,12 +43,18 @@ const singlePkmnSlice = createSlice({
             const newSinglePkmn:SinglePkmnState = {
                 id: action.payload.id,
                 name: action.payload.name,
-                imgUrl: action.payload.sprites.other.official_artwork.front_default,
+                imgUrl: action.payload.sprites.other["official-artwork"].front_default,
                 typeFirst: action.payload.types[0].type.name,
-                typeSecond: null,
+                typeSecond: action.payload.types.length > 1 ? action.payload.types[1].type.name : null,
                 flavorText: null
             }
-            state = newSinglePkmn;
+            
+            state.id = newSinglePkmn.id;
+            state.name = newSinglePkmn.name;
+            state.imgUrl = newSinglePkmn.imgUrl;
+            state.typeFirst = newSinglePkmn.typeFirst;
+            state.typeSecond = newSinglePkmn.typeSecond;
+            state.flavorText = newSinglePkmn.flavorText;
         })
   },
 });
@@ -53,6 +63,6 @@ const singlePkmnSlice = createSlice({
 
 export const {} = singlePkmnSlice.actions
 
-export const selectCount = (state: RootState) => state;
+export const selectSinglePkmn = (state: RootState) => state.singlePkmn;
 
 export default singlePkmnSlice.reducer

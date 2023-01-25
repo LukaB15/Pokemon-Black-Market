@@ -1,5 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
+import singleReducer from '../features/singlePokemon/singlePkmnSlice';
 import storage from 'redux-persist/lib/storage';
 import {
   persistStore,
@@ -22,7 +23,8 @@ const persistedReducer = persistReducer(persistConfig, counterReducer)
 
 export const store = configureStore({
   reducer: {
-    counter: persistedReducer
+    counter: persistedReducer,
+    singlePkmn: singleReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

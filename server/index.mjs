@@ -1,19 +1,19 @@
 import express from "express";
-import cors from "cors";
-
-
-const PORT = process.env.PORT || 3001;
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 const app = express();
+dotenv.config();
 
-app.use(cors());
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => console.log("DBConnection Successfull"))
+  .catch((err) => {
+    console.log(err);
+  });
 
+app.use(express.json());
 
-app.get("/api", (req, res) => {
-  res.json({ message : "Hello from server!" });
-});
-
-
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
+app.listen(process.env.PORT || 3001, () => {
+  console.log("Backend server is running!");
 });

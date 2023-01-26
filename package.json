@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/index.mjs"
+    "start": "nodemon server/index.mjs"
   },
   "proxy": "http://localhost:3001",
   "keywords": [],
@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "flowbite": "^1.6.2",
+    "nodemon": "^2.0.20",
     "redux-persist": "^6.0.0"
   }
 }

@@ -1,7 +1,28 @@
 import React from 'react'
-import "./Buy.css";
+import { useAppDispatch, useAppSelector } from '../app/hooks'
+import { selectSellPkmn, sellPkmnSliceAsync, SellPkmnState, storeLvl, storePrice, storeQty } from '../features/sellPokemon/sellPkmnSlice'
 
 export default function Sell() {
+  const sellPkmn:SellPkmnState = useAppSelector(selectSellPkmn);
+  const dispatch = useAppDispatch();
+
+  const sellStorePrice = (e:any) =>{
+    const sellValue:number = +e.target.value;
+    dispatch(storePrice(sellValue));
+  }
+  const sellStoreLvl = (e:any)=>{
+    const lvlValue:number = +e.target.value;
+    dispatch(storeLvl(lvlValue))
+  }
+  const sellStoreQty = (e:any)=>{
+    const qtyValue:number = +e.target.value;
+    dispatch(storeQty(qtyValue))
+  }
+  const sendStateToServer = ()=>{
+    dispatch(sellPkmnSliceAsync(sellPkmn))
+  }
+
+
   return (
     <>
     <div className='w-screen h-max  pt-28 pb-36 bg-bck'>
@@ -13,19 +34,16 @@ export default function Sell() {
           <p className='text-darkest mt-4 mb-4 Pokemon'>
             Charizard
           </p>
-
-          <form>
-          <div className='flex flex-row justify-around'>
-          <input className='w-3/12 placeholder:text-center ' type="text" name="Price" placeholder='Price' required />
-          <input className='w-3/12 placeholder:text-center ' type="text" name="Level" placeholder='Level' required/>
-          <input className='w-3/12 placeholder:text-center ' type="text" name="Quantity" placeholder='Qty' required />
-          </div>
-
-          <div className="flex justify-center space-x-1.5 rounded-lg bg-red-rocket px-4 py-1.5 text-white duration-100 hover:bg-white hover:text-red-rocket hover:border border mt-6 w-6/12 ml-auto mr-auto">
-              <button className="text-lg">Sell</button>
-            </div>
+          <form className='flex flex-row justify-around'>
+            <input className='w-3/12' type="text" name="Price" placeholder='Price' onChange={sellStorePrice} />
+            <input className='w-3/12' type="text" name="Level" placeholder='Level' onChange={sellStoreLvl} />
+            <input className='w-3/12' type="text" name="Quantity" placeholder='Qty' onChange={sellStoreQty} />
           </form>
-    </div>
+
+          <div className="flex items-center space-x-1.5 rounded-lg bg-red-rocket px-4 py-1.5 text-white duration-100 hover:bg-white hover:text-red-rocket hover:border border mt-6 ">
+              <button className="text-lg w-24" onClick={sendStateToServer}>Sell</button>
+          </div>
+        </div>
       </a>
     </article>
       <div className="rounded-xl bg-white p-3 shadow-lg article w-6/12 h-80 flex flex-col items-center mb-16 lg:mb-0">

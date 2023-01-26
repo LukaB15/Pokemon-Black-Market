@@ -94,7 +94,7 @@ export default function SinglePokemon() {
             <p className="mr-1 Pokemon text-xs uppercase">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque iusto, eligendi quos sunt consectetur alias eos rerum, animi quis error a architecto tempora temporibus quidem nam, dolor autem non.</p>
            </div>
 
-           <button className='bg-white mt-5 rounded-lg px-8 pt-2 pb-2 border border-transparent hover:bg-red-rocket hover:border-white hover:text-white transition ease-in-out'>Add to Cart</button>
+           <button className='bg-white mt-5 rounded-lg px-8 pt-2 pb-2 border border-transparent hover:opacity-75 hover:border-white  transition ease-in-out'>Add to Cart</button>
         </div>
         </div>
 

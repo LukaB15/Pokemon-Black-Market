@@ -52,7 +52,7 @@ export default function SinglePokemon() {
           </div>
           <div className='mt-4 flex flex-row'>
             <p className="mr-2 Pokemon">250</p>
-            <img className="w-4 h-6" src="../pokedollar.png"/>
+            <img className="w-4 h-6" src="../pokedollar.png" alt="pokedollar"/>
           </div>
     
           <div className="flex items-center space-x-1.5 rounded-lg bg-red-rocket px-4 py-1.5 text-white duration-100 hover:bg-white hover:text-red-rocket hover:border border mt-6">
@@ -73,14 +73,15 @@ export default function SinglePokemon() {
           <div className='rounded-xl bg-white p-3 shadow-lg article w-full mt-2'>
             <h4 className='Pokemon mb-4'>Recommandations</h4>
             <div className='flex flex-row justify-evenly'>
-              <img className='w-24 hover:border hover:border-red-rocket hover:rounded p-2 border border-transparent transition ease-in-out' src="../charizard.png" />
-              <img className='w-24 hover:border hover:border-red-rocket hover:rounded p-2 border border-transparent transition ease-in-out' src="../charizard.png" />
-              <img className='w-24 hover:border hover:border-red-rocket hover:rounded p-2 border border-transparent transition ease-in-out' src="../charizard.png" />
+              <img className='w-24 hover:border hover:border-red-rocket hover:rounded p-2 border border-transparent transition ease-in-out' src="../charizard.png" alt="recommandations_poke" />
+              <img className='w-24 hover:border hover:border-red-rocket hover:rounded p-2 border border-transparent transition ease-in-out' src="../charizard.png" alt="recommandations_poke" />
+              <img className='w-24 hover:border hover:border-red-rocket hover:rounded p-2 border border-transparent transition ease-in-out' src="../charizard.png" alt="recommandations_poke"/>
             </div>
           </div>
          
         </div>
         </div>
+    
 
   )
 }

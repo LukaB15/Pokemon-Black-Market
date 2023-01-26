@@ -4,8 +4,8 @@ import "./Buy.css";
 export default function Sell() {
   return (
     <>
-    <div className='w-screen h-max'>
-    <div className='flex flex-col-reverse md:flex-col-reverse lg:flex-row items-center ml-auto mr-auto w-fit mt-28 mb-36'>
+    <div className='w-screen h-max  pt-28 pb-36 bg-bck'>
+    <div className='flex flex-col-reverse md:flex-col-reverse lg:flex-row items-center ml-auto mr-auto w-fit '>
       <article className="rounded-xl bg-white p-3 shadow-lg article w-6/12 lg:mr-12 mb-16 lg:mb-0">
       <a href="#">
         <div className="relative flex flex-col items-center overflow-hidden rounded-xl">

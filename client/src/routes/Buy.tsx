@@ -39,7 +39,7 @@ export default function Buy() {
 	</a>
 </div>
 
-<section className="py-10 section_buy">
+<section className="py-10 bg-bck">
   <div className="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
     <article className="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
       <a href="#">
@@ -202,7 +202,8 @@ export default function Buy() {
           </div>
           <div className='mt-4 flex flex-row'>
             <p className="mr-2 Pokemon">250</p>
-            <img className="w-4 h-6" src="pokedollar.png"/></div>
+            <img className="w-4 h-6" src="pokedollar.png"/>
+          </div>
 
           <div className="flex items-center space-x-1.5 rounded-lg bg-red-rocket px-4 py-1.5 text-white duration-100 hover:bg-white hover:text-red-rocket hover:border border mt-6">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-4 w-4">

@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { selectSinglePkmn, singlePokeballGoAsync } from '../features/singlePokemon/singlePkmnSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
+import "./Buy.css";
 
 
 export default function SinglePokemon() {
@@ -27,8 +28,8 @@ export default function SinglePokemon() {
     //   </div>
     // </div>
    
-       <div className='flex flex-row items-center ml-auto mr-auto w-fit mt-28 mb-36'>
-          <article className="rounded-xl bg-white p-3 shadow-lg article w-full">
+       <div className='flex flex-col lg:flex-row items-center justify-center w-fit pt-28 pb-36 bg-bck'>
+          <article className="rounded-xl bg-white p-3 shadow-lg article lg:w-3/12 w-6/12">
           <a href="#">
             <div className="relative flex flex-col items-center overflow-hidden rounded-xl">
             <img src={singlePkmn.imgUrl} alt="pkmnimg" className='w-64'  />
@@ -41,13 +42,17 @@ export default function SinglePokemon() {
               <p>{singlePkmn.typeFirst}</p>
             </div>
             <div className='flex flex-col items-center border-l-4 border-red-rocket border-r-4 ml-5 pl-3 mr-3 pr-3'>
-              <p className='Pokemon text-xs'>Height</p>
-              <p>200cm</p>
+              <p className='Pokemon text-xs'>Type 2</p>
+              <p>{singlePkmn.typeSecond}</p>
             </div>
             <div className='w-14 flex flex-col items-center'>
-              <p className='Pokemon text-xs'>Weight</p>
-              <p>220kg</p>
+              <p className='Pokemon text-xs'>Level</p>
+              <p>100</p>
             </div>
+          </div>
+          <div className='mt-4 flex flex-row'>
+            <p className="mr-2 Pokemon">250</p>
+            <img className="w-4 h-6" src="../pokedollar.png"/>
           </div>
     
           <div className="flex items-center space-x-1.5 rounded-lg bg-red-rocket px-4 py-1.5 text-white duration-100 hover:bg-white hover:text-red-rocket hover:border border mt-6">
@@ -60,8 +65,20 @@ export default function SinglePokemon() {
             </div>
           </a>
         </article>
-        <div>
-          <p>Description</p>
+        <div className='flex flex-col ml-0 lg:ml-10 lg:w-3/12 w-6/12'>
+          <div className='rounded-xl bg-white p-3 shadow-lg article w-full mt-4 lg:mt-0 mb-2'>
+          <h4 className='Pokemon mb-4'>Description</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae, deleniti asperiores? Eveniet, sapiente fugit nulla error vel modi veritatis saepe accusantium quas accusamus possimus aliquid, deserunt neque rerum a at.</p>
+          </div>
+          <div className='rounded-xl bg-white p-3 shadow-lg article w-full mt-2'>
+            <h4 className='Pokemon mb-4'>Recommandations</h4>
+            <div className='flex flex-row justify-evenly'>
+              <img className='w-24 hover:border hover:border-red-rocket hover:rounded p-2 border border-transparent transition ease-in-out' src="../charizard.png" />
+              <img className='w-24 hover:border hover:border-red-rocket hover:rounded p-2 border border-transparent transition ease-in-out' src="../charizard.png" />
+              <img className='w-24 hover:border hover:border-red-rocket hover:rounded p-2 border border-transparent transition ease-in-out' src="../charizard.png" />
+            </div>
+          </div>
+         
         </div>
         </div>
 

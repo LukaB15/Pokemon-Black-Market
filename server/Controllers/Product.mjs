@@ -4,12 +4,11 @@ const productSchema = new mongoose.Schema(
   {
     idApi: {
       type: Number,
-      required: true,
     },
     namePokemon: { type: String, required: true },
     level: { type: Number, required: true },
     price: { type: Number, required: true },
-    idSeller: { type: String, required: true },
+    idSeller: { type: String },
     idOrder: { type: String },
   },
   { timestamps: true }

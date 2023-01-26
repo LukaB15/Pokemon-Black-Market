@@ -15,6 +15,9 @@ module.exports = {
       },
       scale:{
         '0':'0',
+      },
+      backgroundImage: {
+        'bck': "url('../public/bck.jpg')",
       }
     },
   },

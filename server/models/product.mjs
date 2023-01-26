@@ -1,14 +1,15 @@
-const router = require("express").Router();
-const Product = require("../Controllers/Product");
-const {
+import express from "express";
+const router = express.Router();
+import Product from "../Controllers/Product.mjs";
+import {
   verifyToken,
   verifyTokenAndAuthorization,
   verifyTokenAndAdmin,
-} = require("./verifyToken");
+} from "./verifyToken.mjs";
 
 //CREATE
 
-router.post("/", verifyTokenAndAdmin, async (req, res) => {
+router.post("/", verifyToken, async (req, res) => {
   const newProduct = new Product(req.body);
 
   try {
@@ -81,4 +82,4 @@ router.get("/", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

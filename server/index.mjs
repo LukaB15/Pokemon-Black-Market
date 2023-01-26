@@ -1,7 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-
+import userRoute from "./models/user.mjs";
+import productRoute from "./models/product.mjs";
+import authRoute from "./models/auth.mjs";
+import orderRoute from "./models/order.mjs";
 const app = express();
 dotenv.config();
 
@@ -13,6 +16,10 @@ mongoose
   });
 
 app.use(express.json());
+app.use("/api/product", productRoute);
+app.use("/api/user", userRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/order", orderRoute);
 
 app.listen(process.env.PORT || 3001, () => {
   console.log("Backend server is running!");

@@ -12,21 +12,24 @@ import {
 router.post(
   "/",
   /*verifyToken,*/ async (req, res) => {
-    const newProduct = new Product({
-      idApi: 0,
-      namePokemon: "pokemon",
-      level: req.body.lvl,
-      price: req.body.price,
-      idSeller: "idseller",
-      idOrder: "nothing",
-    });
-    console.log("product route");
-    try {
-      let savedProduct = await newProduct.save();
-      res.status(200).json(savedProduct);
-    } catch (err) {
-      res.status(500).json(err);
+    let savedProduct;
+    for (let i = 0; i < req.body.qty; i++) {
+      const newProduct = new Product({
+        idApi: 0,
+        namePokemon: "pokemon",
+        level: req.body.lvl,
+        price: req.body.price,
+        idSeller: "idseller",
+        idOrder: "nothing",
+      });
+
+      try {
+        savedProduct = await newProduct.save();
+      } catch (err) {
+        res.status(500).json(err);
+      }
     }
+    res.status(200).json(savedProduct);
   }
 );
 

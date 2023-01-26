@@ -14,6 +14,7 @@ router.post("/", verifyToken, async (req, res) => {
 
   try {
     for (let i = 0; i < req.body.qty; i++) {
+      //va cherhcer idSeller= req.body.idSeller
       const savedProduct = await newProduct.save();
       res.status(200).json(savedProduct);
     }

@@ -13,15 +13,17 @@ router.post("/", verifyToken, async (req, res) => {
   const newProduct = new Product(req.body);
 
   try {
-    const savedProduct = await newProduct.save();
-    res.status(200).json(savedProduct);
+    for (let i = 0; i < req.body.qty; i++) {
+      const savedProduct = await newProduct.save();
+      res.status(200).json(savedProduct);
+    }
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 //UPDATE
-router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {
     const updateProduct = await Product.finByIdAndUpdate(
       req.params.id,

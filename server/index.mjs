@@ -5,6 +5,7 @@ import userRoute from "./models/user.mjs";
 import productRoute from "./models/product.mjs";
 import authRoute from "./models/auth.mjs";
 import orderRoute from "./models/order.mjs";
+import cors from "cors";
 const app = express();
 dotenv.config();
 
@@ -15,6 +16,8 @@ mongoose
     console.log(err);
   });
 
+//app.use(express.static("client/src/index.tsx"));
+app.use(cors());
 app.use(express.json());
 app.use("/api/product", productRoute);
 app.use("/api/user", userRoute);

@@ -9,14 +9,19 @@ import {
 
 //CREATE
 
-router.post("/", verifyToken, async (req, res) => {
-  const newProduct = new Product(req.body);
-
+router.post("/", /*verifyToken,*/ async (req, res) => {
+  const newProduct = new Product({
+    idApi:0,
+    namePokemon:'pokemon',
+    level:req.body.lvl,
+    price:req.body.price,
+    idSeller:"idseller",
+    idOrder:"nothing",
+  });
+  console.log("product route");
   try {
-    for (let i = 0; i < req.body.qty; i++) {
-      const savedProduct = await newProduct.save();
-      res.status(200).json(savedProduct);
-    }
+    let savedProduct = await newProduct.save();
+    res.status(200).json(savedProduct);
   } catch (err) {
     res.status(500).json(err);
   }

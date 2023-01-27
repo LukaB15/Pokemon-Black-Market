@@ -69,7 +69,7 @@ export default function SinglePokemon() {
 
       <>
 
-      <div className='bg-bck h-screen flex flex-row '>
+      <div className='bg-bck h-full flex flex-col '>
 
         <div className='bg-white h-96 w-4/12 ml-28 mt-32 rounded-lg static'>
         <img className='w-4/12 h-6/12' src='../pokemon1.png' />
@@ -95,12 +95,21 @@ export default function SinglePokemon() {
            </div>
 
            <button className='bg-white mt-5 rounded-lg px-8 pt-2 pb-2 border border-29
-           9 border-transparent hover:border-2 hover:border-black  transition ease-in-out'>Add to Cart</button>
+           9 border-transparent  hover:text-red-rocket  transition ease-in-out'>Add to Cart</button>
         </div>
         </div>
 
+        <div className='bg-red-rocket  bg-opacity-90 h-72 w-9/12 mt-72 mb-28 ml-auto mr-auto rounded-xl flex flex-col items-center'>
+          <h2 className='text-white text-xl Pokemon mt-5'>Recommandations</h2>
+        <div className='flex flex-row items-center justify-center mt-5'>
+          <img className='w-3/12 hover:border hover:border-white hover:rounded-xl p-2 border border-transparent transition ease-in-out' src="../charizard.png" alt="recommandations_poke" />
+          <img className='w-3/12 hover:border hover:border-white hover:rounded-xl p-2 border border-transparent transition ease-in-out' src="../charizard.png" alt="recommandations_poke" />
+          <img className='w-3/12 hover:border hover:border-white hover:rounded-xl p-2 border border-transparent transition ease-in-out' src="../charizard.png" alt="recommandations_poke"/>
+         
+        </div>
+        </div>
       </div>
-
+     
       </>
     
 

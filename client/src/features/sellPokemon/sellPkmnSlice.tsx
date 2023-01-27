@@ -1,10 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store';
-import { sendToSellAsync } from './sellPkmnAPI';
+import { getFromApiAsync, sendToSellAsync } from './sellPkmnAPI';
 
 export type SellPkmnState = {
     idApi:number | null;
     name:string | null;
+    imgUrl:string | null;
+    typeFirst: string | null;
+    typeSecond: string | null;
+    flavorText: string | null;
     price:number | null;
     lvl:number | null;
     qty:number | null;
@@ -15,13 +19,25 @@ const initialState:SellPkmnState = {
     name: null,
     price: null,
     lvl: null,
-    qty: null
+    qty: null,
+    imgUrl: null,
+    typeFirst: null,
+    typeSecond: null,
+    flavorText: null
 }
 
 export const sellPkmnSliceAsync = createAsyncThunk(
     'sellPkmn/sendToSell',
     async (sellPkmn:SellPkmnState) => {
         const response = await sendToSellAsync(sellPkmn);
+        return response;
+    }
+);
+
+export const getFromListAsync = createAsyncThunk(
+    'sellPkmn/getFromList',
+    async (name:string) => {
+        const response = await getFromApiAsync(name);
         return response;
     }
 );
@@ -54,6 +70,14 @@ const sellPkmnSlice = createSlice({
             state.price = null;
             state.lvl = null;
             state.qty=null;
+        })
+        .addCase(getFromListAsync.fulfilled, (state, action)=>{
+                state.idApi= action.payload.id;
+                state.name= action.payload.name;
+                state.imgUrl= action.payload.sprites.other["official-artwork"].front_default;
+                state.typeFirst= action.payload.types[0].type.name;
+                state.typeSecond= action.payload.types.length > 1 ? action.payload.types[1].type.name : null;
+                state.flavorText= null
         })
   },
 });

@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
+import PokeList from '../components/PokeList';
 import { selectSellPkmn, sellPkmnSliceAsync, SellPkmnState, storeLvl, storePrice, storeQty } from '../features/sellPokemon/sellPkmnSlice'
 
 export default function Sell() {
+
+  const [searchTerm, setSearchTerm] = useState("");
+
   const sellPkmn:SellPkmnState = useAppSelector(selectSellPkmn);
   const dispatch = useAppDispatch();
 
@@ -19,7 +23,8 @@ export default function Sell() {
     dispatch(storeQty(qtyValue))
   }
   const sendStateToServer = ()=>{
-    dispatch(sellPkmnSliceAsync(sellPkmn))
+    dispatch(sellPkmnSliceAsync(sellPkmn));
+    window.location.reload();
   }
 
 
@@ -28,11 +33,11 @@ export default function Sell() {
     <div className='w-screen h-max  pt-28 pb-36 bg-bck'>
     <div className='flex flex-col-reverse md:flex-col-reverse lg:flex-row items-center ml-auto mr-auto w-fit '>
       <article className="rounded-xl bg-white p-3 shadow-lg article w-6/12 lg:mr-12 mb-16 lg:mb-0">
-      <a href="#">
+     
         <div className="relative flex flex-col items-center overflow-hidden rounded-xl">
-          <img src="charizard.png" className="w-64" alt="Pokemon_Product" />
+          <img src={sellPkmn.imgUrl ? sellPkmn.imgUrl: "pokeball.png" } className="w-64" alt="Pokemon_Product" />
           <p className='text-darkest mt-4 mb-4 Pokemon'>
-            Charizard
+            {sellPkmn.name}
           </p>
           <form className='flex flex-row justify-around'>
             <input className='w-3/12' type="text" name="Price" placeholder='Price' onChange={sellStorePrice} />
@@ -44,13 +49,13 @@ export default function Sell() {
               <button className="text-lg w-24" onClick={sendStateToServer}>Sell</button>
           </div>
         </div>
-      </a>
+
     </article>
-      <div className="rounded-xl bg-white p-3 shadow-lg article w-6/12 h-80 flex flex-col items-center mb-16 lg:mb-0">
-        <input type="text" name="name" className='mt-3' />
-        <div>
-          <p>Result</p>
+      <div className="rounded-xl bg-white p-3 shadow-lg article w-96 h-80  flex flex-col items-center mb-16 lg:mb-0">
+      <div className='searchbardiv'>
+            <input className='searchbar' type="text" placeholder='Search a Pokemon' onChange={event=>{setSearchTerm(event.target.value)}}/>
         </div>
+            <PokeList searchTerm={searchTerm}/>
       </div>
     </div>
     </div>

@@ -13,9 +13,9 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    credits: { type: Number, default: 200 },
   },
   { timestamps: true }
 );
 
-//module.exports = mongoose.model("Users", userSchema);
 export default mongoose.model("Users", userSchema);

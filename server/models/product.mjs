@@ -90,6 +90,17 @@ router.get("/", async (req, res) => {
       });
     } else {
       console.log("avant query");
+      // products = await Product.aggregate([
+      //   // Stage 2: Group remaining documents by pizza name and calculate total quantity
+      //   {
+      //     $group: {
+      //       _id: { name: "$namePokemon", level: "$level", price: "price" },
+      //       "COUNT(*)": {
+      //         $sum: 1,
+      //       },
+      //     },
+      //   },
+      // ]);
       products = await Product.aggregate(
         [
           {
@@ -100,7 +111,7 @@ router.get("/", async (req, res) => {
                 namePokemon: "$namePokemon",
               },
               "COUNT(*)": {
-                $sum: NumberInt(1),
+                $sum: 1,
               },
             },
           },
@@ -109,7 +120,8 @@ router.get("/", async (req, res) => {
               "COUNT(*)": "$COUNT(*)",
               namePokemon: "$_id.namePokemon",
               level: "$_id.level",
-              _id: NumberInt(0),
+              price: "$_id.price",
+              _id: 0,
             },
           },
         ],

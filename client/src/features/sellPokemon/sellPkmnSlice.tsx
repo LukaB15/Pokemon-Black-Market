@@ -70,6 +70,11 @@ const sellPkmnSlice = createSlice({
             state.price = null;
             state.lvl = null;
             state.qty=null;
+            state.imgUrl=null;
+            state.typeFirst=null;
+            state.typeSecond=null;
+            state.flavorText=null;
+            window.location.reload();
         })
         .addCase(getFromListAsync.fulfilled, (state, action)=>{
                 state.idApi= action.payload.id;

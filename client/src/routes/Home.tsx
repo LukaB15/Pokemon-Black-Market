@@ -45,17 +45,6 @@ export default function Home() {
          <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-pokeball" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <circle cx="9" cy="9" r="9" transform="translate(3 3)" /> <circle cx="12" cy="12" r="3" /> <path d="M3 12h6m6 0h6" /> </svg>
          <p className="text-sm text-gray-500 font-semibold uppercase pl-2">Trusted and loved by the team ROCKET </p>
           </div>
-          <div className="flex flex-wrap -m-3">
-            <div className="w-auto p-3">
-              <img src="flaro-assets/logos/brands/brand.png" alt="" />
-            </div>
-            <div className="w-auto p-3">
-              <img src="flaro-assets/logos/brands/brand2.png" alt="" />
-            </div>
-            <div className="w-auto p-3">
-              <img src="flaro-assets/logos/brands/brand3.png" alt="" />
-            </div>
-          </div>
         </div>
         <div className="w-full md:w-1/2 p-8">
           <img className="transform hover:-translate-y-16 transition ease-in-out duration-1000" src="headerHome.png"  alt="" />
@@ -67,15 +56,15 @@ export default function Home() {
 
 {/* Certifications */}
 
-<div className=' xl:static w-full h-96 mt-8 flex lg:flex-row md:flex-col md:pt-8 md:pb-8 place-content-evenly items-center flex-col certif_container'>
+<div className=' w-full h-full mt-8 flex lg:flex-row md:flex-col md:pt-8 md:pb-8 place-content-evenly items-center flex-col certif_container'>
       <div>
-            <p className='text-3xl hover:scale-125 transition ease-in-out duration-1000 md-32 certif_txt '><CountUp end={100} />% QUALITY</p>
+            <p className='w-44 text-center text-3xl hover:scale-125 transition ease-in-out duration-1000 certif_txt mt-10 '><CountUp end={100} />% QUALITY</p>
       </div>
-      <div className='xl:absolute xl:bottom-50 xl:right-50'>
-            <img className=' md:pt-8 md:pb-8 md:w-40 lg:w-full w-32 hover:scale-75 transition ease-in-out duration-1000' src='Original_Nintendo_Seal_of_Quality.png' />
+      <div className=' '>
+            <img className=' w-36  lg:w-52 xl:w-60  hover:scale-75 transition ease-in-out duration-1000 mt-12 mb-12' src='Original_Nintendo_Seal_of_Quality.png' />
       </div>
       <div>
-            <p className='text-3xl text-center hover:scale-125 transition ease-in-out duration-1000 2xl:ml-32  certif_txt '>+ <CountUp end={1200} /> POKEMON<br/>AVAILAIBLE</p>
+            <p className='w-44 text-center text-3xl  hover:scale-125 transition ease-in-out duration-1000 certif_txt flex flex-col items-center mb-10 '>+ <CountUp end={1200} /> POKEMON<br/>AVAILAIBLE</p>
       </div>
 </div>
 

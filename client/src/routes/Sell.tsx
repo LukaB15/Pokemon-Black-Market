@@ -26,7 +26,7 @@ export default function Sell() {
     console.log("sendstatetoserver");
     
     dispatch(sellPkmnSliceAsync(sellPkmn));
-    window.location.reload();
+    
   }
 
 
@@ -46,9 +46,9 @@ export default function Sell() {
             <div className='flex flex-col w-6/12 md:w-11/12 sm:w-10/12'>
               <h3 className='Pokemon mt-5 mb-2'>Enter informations here</h3>
               <form className='flex flex-col'>
-                <input className='w-6/12 mt-2 mb-2' type="text" name="Price" placeholder='Price' onChange={sellStorePrice} />
-                <input className='w-6/12 mt-2 mb-2' type="text" name="Level" placeholder='Level' onChange={sellStoreLvl} />
-                <input className='w-6/12 mt-2 mb-2' type="text" name="Quantity" placeholder='Qty' onChange={sellStoreQty} />
+                <input className='w-6/12 mt-2 mb-2' type="text" name="Price" placeholder='Price' onChange={sellStorePrice} id="price" />
+                <input className='w-6/12 mt-2 mb-2' type="text" name="Level" placeholder='Level' onChange={sellStoreLvl} id="level" />
+                <input className='w-6/12 mt-2 mb-2' type="text" name="Quantity" placeholder='Qty' onChange={sellStoreQty} id="quantity" />
               </form>
             </div>
 

@@ -13,7 +13,6 @@ router.post(
   "/",
   /*verifyToken,*/ async (req, res) => {
     let savedProduct;
-    console.log("route create");
     for (let i = 0; i < req.body.qty; i++) {
       const newProduct = new Product({
         idApi: req.body.idApi,

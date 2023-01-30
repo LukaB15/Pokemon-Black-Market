@@ -19,7 +19,11 @@ router.post(
         namePokemon: req.body.name,
         level: req.body.lvl,
         price: req.body.price,
+<<<<<<< HEAD
         idSeller: "reqbodyuserid",
+=======
+        idSeller: "Seller",
+>>>>>>> dev
         idOrder: "",
       });
 

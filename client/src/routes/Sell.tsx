@@ -26,7 +26,10 @@ export default function Sell() {
     console.log("sendstatetoserver");
     
     dispatch(sellPkmnSliceAsync(sellPkmn));
+<<<<<<< HEAD
     
+=======
+>>>>>>> dev
   }
 
 

@@ -13,13 +13,14 @@ router.post(
   "/",
   /*verifyToken,*/ async (req, res) => {
     let savedProduct;
+    console.log("route create");
     for (let i = 0; i < req.body.qty; i++) {
       const newProduct = new Product({
         idApi: req.body.idApi,
         namePokemon: req.body.name,
         level: req.body.lvl,
         price: req.body.price,
-        idSeller: req.user.id,
+        idSeller: "reqbodyuserid",
         idOrder: "",
       });
 

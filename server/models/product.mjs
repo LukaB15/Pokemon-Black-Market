@@ -15,8 +15,13 @@ router.post(
     let savedProduct;
     for (let i = 0; i < req.body.qty; i++) {
       const newProduct = new Product({
+<<<<<<< HEAD
         idApi: 0,
         namePokemon: "",
+=======
+        idApi: req.body.idApi,
+        namePokemon: req.body.name,
+>>>>>>> dev
         level: req.body.lvl,
         price: req.body.price,
         idSeller: req.user.id,

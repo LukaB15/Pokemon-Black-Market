@@ -45,17 +45,17 @@ export default function Buy() {
               <p>Feu</p>
             </div>
             <div className='flex flex-col items-center border-l-4 border-red-rocket border-r-4 ml-5 pl-3 mr-3 pr-3'>
-              <p className='Pokemon text-xs'>Height</p>
+              <p className='Pokemon text-xs'>Level</p>
               <p>200cm</p>
             </div>
             <div className='w-14 flex flex-col items-center'>
-              <p className='Pokemon text-xs'>Weight</p>
+              <p className='Pokemon text-xs'>Qty</p>
               <p>220kg</p>
             </div>
           </div>
-          <div className='mt-8 mb-4 flex flex-row justify-center'>
+          <div className='mt-8 mb-4 flex flex-row justify-center items-center'>
             <p className=" mr-2 Pokemon mt-1">250</p>
-            <img className="w-4 h-6 mr-5 mt-1" src="pokedollar.png"/>
+            <img className="w-8 h-8 mr-2 mt-1" src="pokedollar.png"/>
           
 
             <div className="flex items-center space-x-1.5 rounded-lg bg-red-rocket px-4 py-1.5 text-white duration-100 hover:bg-white hover:text-red-rocket hover:border border ">
@@ -91,9 +91,9 @@ export default function Buy() {
               <p>220kg</p>
             </div>
           </div>
-          <div className='mt-8 mb-4 flex flex-row justify-center'>
+          <div className='mt-8 mb-4 flex flex-row justify-center items-center'>
             <p className=" mr-2 Pokemon mt-1">250</p>
-            <img className="w-4 h-6 mr-5 mt-1" src="pokedollar.png"/>
+            <img className="w-8 h-8 mr-2 mt-1" src="pokedollar.png"/>
           
 
             <div className="flex items-center space-x-1.5 rounded-lg bg-red-rocket px-4 py-1.5 text-white duration-100 hover:bg-white hover:text-red-rocket hover:border border ">
@@ -129,9 +129,9 @@ export default function Buy() {
               <p>220kg</p>
             </div>
           </div>
-          <div className='mt-8 mb-4 flex flex-row justify-center'>
+          <div className='mt-8 mb-4 flex flex-row justify-center items-center'>
             <p className=" mr-2 Pokemon mt-1">250</p>
-            <img className="w-4 h-6 mr-5 mt-1" src="pokedollar.png"/>
+            <img className="w-8 h-8 mr-2 mt-1" src="pokedollar.png"/>
           
 
             <div className="flex items-center space-x-1.5 rounded-lg bg-red-rocket px-4 py-1.5 text-white duration-100 hover:bg-white hover:text-red-rocket hover:border border ">
@@ -167,9 +167,9 @@ export default function Buy() {
               <p>220kg</p>
             </div>
           </div>
-          <div className='mt-8 mb-4 flex flex-row justify-center'>
+          <div className='mt-8 mb-4 flex flex-row justify-center items-center'>
             <p className=" mr-2 Pokemon mt-1">250</p>
-            <img className="w-4 h-6 mr-5 mt-1" src="pokedollar.png"/>
+            <img className="w-8 h-8 mr-2 mt-1" src="pokedollar.png"/>
           
 
             <div className="flex items-center space-x-1.5 rounded-lg bg-red-rocket px-4 py-1.5 text-white duration-100 hover:bg-white hover:text-red-rocket hover:border border ">

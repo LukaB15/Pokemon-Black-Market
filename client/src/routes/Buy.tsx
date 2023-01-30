@@ -29,7 +29,7 @@ export default function Buy() {
 	</a>
 </div>
 
-<section className="py-10 bg-bck">
+<section className="py-10 bg-bck h-screen">
   <div className="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
     
     <article className="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 article">

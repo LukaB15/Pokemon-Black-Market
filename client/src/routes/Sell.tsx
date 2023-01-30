@@ -24,7 +24,6 @@ export default function Sell() {
   }
   const sendStateToServer = ()=>{
     dispatch(sellPkmnSliceAsync(sellPkmn));
-    window.location.reload();
   }
 
 

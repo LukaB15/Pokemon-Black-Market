@@ -75,9 +75,8 @@ router.get("/find/:id", async (req, res) => {
 router.get("/", async (req, res) => {
   const qNew = req.query.new;
   const qCategory = req.query.body;
-  console.log("avant try");
+
   try {
-    console.log("debut try");
     let products;
 
     if (qNew) {
@@ -89,18 +88,6 @@ router.get("/", async (req, res) => {
         },
       });
     } else {
-      console.log("avant query");
-      // products = await Product.aggregate([
-      //   // Stage 2: Group remaining documents by pizza name and calculate total quantity
-      //   {
-      //     $group: {
-      //       _id: { name: "$namePokemon", level: "$level", price: "price" },
-      //       "COUNT(*)": {
-      //         $sum: 1,
-      //       },
-      //     },
-      //   },
-      // ]);
       products = await Product.aggregate(
         [
           {
@@ -130,9 +117,8 @@ router.get("/", async (req, res) => {
         }
       );
     }
-    console.log("coucou avant 200");
+
     res.status(200).json(products);
-    console.log("coucou aprés 200");
   } catch (err) {
     res.status(500).json(err);
   }

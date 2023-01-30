@@ -87,8 +87,9 @@ export default function Sell() {
           </div>
 
           </div>
-           <button className='bg-white mt-5 rounded-lg px-8 pt-2 pb-2 border border-29
-           9 border-transparent  hover:text-red-rocket  transition ease-in-out'>Sell</button>
+          <div className="flex items-center space-x-1.5 rounded-lg bg-white w-2/12 px-4 py-1.5 text-black duration-100  hover:text-red-rocket hover:border border mt-6 ">
+              <button className="text-lg ml-auto mr-auto" onClick={sendStateToServer}>Sell</button>
+          </div>
         </div>
         </div>
       </div>

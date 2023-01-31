@@ -10,10 +10,27 @@ import {
 //CREATE
 
 router.post("/", verifyToken, async (req, res) => {
-  const newOrder = new Order(req.body);
+  const arrayItemsOrdered = req.body.ordersItems;
+  const newOrder = new Order({
+    idBuyers: req.body.idBuyers,
+    ordersItems: arrayItemsOrdered,
+  });
 
   try {
-    const savedOrder = await newOrder.save();
+    let savedOrder = await newOrder.save();
+    //search orderid
+    //select orderID
+    // from orders
+    // where
+    //const orderId = await Order.aggregate(); //or find when req.body.idBuyers || arrayitemsordered =order
+    arrayItemsOrdered.forEach((element) => {
+      //get pokemon (the oldest )for each pokemon and push it in new array AWAIT
+    });
+
+    arrayPokemonUpdtae.forEach((element) => {
+      //replace id buyer in pokemon id and pokemon order AWAIT
+    });
+
     res.status(200).json(savedOrder);
   } catch (err) {
     res.status(500).json(err);

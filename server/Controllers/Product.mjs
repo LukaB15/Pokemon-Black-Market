@@ -6,6 +6,10 @@ const productSchema = new mongoose.Schema(
       type: Number,
     },
     namePokemon: { type: String, required: true },
+    imgUrl: { type: String },
+    typeFirst: { type: String },
+    typeSecond: { type: String },
+    flavorText: { type: String },
     level: { type: Number, required: true },
     price: { type: Number, required: true },
     idSeller: { type: String },
@@ -14,5 +18,4 @@ const productSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-//module.exports = mongoose.model("Product", productSchema);
 export default mongoose.model("Product", productSchema);

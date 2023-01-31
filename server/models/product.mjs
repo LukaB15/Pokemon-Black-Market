@@ -17,6 +17,10 @@ router.post(
       const newProduct = new Product({
         idApi: req.body.idApi,
         namePokemon: req.body.name,
+        imgUrl: req.body.imgUrl,
+        typeFirst: req.body.typeFirst,
+        typeSecond: req.body.typeSecond,
+        flavorText: req.body.flavorText,
         level: req.body.lvl,
         price: req.body.price,
         idSeller: req.user.id,
@@ -94,8 +98,13 @@ router.get("/", async (req, res) => {
             $group: {
               _id: {
                 price: "$price",
+                idApi: "$idApi",
+                flavorText: "$flavorText",
                 level: "$level",
+                imgUrl: "$imgUrl",
                 namePokemon: "$namePokemon",
+                typeFirst: "$typeFirst",
+                typeSecond: "$typeSecond",
               },
               "COUNT(*)": {
                 $sum: 1,
@@ -108,6 +117,11 @@ router.get("/", async (req, res) => {
               namePokemon: "$_id.namePokemon",
               level: "$_id.level",
               price: "$_id.price",
+              idApi: "$_id.idApi",
+              imgUrl: "$_id.imgUrl",
+              typeFirst: "$_id.typeFirst",
+              typeSecond: "$_id.typeSecond",
+              flavorText: "$_id.flavorText",
               _id: 0,
             },
           },

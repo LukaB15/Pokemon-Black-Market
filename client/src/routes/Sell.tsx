@@ -6,6 +6,7 @@ import { selectSellPkmn, sellPkmnSliceAsync, SellPkmnState, storeLvl, storePrice
 export default function Sell() {
 
   const [searchTerm, setSearchTerm] = useState("");
+  
 
   const sellPkmn:SellPkmnState = useAppSelector(selectSellPkmn);
   const dispatch = useAppDispatch();
@@ -23,7 +24,12 @@ export default function Sell() {
     dispatch(storeQty(qtyValue))
   }
   const sendStateToServer = ()=>{
+
     dispatch(sellPkmnSliceAsync(sellPkmn));
+    sellPkmn.price = null;
+    sellPkmn.qty = null;
+    sellPkmn.lvl = null;
+    
   }
 
 
@@ -72,9 +78,9 @@ export default function Sell() {
             <div className='flex flex-col w-6/12 md:w-11/12 sm:w-10/12'>
               <h3 className='Pokemon mt-5 mb-2'>Enter informations here</h3>
               <form className='flex flex-col'>
-                <input className='w-6/12 mt-2 mb-2' type="text" name="Price" placeholder='Price' onChange={sellStorePrice} />
-                <input className='w-6/12 mt-2 mb-2' type="text" name="Level" placeholder='Level' onChange={sellStoreLvl} />
-                <input className='w-6/12 mt-2 mb-2' type="text" name="Quantity" placeholder='Qty' onChange={sellStoreQty} />
+                <input className='w-6/12 mt-2 mb-2' type="text" name="Price" placeholder='Price' onChange={sellStorePrice} value={sellPkmn.price ? sellPkmn.price : ""} />
+                <input className='w-6/12 mt-2 mb-2' type="text" name="Level" placeholder='Level' onChange={sellStoreLvl}  value={sellPkmn.lvl ? sellPkmn.lvl : ""} />
+                <input className='w-6/12 mt-2 mb-2' type="text" name="Quantity" placeholder='Qty' onChange={sellStoreQty} value={sellPkmn.qty ? sellPkmn.qty : ""} />
               </form>
             </div>
           <div className='w-9/12 md:w-9/12 lg:w-6/12  lg:mr-12 lg:mb-0 xl:mt-0 '>
@@ -89,7 +95,7 @@ export default function Sell() {
 
           </div>
           <div className="flex items-center space-x-1.5 rounded-lg bg-white w-2/12 px-4 py-1.5 text-black duration-100  hover:text-red-rocket hover:border border mt-6 ">
-              <button className="text-lg ml-auto mr-auto" onClick={sendStateToServer}>Sell</button>
+              <button className="text-lg ml-auto mr-auto" disabled={!sellPkmn.lvl ||!sellPkmn.name ||!sellPkmn.price ||!sellPkmn.qty} onClick={sendStateToServer}>{!sellPkmn.lvl ||!sellPkmn.name ||!sellPkmn.price ||!sellPkmn.qty ? "All Fields are required" : "Sell"}</button>
           </div>
         </div>
         </div>

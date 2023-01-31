@@ -1,0 +1,44 @@
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { RootState } from '../../app/store';
+import { getBuyListAsync } from './buyListSliceAPI';
+
+export type buyPokemon = {
+    "COUNT(*)":number;
+    level:number;
+    namePokemon:string;
+    price:number;
+}
+
+
+export const initialState:Array<buyPokemon> = [];
+
+
+export const getBuyListFromServerAsync = createAsyncThunk(
+    'buyList/buildBuyList',
+    async () => {
+        const response = await getBuyListAsync();
+        return response;
+    }
+);
+
+const buyListSlice = createSlice({
+  name: "buyList",
+  initialState,
+  reducers: {},
+  extraReducers:(builder) => {
+      builder
+        .addCase(getBuyListFromServerAsync.fulfilled, (state, action) => {
+            action.payload.forEach((element:any) => {
+                
+                return state.push(element);
+            });
+            
+        })
+  },
+});
+
+export const {} = buyListSlice.actions
+
+export const selectBuyList = (state: RootState) => state.buyList;
+
+export default buyListSlice.reducer

@@ -1,7 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import {  getBuyListFromServerAsync, selectBuyList } from '../features/buyList/buyListSlice';
 import "./Buy.css";
 
 export default function Buy() {
+  const buyList = useAppSelector(selectBuyList);
+  const dispatch = useAppDispatch();
+  useEffect(()=>{
+    dispatch(getBuyListFromServerAsync())
+    console.log(buyList);
+    
+  },[])
   return (
     <>
 <div className="bg-white">

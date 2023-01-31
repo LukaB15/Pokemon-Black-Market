@@ -59,12 +59,12 @@ export default function Sell() {
     </div>
     </div> */}
 
-    <div className='bg-bck flex flex-col h-screen '>
+    <div className='bg-bck flex flex-col min-h-screen'>
 
         <div className='bg-white h-96 w-6/12 sm:w-4/12 ml-28 mt-32 rounded-lg static'>
-        <img className='w-4/12 h-6/12' src='../pokemon1.png' />
+        <img className='hidden lg:block w-4/12 h-6/12' src='../pokemon1.png' />
         <img src={sellPkmn.imgUrl ? sellPkmn.imgUrl: "pokeball.png" } alt="pkmnimg" className='w-28 top-36 left-44 md:w-36 sm:top-96 lg:w-52 lg:top-96 xl:top-72 xl:w-72 2xl:w-96  max-w-xs 2xl:max-w-none absolute sm:left-36 2xl:left-28 z-10'  />
-        <div className='bg-red-rocket bg-opacity-90 w-full sm:w-9/12  ml-0 sm:ml-28 mt-40 pt-10 pb-5 sm:pl-44 pl-10 rounded-lg absolute top-28 right-0 sm:right-16'>
+        <div className='bg-red-rocket bg-opacity-90 w-full sm:w-9/12  ml-0 sm:ml-28 mt-40 pt-10 pb-5 sm:pl-44 pl-10 rounded-lg absolute top-4 xl:top-28 right-0 sm:right-16'>
         
           <h2 className='pokemon text-xs md:text-2xl text-white uppercase'>{sellPkmn.name ? sellPkmn.name: "Name of the pokemon" }</h2>
           <div className='flex flex-col-reverse xl:flex-row'>

@@ -38,12 +38,16 @@ router.post(
 );
 
 //UPDATE
-router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.put("/:_id", verifyTokenAndAuthorization, async (req, res) => {
   try {
     const updateProduct = await Product.finByIdAndUpdate(
-      req.params.id,
+      req.params._id,
       {
-        $set: req.body,
+        $set: {
+          level: req.body.lvl,
+          price: req.body.price,
+          namePokemon: req.body.namePokemon,
+        },
       },
       { new: true }
     );
@@ -55,9 +59,9 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
 
 //DELETE
 
-router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.delete("/delete/:_id", verifyTokenAndAuthorization, async (req, res) => {
   try {
-    await Users.findByIdAndDelete(req.params.id);
+    await Product.deleteOne({ _id: req.params._id });
     res.status(200).json("Product has been deleted...");
   } catch (err) {
     res.status(500).json(err);
@@ -65,9 +69,10 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
 });
 
 //GET PRODUCT
-router.get("/find/:id", async (req, res) => {
+router.get("/find/:namePokemon&:level&:price", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
+    //level nom prix
 
     res.status(200).json(product);
   } catch (err) {
@@ -77,60 +82,48 @@ router.get("/find/:id", async (req, res) => {
 
 //GET ALL Product
 router.get("/", async (req, res) => {
-  const qNew = req.query.new;
-  const qCategory = req.query.body;
-
   try {
     let products;
 
-    if (qNew) {
-      products = await Product.find().sort({ createdAt: -1 }).limit(5);
-    } else if (qCategory) {
-      products = await Product.find({
-        categories: {
-          $in: [qCategory],
-        },
-      });
-    } else {
-      products = await Product.aggregate(
-        [
-          {
-            $group: {
-              _id: {
-                price: "$price",
-                idApi: "$idApi",
-                flavorText: "$flavorText",
-                level: "$level",
-                imgUrl: "$imgUrl",
-                namePokemon: "$namePokemon",
-                typeFirst: "$typeFirst",
-                typeSecond: "$typeSecond",
-              },
-              "COUNT(*)": {
-                $sum: 1,
-              },
-            },
-          },
-          {
-            $project: {
-              "COUNT(*)": "$COUNT(*)",
-              namePokemon: "$_id.namePokemon",
-              level: "$_id.level",
-              price: "$_id.price",
-              idApi: "$_id.idApi",
-              imgUrl: "$_id.imgUrl",
-              typeFirst: "$_id.typeFirst",
-              typeSecond: "$_id.typeSecond",
-              flavorText: "$_id.flavorText",
-              _id: 0,
-            },
-          },
-        ],
+    products = await Product.aggregate(
+      [
+        { $match: { idOrder: "" } },
         {
-          allowDiskUse: true,
-        }
-      );
-    }
+          $group: {
+            _id: {
+              price: "$price",
+              idApi: "$idApi",
+              flavorText: "$flavorText",
+              level: "$level",
+              imgUrl: "$imgUrl",
+              namePokemon: "$namePokemon",
+              typeFirst: "$typeFirst",
+              typeSecond: "$typeSecond",
+            },
+            "COUNT(*)": {
+              $sum: 1,
+            },
+          },
+        },
+        {
+          $project: {
+            "COUNT(*)": "$COUNT(*)",
+            namePokemon: "$_id.namePokemon",
+            level: "$_id.level",
+            price: "$_id.price",
+            idApi: "$_id.idApi",
+            imgUrl: "$_id.imgUrl",
+            typeFirst: "$_id.typeFirst",
+            typeSecond: "$_id.typeSecond",
+            flavorText: "$_id.flavorText",
+            _id: 0,
+          },
+        },
+      ],
+      {
+        allowDiskUse: true,
+      }
+    );
 
     res.status(200).json(products);
   } catch (err) {

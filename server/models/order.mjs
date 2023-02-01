@@ -2,6 +2,7 @@ import express from "express";
 const router = express.Router();
 import Order from "../Controllers/Order.mjs";
 import Product from "../Controllers/Product.mjs";
+import Users from "../Controllers/Users.mjs";
 import {
   verifyToken,
   verifyTokenAndAuthorization,
@@ -30,8 +31,8 @@ router.post("/", verifyToken, async (req, res) => {
       }
     );
 
-    arrayItemsOrdered.forEach((element) => {
-      let oldestPokemon = Product.find([
+    arrayItemsOrdered.forEach(async (element) => {
+      let oldestPokemon = await Product.find([
         {
           $match: {
             $and: [
@@ -47,39 +48,56 @@ router.post("/", verifyToken, async (req, res) => {
 
       ArrayPokemonWithId.push(oldestPokemon);
     });
-
+    ArrayPokemonWithId.forEach(async (element) => {
+      await Product.updateOne(
+        { _id: element._id },
+        {
+          $set: {
+            idOrder: idOrder,
+          },
+        }
+      );
+    });
+    await Users.updateOne(
+      { _id: idBuyers },
+      {
+        $set: {
+          credits: $credits - req.body.total,
+        },
+      }
+    );
     res.status(200).json(savedOrder);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-//UPDATE
-router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
-  try {
-    const updateOrder = await Order.finByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body,
-      },
-      { new: true }
-    );
-    res.status(200).json(updateOrder);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// //UPDATE
+// router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+//   try {
+//     const updateOrder = await Order.finByIdAndUpdate(
+//       req.params.id,
+//       {
+//         $set: req.body,
+//       },
+//       { new: true }
+//     );
+//     res.status(200).json(updateOrder);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 //DELETE
 
-router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
-  try {
-    await Order.findByIdAndDelete(req.params.id);
-    res.status(200).json("Order has been deleted...");
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+//   try {
+//     await Order.findByIdAndDelete(req.params.id);
+//     res.status(200).json("Order has been deleted...");
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 //GET user Order
 router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {

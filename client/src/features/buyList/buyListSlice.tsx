@@ -7,6 +7,8 @@ export type buyPokemon = {
     level:number;
     namePokemon:string;
     price:number;
+    idApi:number;
+    
 }
 
 

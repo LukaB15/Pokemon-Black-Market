@@ -70,14 +70,19 @@ const sellPkmnSlice = createSlice({
             state.price = null;
             state.lvl = null;
             state.qty=null;
+            state.imgUrl=null;
+            state.typeFirst=null;
+            state.typeSecond=null;
+            state.flavorText=null;
+            //window.location.reload();
         })
         .addCase(getFromListAsync.fulfilled, (state, action)=>{
-                state.idApi= action.payload.id;
-                state.name= action.payload.name;
-                state.imgUrl= action.payload.sprites.other["official-artwork"].front_default;
-                state.typeFirst= action.payload.types[0].type.name;
-                state.typeSecond= action.payload.types.length > 1 ? action.payload.types[1].type.name : null;
-                state.flavorText= null
+            state.idApi= action.payload.id;
+            state.name= action.payload.name;
+            state.imgUrl= action.payload.sprites.other["official-artwork"].front_default;
+            state.typeFirst= action.payload.types[0].type.name;
+            state.typeSecond= action.payload.types.length > 1 ? action.payload.types[1].type.name : null;
+            state.flavorText= null
         })
   },
 });

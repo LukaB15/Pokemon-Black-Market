@@ -6,6 +6,7 @@ import { selectSellPkmn, sellPkmnSliceAsync, SellPkmnState, storeLvl, storePrice
 export default function Sell() {
 
   const [searchTerm, setSearchTerm] = useState("");
+  
 
   const sellPkmn:SellPkmnState = useAppSelector(selectSellPkmn);
   const dispatch = useAppDispatch();
@@ -23,8 +24,12 @@ export default function Sell() {
     dispatch(storeQty(qtyValue))
   }
   const sendStateToServer = ()=>{
+
     dispatch(sellPkmnSliceAsync(sellPkmn));
-    window.location.reload();
+    sellPkmn.price = null;
+    sellPkmn.qty = null;
+    sellPkmn.lvl = null;
+    
   }
 
 
@@ -60,12 +65,12 @@ export default function Sell() {
     </div>
     </div> */}
 
-    <div className='bg-bck flex flex-col h-screen '>
+    <div className='bg-bck flex flex-col min-h-screen'>
 
         <div className='bg-white h-96 w-6/12 sm:w-4/12 ml-28 mt-32 rounded-lg static'>
-        <img className='w-4/12 h-6/12' src='../pokemon1.png' />
+        <img className='hidden lg:block w-4/12 h-6/12' src='../pokemon1.png' />
         <img src={sellPkmn.imgUrl ? sellPkmn.imgUrl: "pokeball.png" } alt="pkmnimg" className='w-28 top-36 left-44 md:w-36 sm:top-96 lg:w-52 lg:top-96 xl:top-72 xl:w-72 2xl:w-96  max-w-xs 2xl:max-w-none absolute sm:left-36 2xl:left-28 z-10'  />
-        <div className='bg-red-rocket bg-opacity-90 w-full sm:w-9/12  ml-0 sm:ml-28 mt-40 pt-10 pb-5 sm:pl-44 pl-10 rounded-lg absolute top-28 right-0 sm:right-16'>
+        <div className='bg-red-rocket bg-opacity-90 w-full sm:w-9/12  ml-0 sm:ml-28 mt-40 pt-10 pb-5 sm:pl-44 pl-10 rounded-lg absolute top-2 xl:top-28 right-0 sm:right-16'>
         
           <h2 className='pokemon text-xs md:text-2xl text-white uppercase'>{sellPkmn.name ? sellPkmn.name: "Name of the pokemon" }</h2>
           <div className='flex flex-col-reverse xl:flex-row'>
@@ -73,22 +78,24 @@ export default function Sell() {
             <div className='flex flex-col w-6/12 md:w-11/12 sm:w-10/12'>
               <h3 className='Pokemon mt-5 mb-2'>Enter informations here</h3>
               <form className='flex flex-col'>
-                <input className='w-6/12 mt-2 mb-2' type="text" name="Price" placeholder='Price' onChange={sellStorePrice} />
-                <input className='w-6/12 mt-2 mb-2' type="text" name="Level" placeholder='Level' onChange={sellStoreLvl} />
-                <input className='w-6/12 mt-2 mb-2' type="text" name="Quantity" placeholder='Qty' onChange={sellStoreQty} />
+                <input className='w-6/12 mt-2 mb-2' type="text" name="Price" placeholder='Price' onChange={sellStorePrice} value={sellPkmn.price ? sellPkmn.price : ""} />
+                <input className='w-6/12 mt-2 mb-2' type="text" name="Level" placeholder='Level' onChange={sellStoreLvl}  value={sellPkmn.lvl ? sellPkmn.lvl : ""} />
+                <input className='w-6/12 mt-2 mb-2' type="text" name="Quantity" placeholder='Qty' onChange={sellStoreQty} value={sellPkmn.qty ? sellPkmn.qty : ""} />
               </form>
             </div>
-
-          <div className="rounded-xl bg-white p-3 shadow-lg article w-9/12 md:w-9/12 lg:w-6/12 lg:mr-12 h-80  flex flex-col items-center mb-16 lg:mb-0 xl:mt-0 mt-5 ">
+          <div className='w-9/12 md:w-9/12 lg:w-6/12  lg:mr-12 lg:mb-0 xl:mt-0 '>
+          <h3 className='Pokemon mt-5 mb-2'>Select Pokemon</h3>
+          <div className="rounded-xl bg-white p-3 shadow-lg article h-80  flex flex-col items-center  ">
             <div className='searchbardiv'>
                 <input  className='w-6/12 md:w-full mt-2 mb-2' type="text" placeholder='Search a Pokemon' onChange={event=>{setSearchTerm(event.target.value)}}/>
             </div>
                 <PokeList searchTerm={searchTerm}/>
           </div>
+          </div>
 
           </div>
           <div className="flex items-center space-x-1.5 rounded-lg bg-white w-2/12 px-4 py-1.5 text-black duration-100  hover:text-red-rocket hover:border border mt-6 ">
-              <button className="text-lg ml-auto mr-auto" onClick={sendStateToServer}>Sell</button>
+              <button className="text-lg ml-auto mr-auto" disabled={!sellPkmn.lvl ||!sellPkmn.name ||!sellPkmn.price ||!sellPkmn.qty} onClick={sendStateToServer}>{!sellPkmn.lvl ||!sellPkmn.name ||!sellPkmn.price ||!sellPkmn.qty ? "All Fields are required" : "Sell"}</button>
           </div>
         </div>
         </div>

@@ -8,7 +8,6 @@ import { getFromListAsync, selectSellPkmn } from '../features/sellPokemon/sellPk
 
 export default function Pokemon(props:any) {
 const randomlvl = Math.floor(Math.random() * 101);
-console.log(props.searchTerm.searchTerm);
 
 const sellPokemon = useAppSelector(selectSellPkmn);
 const dispatch = useAppDispatch();

@@ -23,7 +23,7 @@ router.post(
         flavorText: req.body.flavorText,
         level: req.body.lvl,
         price: req.body.price,
-        idSeller: req.user.id,
+        idSeller: "Seller",
         idOrder: "",
       });
 

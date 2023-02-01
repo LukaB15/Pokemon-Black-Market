@@ -7,9 +7,11 @@ import Footer from "./components/footer/Footer";
 function App() {
   return (
     <>
-      <Navbar />
-      <Outlet />
-      <Footer />
+    {/* <div className='flex flex-col justify-between min-h-screen '> */}
+    <Navbar />
+    <Outlet />
+    <Footer />
+    {/* </div> */}
     </>
   );
 }

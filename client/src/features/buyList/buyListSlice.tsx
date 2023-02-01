@@ -8,6 +8,9 @@ export type buyPokemon = {
     namePokemon:string;
     price:number;
     idApi:number;
+    imgUrl:string;
+    typeFirst:string;
+    typeSecond:string;
     
 }
 

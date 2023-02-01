@@ -1,19 +1,22 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { buyPokemon } from '../features/buyList/buyListSlice'
 
 export default function BuyPokemon(props:buyPokemon) {
   return (
+    <Link to={{pathname: `/SinglePokemon/${props.idApi}`}}>
     <article className="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 article">
       <a href="#">
         <div className="relative flex flex-col items-center overflow-hidden rounded-xl">
-          <img src="charizard.png" alt="Pokemon_Product" />
+          <img src={props.imgUrl} alt="Pokemon_Product" />
           <p className='text-darkest mt-4 mb-4 Pokemon'>
             {props.namePokemon}
           </p>
-          <div className='flex flex-row pt-4 pb-4 items-center ml-auto mr-auto border-t border-b border-red-rocket '>
+          <div className='flex flex-row pt-4 pb-4 h-24 items-center ml-auto mr-auto border-t border-b border-red-rocket '>
             <div className='w-8 flex flex-col items-center'>
               <p className='Pokemon text-xs'>Type</p>
-              <p>Feu</p>
+              <p>{props.typeFirst}</p>
+              <p>{props.typeSecond ? props.typeSecond: "" }</p>
             </div>
             <div className='flex flex-col items-center border-l-4 border-red-rocket border-r-4 ml-5 pl-3 mr-3 pr-3'>
               <p className='Pokemon text-xs'>Level</p>
@@ -40,5 +43,6 @@ export default function BuyPokemon(props:buyPokemon) {
         </div>
       </a>
     </article>
+    </Link>
   )
 }

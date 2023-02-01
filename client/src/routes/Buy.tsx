@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import BuyPokemon from '../components/BuyPokemon';
-import {  buyPokemon, getBuyListFromServerAsync, selectBuyList } from '../features/buyList/buyListSlice';
+import {  buyPokemon, emptyArray, getBuyListFromServerAsync, selectBuyList } from '../features/buyList/buyListSlice';
 import { v4 as uuidv4 } from 'uuid';
 import "./Buy.css";
 
 
 export default function Buy() {
-  const [isLoaded, setIsLoaded] = useState(false);
   const buyList:Array<buyPokemon> = useAppSelector(selectBuyList);
   const dispatch = useAppDispatch();
+  const shouldLoad = useRef(true);
   useEffect(()=>{
-    if(!isLoaded){
-    dispatch(getBuyListFromServerAsync())
-    setIsLoaded(true);
+    if(shouldLoad.current){
+      dispatch(emptyArray());
+      dispatch(getBuyListFromServerAsync());
+      shouldLoad.current = false;
     }
   },[])
   return (

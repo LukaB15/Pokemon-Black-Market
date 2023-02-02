@@ -3,7 +3,6 @@ import express from "express";
 const router = express.Router();
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import cookieParser from "cookieParser";
 
 //register
 router.post("/register", async (req, res) => {

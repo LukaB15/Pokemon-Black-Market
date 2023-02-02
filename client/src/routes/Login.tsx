@@ -44,7 +44,7 @@ export default function Login() {
     console.log(response);
     
     if(response.status === 200){
-      //setLoggedIn(true);
+      setLoggedIn(true);
     }
   }
 

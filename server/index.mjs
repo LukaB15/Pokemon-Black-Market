@@ -6,7 +6,7 @@ import productRoute from "./routes/product.mjs";
 import authRoute from "./routes/auth.mjs";
 import orderRoute from "./routes/order.mjs";
 import cors from "cors";
-import cookieParser from "cookieParser";
+import cookieParser from "cookie-parser";
 const app = express();
 dotenv.config();
 

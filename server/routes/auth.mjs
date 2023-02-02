@@ -9,7 +9,7 @@ router.post("/register", async (req, res) => {
   let passwFormat = /^[A-Za-z]\w{7,30}$/;
   const password = req.body.password;
   console.log(req.body.password);
-  
+
   if (!password.match(passwFormat)) return "Invalid password";
   console.log("apres le if");
   const hashing = await bcrypt.hash(password, 10);
@@ -24,7 +24,6 @@ router.post("/register", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-  
 });
 
 //login
@@ -50,7 +49,6 @@ router.post("/login", async (req, res) => {
       { expiresIn: "1d" }
     );
     const { hidepassword, ...others } = user;
-    res.cookie("jwt", accesToken, { httpOnly: true, maxAge: 3000 });
     res.status(200).json({ ...others, accesToken });
   } catch (err) {
     res.status(500).json(err);

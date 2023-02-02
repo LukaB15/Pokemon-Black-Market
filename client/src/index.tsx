@@ -54,7 +54,7 @@ const router = createBrowserRouter([
         element: <Checkout />,
       },
       {
-        path: "/SinglePokemon/:id",
+        path: "/SinglePokemon/:name/:level/:price",
         element: <SinglePokemon />,
       },
       {

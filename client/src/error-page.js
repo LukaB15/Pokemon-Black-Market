@@ -10,9 +10,9 @@ export default function ErrorPage() {
   return (
     <>
     <Navbar />
-    <div id="error-page" className="mt-32 mb-52">
+    <div id="error-page" className="mt-32 mb-96 h-full">
       
-      <img className="hover:scale-0 delay-500 hover:rotate-180 hover:ease-out transition ml-auto mr-auto" src="404.png" />
+      <img className="hover:scale-0 delay-500 hover:rotate-180 hover:ease-out transition ml-auto mr-auto" src="../../../404.png" />
       <p className="ml-auto mr-auto w-fit pokemon text-red-rocket mt-8 text-center">Once again Team Rocket flies to other skies !!!</p>
       <p className="ml-auto mr-auto w-fit mt-4">
         <i>{error.statusText || error.message}</i>

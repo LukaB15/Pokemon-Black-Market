@@ -4,3 +4,32 @@
 .article{
       border: 2px solid #EC4962;
 }
+
+.shopping-cart {
+      background-color: #EC4962;
+      position: relative;
+      /* padding: 25px; */
+      border-radius: 50px;
+      position: fixed;
+      bottom: 40px;
+      right: 10px;
+      z-index: 1;
+    }
+    
+    .shopping-cart:active {
+      box-shadow: 0 4px 4px gray;
+    }
+    
+    #cartIcon{
+      color: white;
+    }
+    
+    .shopping-cart > p{
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: red;
+      padding: 4px 8px;
+      color: white;
+      border-radius: 50px;
+    }

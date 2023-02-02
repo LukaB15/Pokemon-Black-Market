@@ -48,6 +48,10 @@ export default function Buy() {
             )}
           </div>
         </section>
+        <div className='shopping-cart w-1/12' onClick={() => window.location.replace("/Checkout")}>
+          <img id='cartIcon' src="pokeball.png"/>
+          <p>5</p>
+        </div>
       </div>
     </>
   )

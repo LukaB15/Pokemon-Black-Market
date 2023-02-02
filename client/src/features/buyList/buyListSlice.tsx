@@ -11,6 +11,7 @@ export type buyPokemon = {
     imgUrl:string;
     typeFirst:string;
     typeSecond:string;
+    flavorText:string;
     
 }
 

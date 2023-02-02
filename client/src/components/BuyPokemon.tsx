@@ -4,9 +4,9 @@ import { buyPokemon } from '../features/buyList/buyListSlice'
 
 export default function BuyPokemon(props:buyPokemon) {
   return (
-    <Link to={{pathname: `/SinglePokemon/${props.idApi}`}}>
+    <Link to={{pathname: `/SinglePokemon/${props.namePokemon}/${props.level}/${props.price}`}}>
     <article className="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 article">
-      <a href="#">
+     
         <div className="relative flex flex-col items-center overflow-hidden rounded-xl">
           <img src={props.imgUrl} alt="Pokemon_Product" />
           <p className='text-darkest mt-4 mb-4 Pokemon'>
@@ -41,7 +41,7 @@ export default function BuyPokemon(props:buyPokemon) {
               </div>
           </div>
         </div>
-      </a>
+      
     </article>
     </Link>
   )

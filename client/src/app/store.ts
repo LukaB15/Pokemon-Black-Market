@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+// import counterReducer from '../features/counter/counterSlice';
 import singleReducer from '../features/singlePokemon/singlePkmnSlice';
 import sellPkmnReducer from '../features/sellPokemon/sellPkmnSlice';
 import buyListReducer from '../features/buyList/buyListSlice';
@@ -20,13 +20,12 @@ const persistConfig = {
   storage,
 }
 
-const persistedReducer = persistReducer(persistConfig, counterReducer)
+const persistedReducer = persistReducer(persistConfig, singleReducer)
 
 
 export const store = configureStore({
   reducer: {
-    counter: persistedReducer,
-    singlePkmn: singleReducer,
+    singlePkmn: persistedReducer,
     sellPkmn: sellPkmnReducer,
     buyList: buyListReducer
   },

@@ -54,7 +54,7 @@ const router = createBrowserRouter([
         element: <Checkout />,
       },
       {
-        path: "/SinglePokemon/:id",
+        path: "/SinglePokemon/:name/:level/:price",
         element: <SinglePokemon />,
       },
       {
@@ -70,7 +70,7 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
+      <PersistGate loading={null} persistor={persistor}>
         <RouterProvider router={router} />
       </PersistGate>
     </Provider>

@@ -1,6 +1,8 @@
 import express from "express";
 const router = express.Router();
 import Order from "../Controllers/Order.mjs";
+import Product from "../Controllers/Product.mjs";
+import Users from "../Controllers/Users.mjs";
 import {
   verifyToken,
   verifyTokenAndAuthorization,
@@ -11,6 +13,7 @@ import {
 
 router.post("/", verifyToken, async (req, res) => {
   const arrayItemsOrdered = req.body.ordersItems;
+  let ArrayPokemonWithId = [];
   const newOrder = new Order({
     idBuyers: req.body.idBuyers,
     ordersItems: arrayItemsOrdered,
@@ -18,51 +21,83 @@ router.post("/", verifyToken, async (req, res) => {
 
   try {
     let savedOrder = await newOrder.save();
-    //search orderid
-    //select orderID
-    // from orders
-    // where
-    //const orderId = await Order.aggregate(); //or find when req.body.idBuyers || arrayitemsordered =order
-    arrayItemsOrdered.forEach((element) => {
-      //get pokemon (the oldest )for each pokemon and push it in new array AWAIT
-    });
+    const idOrder = await Order.find(
+      {
+        idBuyers: req.body.idBuyers,
+        ordersItems: arrayItemsOrdered,
+      },
+      {
+        _id: "$_id",
+      }
+    );
 
-    arrayPokemonUpdtae.forEach((element) => {
-      //replace id buyer in pokemon id and pokemon order AWAIT
-    });
+    arrayItemsOrdered.forEach(async (element) => {
+      let oldestPokemon = await Product.find([
+        {
+          $match: {
+            $and: [
+              { namePokemon: element.namePokemon },
+              { level: element.level },
+              { price: element.price },
+            ],
+          },
+        },
+        { $sort: { createdAt: -1 } },
+        { $limit: 1 },
+      ]);
 
+      ArrayPokemonWithId.push(oldestPokemon);
+    });
+    ArrayPokemonWithId.forEach(async (element) => {
+      await Product.updateOne(
+        { _id: element._id },
+        {
+          $set: {
+            idOrder: idOrder,
+          },
+        }
+      );
+    });
+    await Users.updateOne(
+      { _id: idBuyers },
+      {
+        $set: {
+          credits: $credits - req.body.total,
+        },
+      }
+    );
     res.status(200).json(savedOrder);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-//UPDATE
-router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
-  try {
-    const updateOrder = await Order.finByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body,
-      },
-      { new: true }
-    );
-    res.status(200).json(updateOrder);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// //UPDATE
+// router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+//   try {
+//     const updateOrder = await Order.finByIdAndUpdate(
+//       req.params.id,
+//       {
+//         $set: req.body,
+//       },
+//       { new: true }
+//     );
+//     res.status(200).json(updateOrder);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 //DELETE
 
-router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
-  try {
-    await Order.findByIdAndDelete(req.params.id);
-    res.status(200).json("Order has been deleted...");
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+//   try {
+//     await Order.findByIdAndDelete(req.params.id);
+//     res.status(200).json("Order has been deleted...");
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 //GET user Order
 router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {

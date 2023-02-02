@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import Product from "../Controllers/Product.mjs";
+import Product from "../models/Product.mjs";
 import {
   verifyToken,
   verifyTokenAndAuthorization,

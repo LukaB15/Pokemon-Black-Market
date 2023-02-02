@@ -1,8 +1,8 @@
 import express from "express";
 const router = express.Router();
-import Order from "../Controllers/Order.mjs";
-import Product from "../Controllers/Product.mjs";
-import Users from "../Controllers/Users.mjs";
+import Order from "../models/Order.mjs";
+import Product from "../models/Product.mjs";
+import Users from "../models/Users.mjs";
 import {
   verifyToken,
   verifyTokenAndAuthorization,

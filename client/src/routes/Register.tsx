@@ -1,8 +1,51 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import "./Login.css";
 
 export default function Register() {
+  const [nickName, setNickName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+  const [passwordVis, setPasswordVis] = useState("password");
+  const [confirmPasswordVis, setConfirmPasswordVis] = useState("password");
+
+  const handleChangeNickname = (e:any) =>{
+    setNickName(e.target.value);
+  }
+  const handleChangeEmail = (e:any) =>{
+    setEmail(e.target.value);
+  }
+  const handleChangePassword = (e:any) =>{
+    setPassword(e.target.value);
+  }
+  const handleChangeConfirmPassword = (e:any) =>{
+    setConfirmPassword(e.target.value);
+  }
+
+  const togglePassword = () =>{
+    if(passwordVis === "password"){
+      setPasswordVis("text");
+    }else{
+      setPasswordVis("password");
+    }
+  }
+
+  const toggleConfirmPassword = () =>{
+    if(confirmPasswordVis === "password"){
+      setConfirmPasswordVis("text");
+    }else{
+      setConfirmPasswordVis("password");
+    }
+  }
+
+  const handleRegister = () =>{
+    console.log("nickName : "+nickName);
+    console.log("email : "+email);
+    console.log("password : "+password);
+    console.log("confirmPassword : "+confirmPassword);
+    
+  }
   return (
   
     <>
@@ -21,6 +64,7 @@ export default function Register() {
                 className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:outline-none"
                 id="exampleFormControlInput2"
                 placeholder="Nickname"
+                onChange={handleChangeNickname}
               />
             </div>
 
@@ -30,31 +74,39 @@ export default function Register() {
                 className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:outline-none"
                 id="exampleFormControlInput2"
                 placeholder="Email address"
+                onChange={handleChangeEmail}
               />
             </div>
   
             <div className="mb-6">
               <input
-                type="password"
+                type={passwordVis}
                 className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:outline-none"
-                id="exampleFormControlInput2"
+                id="firstPassword"
                 placeholder="Password"
+                onChange={handleChangePassword}
               />
+              <input type="checkbox" name='passwordToggle' onChange={togglePassword} />
+              <label htmlFor="passwordToggle">  Show Password</label>
             </div>
 
             <div className="mb-6">
               <input
-                type="password"
+                type={confirmPasswordVis}
                 className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:outline-none"
-                id="exampleFormControlInput2"
+                id="confirmPassword"
                 placeholder="Confirm Password"
+                onChange={handleChangeConfirmPassword}
               />
+              <input type="checkbox" name='passwordToggle' onChange={toggleConfirmPassword} />
+              <label htmlFor="passwordToggle">  Show Confirm Password</label>
             </div>
   
             <div className="text-center lg:text-left mb-20">
               <button
                 type="button"
                 className="inline-block px-7 py-3 bg-red-rocket text-white font-medium text-sm leading-snug uppercase rounded  hover:bg-white hover:shadow-lg hover:text-red-rocket hover:border hover:border-red-rocket border border-white  transition duration-150 ease-in-out"
+                onClick={handleRegister}
               >
                 Register
               </button>

@@ -1,5 +1,6 @@
+import axios from 'axios';
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import "./Login.css";
 
 export default function Register() {
@@ -70,12 +71,21 @@ export default function Register() {
     }
   }
 
-  const handleRegister = () =>{
+  const handleRegister = async () =>{
     console.log("nickName : "+nickName);
     console.log("email : "+email);
     console.log("password : "+password);
     console.log("confirmPassword : "+confirmPassword);
-    
+    const registerReq = {
+      username : nickName,
+      password : password,
+      email : email
+    }
+    const response = await axios.post(`http://localhost:3001/api/auth/register`, registerReq);
+    console.log(response);
+    if(response.status === 200){
+      return <Navigate to="/Buy" />
+    }
   }
   return (
   
@@ -117,9 +127,19 @@ export default function Register() {
                 placeholder="Password"
                 onChange={handleChangePassword}
               />
-              <input type="checkbox" name='passwordToggle' onChange={togglePassword} />
-              <label htmlFor="passwordToggle">  Show Password</label>
-              <p className={password.length>0?"visible":"invisible"}>{safePassword ? "Password is safe" : "Password not safe"}</p>
+              
+              <div className="form-group form-check">
+                <input
+                  onChange={togglePassword}
+                  type="checkbox"
+                  className="form-check-input appearance-none h-4 w-4 border border-red-rocket rounded-sm bg-white checked:bg-red-rocket checked:border-red-rocket focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  id="exampleCheck2"
+                />
+                <label className="form-check-label inline-block text-gray-800" htmlFor="exampleCheck2">
+                  Show Password
+                </label>
+                <p className={password.length>0?"visible":"invisible"}>{safePassword ? "Password is safe" : "Password not safe"}</p>
+              </div>
             </div>
 
             <div className="mb-6">
@@ -130,9 +150,18 @@ export default function Register() {
                 placeholder="Confirm Password"
                 onChange={handleChangeConfirmPassword}
               />
-              <input type="checkbox" name='passwordToggle' onChange={toggleConfirmPassword} />
-              <label htmlFor="passwordToggle">  Show Confirm Password</label>
-              <p className={confirmPassword.length>0?"visible":"invisible"}>{samePassword?"Same Password":"Not the same password"}</p>
+              <div className="form-group form-check">
+                <input
+                  onChange={toggleConfirmPassword}
+                  type="checkbox"
+                  className="form-check-input appearance-none h-4 w-4 border border-red-rocket rounded-sm bg-white checked:bg-red-rocket checked:border-red-rocket focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  id="exampleCheck2"
+                />
+                <label className="form-check-label inline-block text-gray-800" htmlFor="exampleCheck2">
+                  Show Confirm Password
+                </label>
+                <p className={confirmPassword.length>0?"visible":"invisible"}>{samePassword?"Same Password":"Not the same password"}</p>
+              </div>
             </div>
   
             <div className="text-center lg:text-left mb-20">

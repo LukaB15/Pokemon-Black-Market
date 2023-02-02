@@ -8,9 +8,10 @@ import jwt from "jsonwebtoken";
 router.post("/register", async (req, res) => {
   let passwFormat = /^[A-Za-z]\w{7,30}$/;
   const password = req.body.password;
-
-  if (!password.value.match(passwFormat)) return "Invalid password";
-
+  console.log(req.body.password);
+  
+  if (!password.match(passwFormat)) return "Invalid password";
+  console.log("apres le if");
   const hashing = await bcrypt.hash(password, 10);
   const newUser = new Users({
     username: req.body.username,
@@ -23,6 +24,7 @@ router.post("/register", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+  
 });
 
 //login

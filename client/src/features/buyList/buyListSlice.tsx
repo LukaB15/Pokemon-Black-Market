@@ -8,6 +8,9 @@ export type buyPokemon = {
     namePokemon:string;
     price:number;
     idApi:number;
+    imgUrl:string;
+    typeFirst:string;
+    typeSecond:string;
     
 }
 
@@ -26,20 +29,23 @@ export const getBuyListFromServerAsync = createAsyncThunk(
 const buyListSlice = createSlice({
   name: "buyList",
   initialState,
-  reducers: {},
+  reducers: {
+    emptyArray:(state)=>{
+        state.splice(0, state.length);
+    }
+  },
   extraReducers:(builder) => {
       builder
         .addCase(getBuyListFromServerAsync.fulfilled, (state, action) => {
-            action.payload.forEach((element:any) => {
-                
-                return state.push(element);
+            action.payload.forEach((element:buyPokemon) => {
+                return state.push(element)
             });
             
         })
   },
 });
 
-export const {} = buyListSlice.actions
+export const {emptyArray} = buyListSlice.actions
 
 export const selectBuyList = (state: RootState) => state.buyList;
 

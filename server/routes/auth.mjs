@@ -49,6 +49,7 @@ router.post("/login", async (req, res) => {
       { expiresIn: "1d" }
     );
     const { hidepassword, ...others } = user;
+    res.cookie("jwt", accesToken, { httpOnly: true, maxAge: 3000 });
     res.status(200).json({ ...others, accesToken });
   } catch (err) {
     res.status(500).json(err);

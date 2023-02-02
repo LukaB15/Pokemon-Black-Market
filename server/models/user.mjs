@@ -54,7 +54,21 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
     const Alluser = await Users.find().sort({ createdAt: -1 });
 
-    res.status(200).json({ Alluser });
+    res.status(200).json(Alluser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//UPDATE CREDITS
+
+router.put("/credits/:id", verifyTokenAndAuthorization, async (req, res) => {
+  try {
+    const addCredits = await Users.findByIdAndUpdate(req.params.id, {
+      $inc: { credits: +req.body.credits },
+    });
+
+    res.status(200).json(addCredits);
   } catch (err) {
     res.status(500).json(err);
   }

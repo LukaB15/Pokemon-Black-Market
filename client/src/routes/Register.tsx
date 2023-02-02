@@ -3,24 +3,55 @@ import { Link } from 'react-router-dom'
 import "./Login.css";
 
 export default function Register() {
-  const [nickName, setNickName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
+  const [nickName, setNickName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordVis, setPasswordVis] = useState("password");
   const [confirmPasswordVis, setConfirmPasswordVis] = useState("password");
+  const [safePassword, setSafePassword] = useState(false);
+  const [samePassword, setSamePassword] = useState(false);
+
+  const escapeHtml=(unsafeString:string)=>{
+    return unsafeString
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+  }
+
+  const checkPassword = (inputString:string)=>{
+    const passW = /^[A-Za-z]\w{7,30}$/;
+    return inputString.match(passW);
+  }
 
   const handleChangeNickname = (e:any) =>{
-    setNickName(e.target.value);
+    setNickName(escapeHtml(e.target.value));
   }
   const handleChangeEmail = (e:any) =>{
-    setEmail(e.target.value);
+    setEmail(escapeHtml(e.target.value));
   }
   const handleChangePassword = (e:any) =>{
-    setPassword(e.target.value);
+    if(checkPassword(e.target.value)){
+      setSafePassword(true);
+    }else{
+      setSafePassword(false);
+    }
+    setPassword(escapeHtml(e.target.value));
+    if(confirmPassword === escapeHtml(e.target.value)){
+      setSamePassword(true);
+    }else{
+      setSamePassword(false);
+    }
   }
   const handleChangeConfirmPassword = (e:any) =>{
-    setConfirmPassword(e.target.value);
+    setConfirmPassword(escapeHtml(e.target.value));
+    if(password === escapeHtml(e.target.value)){
+      setSamePassword(true);
+    }else{
+      setSamePassword(false);
+    }
   }
 
   const togglePassword = () =>{
@@ -88,6 +119,7 @@ export default function Register() {
               />
               <input type="checkbox" name='passwordToggle' onChange={togglePassword} />
               <label htmlFor="passwordToggle">  Show Password</label>
+              <p className={password.length>0?"visible":"invisible"}>{safePassword ? "Password is safe" : "Password not safe"}</p>
             </div>
 
             <div className="mb-6">
@@ -100,6 +132,7 @@ export default function Register() {
               />
               <input type="checkbox" name='passwordToggle' onChange={toggleConfirmPassword} />
               <label htmlFor="passwordToggle">  Show Confirm Password</label>
+              <p className={confirmPassword.length>0?"visible":"invisible"}>{samePassword?"Same Password":"Not the same password"}</p>
             </div>
   
             <div className="text-center lg:text-left mb-20">

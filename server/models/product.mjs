@@ -68,7 +68,7 @@ router.delete("/delete/:_id", verifyTokenAndAuthorization, async (req, res) => {
   }
 });
 
-//GET PRODUCT
+//GET SINGLE PRODUCT
 router.get("/find/:namePokemon&:level&:price", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -126,6 +126,54 @@ router.get("/", async (req, res) => {
     );
 
     res.status(200).json(products);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//GET PRODUCT BY USER
+router.get("/findProduct/:username", async (req, res) => {
+  try {
+    const productByUser = await Product.aggregate(
+      [
+        {
+          $match: {
+            $and: [
+              {
+                $expr: {
+                  $eq: ["$users._id", "$orders.idBuyers"],
+                },
+              },
+              {
+                $expr: {
+                  $eq: ["$orders._id", "$products.idOrder"],
+                },
+              },
+              {
+                $expr: {
+                  $eq: ["$users._id", req.params.username],
+                },
+              },
+            ],
+          },
+        },
+      ],
+      {
+        allowDiskUse: true,
+      }
+    );
+    res.status(200).json(productByUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//GET ALL PRODUCT FOR ADMIN
+router.get("/admin", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const Allproduct = await Product.find().sort({ createdAt: -1 });
+
+    res.status(200).json({ Allproduct });
   } catch (err) {
     res.status(500).json(err);
   }

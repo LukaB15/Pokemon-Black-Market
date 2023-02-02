@@ -42,7 +42,7 @@ router.post("/", verifyToken, async (req, res) => {
             ],
           },
         },
-        { $sort: { created: -1 } },
+        { $sort: { createdAt: -1 } },
         { $limit: 1 },
       ]);
 

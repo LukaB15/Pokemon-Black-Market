@@ -1,11 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import userRoute from "./models/user.mjs";
-import productRoute from "./models/product.mjs";
-import authRoute from "./models/auth.mjs";
-import orderRoute from "./models/order.mjs";
+import userRoute from "./routes/user.mjs";
+import productRoute from "./routes/product.mjs";
+import authRoute from "./routes/auth.mjs";
+import orderRoute from "./routes/order.mjs";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 const app = express();
 dotenv.config();
 
@@ -17,6 +18,7 @@ mongoose
   });
 
 //app.use(express.static("client/src/index.tsx"));
+app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 app.use("/api/product", productRoute);

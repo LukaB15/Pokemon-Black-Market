@@ -57,12 +57,15 @@ export const singlePkmnSlice = createSlice({
 
         })
         .addCase(getFlavorTextAsync.fulfilled, (state, action)=>{
-            let i:number = 0;
-            while(action.payload.flavor_text_entries[i].language.name != "en"){
-                i++;
-            };
-            console.log(action.payload.flavor_text_entries[i].flavor_text)
-            state.flavorText = action.payload.flavor_text_entries[i].flavor_text;
+            if(action.payload==="No description found"){
+                state.flavorText = "No description found";
+            }else{
+                let i:number = 0;
+                while(action.payload.flavor_text_entries[i].language.name != "en"){
+                    i++;
+                };
+                state.flavorText = action.payload.flavor_text_entries[i].flavor_text;
+            }
         })
   },
 });

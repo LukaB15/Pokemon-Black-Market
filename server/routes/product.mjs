@@ -10,6 +10,7 @@ import {
 //CREATE
 
 router.post("/", verifyToken, async (req, res) => {
+  console.log(req.user._id);
   let savedProduct;
   for (let i = 0; i < req.body.qty; i++) {
     const newProduct = new Product({

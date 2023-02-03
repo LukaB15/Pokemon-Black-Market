@@ -72,72 +72,43 @@ router.post("/", verifyToken, async (req, res) => {
   }
 });
 
-// //UPDATE
-// router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
-//   try {
-//     const updateOrder = await Order.finByIdAndUpdate(
-//       req.params.id,
-//       {
-//         $set: req.body,
-//       },
-//       { new: true }
-//     );
-//     res.status(200).json(updateOrder);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
-//DELETE
-
-// router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
-//   try {
-//     await Order.findByIdAndDelete(req.params.id);
-//     res.status(200).json("Order has been deleted...");
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
 //GET user Order
 router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
   try {
-    const orders = await Order.find({ userId: req.params.userId });
+    const orders = await Order.find({ idBuyers: req.params.userId });
+    const numberOrder = await Order.aggregate(
+      [
+        {
+          $match: {
+            $expr: {
+              $eq: ["$idBuyers.orders", req.params.userId],
+            },
+          },
+        },
+        {
+          $group: {
+            _id: {},
+            "COUNT(orders)": {
+              $sum: 1,
+            },
+          },
+        },
+        {
+          $project: {
+            "COUNT(orders)": "$COUNT(orders)",
+            _id: 0,
+          },
+        },
+      ],
+      {
+        allowDiskUse: true,
+      }
+    );
 
-    res.status(200).json(orders);
+    res.status(200).json(orders, numberOrder);
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
-// //GET MONTHLY INCOME
-
-// router.get("/income", verifyTokenAndAdmin, async (req, res) => {
-//   const date = new Date();
-//   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
-//   const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
-
-//   try {
-//     const income = await Order.aggregate([
-//       { $match: { createdAt: { $gte: previousMonth } } },
-
-//       {
-//         $project: {
-//           month: { $month: "$createdAt" },
-//           sales: "$amount",
-//         },
-//       },
-//       {
-//         $group: {
-//           _id: "$month",
-//           total: { $sum: "$sales" },
-//         },
-//       },
-//     ]);
-//     res.status(200).json(income);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 
 export default router;

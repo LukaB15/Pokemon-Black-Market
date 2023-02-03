@@ -46,7 +46,6 @@ router.put("/:_id", verifyTokenAndAuthorization, async (req, res) => {
         $set: {
           level: req.body.lvl,
           price: req.body.price,
-          namePokemon: req.body.namePokemon,
         },
       },
       { new: true }

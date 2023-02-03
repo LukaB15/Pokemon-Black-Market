@@ -8,3 +8,11 @@ export async function fetchSinglePkmn(id:string | undefined){
     });    
     return response.data;
 }
+
+export async function fetchFlavorTextAsync(id:string){
+    const response = await axios({
+        method:"get",
+        url:`https://pokeapi.co/api/v2/pokemon-species/${id}`
+    });    
+    return response.data;
+}

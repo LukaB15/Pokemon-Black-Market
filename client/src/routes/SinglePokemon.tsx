@@ -5,6 +5,8 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import "./Buy.css";
 import { selectBuyList } from '../features/buyList/buyListSlice';
 import {buyPokemon} from '../features/buyList/buyListSlice';
+import { log } from 'console';
+import BuyPokemon from '../components/BuyPokemon';
 
 
 export default function SinglePokemon() {
@@ -18,7 +20,7 @@ export default function SinglePokemon() {
     const filteredBuyList :Array<buyPokemon> = buyList.filter(
       (buy: buyPokemon) => buy.level === +level! && buy.namePokemon === name && buy.price === +price!
     );
-
+    
     useEffect(()=>{
       if(buyList.length > 0){
         dispatch(fillState(filteredBuyList[0]));

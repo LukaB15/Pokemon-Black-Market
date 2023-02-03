@@ -1,23 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store';
+import { buyPokemon } from '../buyList/buyListSlice';
 import { fetchSinglePkmn } from './singlePkmnAPI';
 
-export type SinglePkmnState = {
-    id:number;
-    name:string;
-    imgUrl:string;
-    typeFirst:string;
-    typeSecond:string | null;
-    flavorText:string | null;
-}
 
-const initialState:SinglePkmnState = {
-    id: 0,
-    name: '',
+
+const initialState:buyPokemon = {
+    'COUNT(*)': 0,
+    level: 0,
+    namePokemon: '',
+    price: 0,
+    idApi: 0,
     imgUrl: '',
     typeFirst: '',
-    typeSecond: null,
-    flavorText: null
+    typeSecond: '',
+    flavorText: ''
 }
 
 export const singlePokeballGoAsync = createAsyncThunk(
@@ -32,32 +29,25 @@ export const singlePokeballGoAsync = createAsyncThunk(
 export const singlePkmnSlice = createSlice({
   name: 'SinglePkmn',
   initialState,
-  reducers: {},
+  reducers: {
+    fillState:(state, action)=>{
+        state['COUNT(*)']=action.payload['COUNT(*)'];
+        state.idApi = action.payload.idApi;
+        state.imgUrl = action.payload.imgUrl;
+    }
+  },
   extraReducers:(builder) => {
       builder
         .addCase(singlePokeballGoAsync.fulfilled, (state, action)=>{
-            const newSinglePkmn:SinglePkmnState = {
-                id: action.payload.id,
-                name: action.payload.name,
-                imgUrl: action.payload.sprites.other["official-artwork"].front_default,
-                typeFirst: action.payload.types[0].type.name,
-                typeSecond: action.payload.types.length > 1 ? action.payload.types[1].type.name : null,
-                flavorText: null
-            }
-            
-            state.id = newSinglePkmn.id;
-            state.name = newSinglePkmn.name;
-            state.imgUrl = newSinglePkmn.imgUrl;
-            state.typeFirst = newSinglePkmn.typeFirst;
-            state.typeSecond = newSinglePkmn.typeSecond;
-            state.flavorText = newSinglePkmn.flavorText;
+            state['COUNT(*)'] = 1;
+
         })
   },
 });
 
 
 
-export const {} = singlePkmnSlice.actions
+export const {fillState} = singlePkmnSlice.actions
 
 export const selectSinglePkmn = (state: RootState) => state.singlePkmn;
 

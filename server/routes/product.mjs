@@ -9,33 +9,30 @@ import {
 
 //CREATE
 
-router.post(
-  "/",
-  /*verifyToken,*/ async (req, res) => {
-    let savedProduct;
-    for (let i = 0; i < req.body.qty; i++) {
-      const newProduct = new Product({
-        idApi: req.body.idApi,
-        namePokemon: req.body.name,
-        imgUrl: req.body.imgUrl,
-        typeFirst: req.body.typeFirst,
-        typeSecond: req.body.typeSecond,
-        flavorText: req.body.flavorText,
-        level: req.body.lvl,
-        price: req.body.price,
-        idSeller: req.user._id,
-        idOrder: "",
-      });
+router.post("/", verifyToken, async (req, res) => {
+  let savedProduct;
+  for (let i = 0; i < req.body.qty; i++) {
+    const newProduct = new Product({
+      idApi: req.body.idApi,
+      namePokemon: req.body.name,
+      imgUrl: req.body.imgUrl,
+      typeFirst: req.body.typeFirst,
+      typeSecond: req.body.typeSecond,
+      flavorText: req.body.flavorText,
+      level: req.body.lvl,
+      price: req.body.price,
+      idSeller: req.user._id,
+      idOrder: "",
+    });
 
-      try {
-        savedProduct = await newProduct.save();
-      } catch (err) {
-        res.status(500).json(err);
-      }
+    try {
+      savedProduct = await newProduct.save();
+    } catch (err) {
+      res.status(500).json(err);
     }
-    res.status(200).json(savedProduct);
   }
-);
+  res.status(200).json(savedProduct);
+});
 
 //UPDATE
 router.put("/:_id", verifyTokenAndAuthorization, async (req, res) => {

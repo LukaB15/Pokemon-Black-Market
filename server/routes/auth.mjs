@@ -8,10 +8,9 @@ import jwt from "jsonwebtoken";
 router.post("/register", async (req, res) => {
   let passwFormat = /^[A-Za-z]\w{7,30}$/;
   const password = req.body.password;
-  console.log(req.body.password);
 
   if (!password.match(passwFormat)) return "Invalid password";
-  console.log("apres le if");
+
   const hashing = await bcrypt.hash(password, 10);
   const newUser = new Users({
     username: req.body.username,
@@ -49,7 +48,12 @@ router.post("/login", async (req, res) => {
       { expiresIn: "1d" }
     );
     const { hidepassword, ...others } = user;
-    res.cookie("jwt", accesToken, { httpOnly: true, maxAge: 3000 });
+    console.log("avant cookie");
+    let cookie = res.cookie("PokeCookie", accesToken, {
+      httpOnly: true,
+      maxAge: 86400000,
+    });
+
     res.status(200).json({ ...others, accesToken });
   } catch (err) {
     res.status(500).json(err);

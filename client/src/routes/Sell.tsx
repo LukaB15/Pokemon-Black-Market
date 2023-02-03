@@ -26,9 +26,6 @@ export default function Sell() {
   const sendStateToServer = ()=>{
 
     dispatch(sellPkmnSliceAsync(sellPkmn));
-    // sellPkmn.price = null;
-    // sellPkmn.qty = null;
-    // sellPkmn.lvl = null;
     
   }
 

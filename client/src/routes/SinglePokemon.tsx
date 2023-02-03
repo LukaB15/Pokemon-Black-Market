@@ -20,6 +20,7 @@ export default function SinglePokemon() {
     );
 
     useEffect(()=>{
+      window.scrollTo(0, 0);
       if(buyList.length > 0){
         dispatch(fillState(filteredBuyList[0]));
         dispatch(getFlavorTextAsync(""+filteredBuyList[0].idApi))

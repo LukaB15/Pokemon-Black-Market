@@ -3,7 +3,7 @@ import { SellPkmnState } from "./sellPkmnSlice";
 
 export async function sendToSellAsync(pkmnToSell:SellPkmnState){    
     
-    const request = axios.post(`http://localhost:3001/api/product/`, pkmnToSell);
+    const request = axios.post(`http://localhost:3001/api/product/`, pkmnToSell, {withCredentials:true});
     return request.then(response => response.data);
 }
 

@@ -60,10 +60,7 @@ export default function Checkout() {
           <p className="text-gray-700">Subtotal</p>
           <p className="text-gray-700">$129.99</p>
         </div>
-        <div className="flex justify-between">
-          <p className="text-gray-700">Shipping</p>
-          <p className="text-gray-700">$4.99</p>
-        </div>
+       
         <hr className="my-4" />
         <div className="flex justify-between">
           <p className="text-lg font-bold">Total</p>

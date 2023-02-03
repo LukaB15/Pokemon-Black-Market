@@ -53,8 +53,8 @@ export default function SinglePokemon() {
           <h2 className='pokemon text-xs md:text-2xl text-white uppercase'>{filteredBuyList[0].namePokemon}</h2>
 
           <div className='mt-4 flex flex-row'>
-             <img className="w-8 h-8" src="../../../pokedollar.png" alt="pokedollar"/>
-             <p className="mr-1 Pokemon text-xl">{filteredBuyList[0].price}</p>
+             
+             <p className="mr-1 Pokemon text-xl">${filteredBuyList[0].price}</p>
            </div>
 
           <h3 className='Pokemon mt-5 mb-2'>Type(s)</h3>

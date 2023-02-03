@@ -74,10 +74,13 @@ export default function Profile() {
             <div className="flex flex-col items-center -mt-20">
                 <img src="rocket.jpeg" className="w-40 border-4 border-white rounded-full" />
                 <div className="flex items-center space-x-2 mt-2">
-                    <p className="text-2xl">Your name</p>
+                    <p className="text-2xl Pokemon">Your name</p>
                 </div>
-                <p className="text-gray-700">Your e-mail</p>
-                <p className="text-sm text-gray-500">New York, USA</p>
+                <p className="text-gray-700 ">Your e-mail</p>
+                <div className='flex flex-row'>
+                <p className="text-sm text-gray-500 Pokemon">500</p>
+                <p className='text-sm Pokemon'>$</p>
+                </div>
             </div>
             <div className="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
                 <div className="flex items-center space-x-4 mt-2">
@@ -101,10 +104,18 @@ export default function Profile() {
                             <span className="font-bold w-24">E-mail:</span>
                             <span className="text-gray-700">Email</span>
                         </li>
-
+                    <div className='flex flex-row justify-between'>
+                    <Link to={"/ModifyProfile"}>
                     <button className="flex items-center hover:bg-red-rocket bg-white hover:text-white text-red-rocket border hover:border-transparent border-red-rocket px-4 py-2 rounded text-sm space-x-2 transition duration-100 mt-8">                    
                         <span>Modify Profile</span>
                     </button>
+                    </Link>
+                    <Link to={"/AddPokedollar"}>
+                    <button className="flex items-center hover:bg-red-rocket bg-white hover:text-white text-red-rocket border hover:border-transparent border-red-rocket px-4 py-2 rounded text-sm space-x-2 transition duration-100 mt-8">                    
+                        <span>Add Pokedollar</span>
+                    </button>
+                    </Link>
+                    </div>
                     </ul>
                 </div>
                 <div className="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">

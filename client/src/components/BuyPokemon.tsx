@@ -29,8 +29,8 @@ export default function BuyPokemon(props:buyPokemon) {
           </div>
           <div className='mt-8 mb-4 flex flex-col justify-center items-center'>
             <div className='flex flex-row'>
-              <p className=" mr-2 Pokemon mt-1">{props.price}</p>
-              <img className="w-8 h-8 mr-2 mt-1" src="pokedollar.png"/>
+              <p className=" mr-2 Pokemon mt-1">{props.price} $</p>
+              
             </div>
             <div className="flex items-center space-x-1.5 rounded-lg bg-red-rocket px-4 py-1.5 text-white duration-100 hover:bg-white hover:text-red-rocket hover:border border ">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-4 w-4">

@@ -23,6 +23,8 @@ import SinglePokemon from './routes/SinglePokemon';
 import Profile from './routes/Profile';
 import Home from './routes/Home';
 import Mysale from './routes/MySale';
+import AddPokedollar from './routes/AddPokedollar';
+import ModifyProfile from './routes/ModifyProfile';
 
 
 const router = createBrowserRouter([
@@ -65,6 +67,14 @@ const router = createBrowserRouter([
       {
         path: "/MySale",
         element: <Mysale />,
+      },
+      {
+        path: "/AddPokedollar",
+        element: <AddPokedollar />,
+      },
+      {
+        path: "/ModifyProfile",
+        element: <ModifyProfile />,
       },
     ],
   },

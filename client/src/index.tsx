@@ -24,6 +24,7 @@ import AddPokedollar from "./routes/AddPokedollar";
 import ModifyProfile from "./routes/ModifyProfile";
 import axios from "axios";
 
+
 const router = createBrowserRouter([
   {
     element: <App />,

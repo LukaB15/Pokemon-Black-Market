@@ -45,8 +45,16 @@ export default function SinglePokemon() {
           <h3 className='Pokemon mt-5 mb-2'>Type(s)</h3>
            <div className='mt-4 flex flex-row'>
             <p className="mr-1 Pokemon md:text-xl text-white uppercase text-xs">{singlePokemon.typeFirst}</p>
+            <img src={`https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/${singlePokemon.typeFirst}.svg`} className="w-8" />
+
+            {singlePokemon.typeSecond ? 
+            <>
             <p className="mr-1 Pokemon md:text-xl text-white uppercase text-xs ml-5">{singlePokemon.typeSecond}</p>
-           </div>
+            <img src={`https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/${singlePokemon.typeSecond}.svg`} className="w-8" />
+            </>
+            : "" }
+
+            </div>
 
            <h3 className='Pokemon mt-5 mb-2'>Description</h3>
            <div className='mt-4 flex flex-row'>

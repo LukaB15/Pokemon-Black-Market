@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import { fillState, selectSinglePkmn, singlePokeballGoAsync } from '../features/singlePokemon/singlePkmnSlice';
+import { fillState, getFlavorTextAsync, selectSinglePkmn } from '../features/singlePokemon/singlePkmnSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import "./Buy.css";
 import { selectBuyList } from '../features/buyList/buyListSlice';
@@ -18,11 +18,12 @@ export default function SinglePokemon() {
     const filteredBuyList :Array<buyPokemon> = buyList.filter(
       (buy: buyPokemon) => buy.level === +level! && buy.namePokemon === name && buy.price === +price!
     );
-    
-    // console.log(filteredBuyList[0].namePokemon);
-  
+
     useEffect(()=>{
-      dispatch(fillState(filteredBuyList[0]));
+      if(buyList.length > 0){
+        dispatch(fillState(filteredBuyList[0]));
+        dispatch(getFlavorTextAsync(""+filteredBuyList[0].idApi))
+      }
     },[]);
   return (   
     

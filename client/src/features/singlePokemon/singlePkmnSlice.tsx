@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store';
 import { buyPokemon } from '../buyList/buyListSlice';
-import { fetchSinglePkmn } from './singlePkmnAPI';
+import { fetchFlavorTextAsync, fetchSinglePkmn } from './singlePkmnAPI';
 
 
 
@@ -25,6 +25,14 @@ export const singlePokeballGoAsync = createAsyncThunk(
     }
 );
 
+export const getFlavorTextAsync = createAsyncThunk(
+    'singlePkmn/fetchFlavorText',
+    async (id:string)=>{
+        const response = await fetchFlavorTextAsync(id);
+        return response;
+    }
+)
+
 
 export const singlePkmnSlice = createSlice({
   name: 'SinglePkmn',
@@ -34,6 +42,12 @@ export const singlePkmnSlice = createSlice({
         state['COUNT(*)']=action.payload['COUNT(*)'];
         state.idApi = action.payload.idApi;
         state.imgUrl = action.payload.imgUrl;
+        state.level = action.payload.level;
+        state.namePokemon = action.payload.namePokemon;
+        state.price = action.payload.price;
+        state.typeFirst = action.payload.typeFirst;
+        state.typeSecond = action.payload.typeSecond;
+        
     }
   },
   extraReducers:(builder) => {
@@ -41,6 +55,14 @@ export const singlePkmnSlice = createSlice({
         .addCase(singlePokeballGoAsync.fulfilled, (state, action)=>{
             state['COUNT(*)'] = 1;
 
+        })
+        .addCase(getFlavorTextAsync.fulfilled, (state, action)=>{
+            let i:number = 0;
+            while(action.payload.flavor_text_entries[i].language.name != "en"){
+                i++;
+            };
+            console.log(action.payload.flavor_text_entries[i].flavor_text)
+            state.flavorText = action.payload.flavor_text_entries[i].flavor_text;
         })
   },
 });

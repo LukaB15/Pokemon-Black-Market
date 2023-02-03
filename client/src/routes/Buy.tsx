@@ -11,6 +11,9 @@ export default function Buy() {
   const dispatch = useAppDispatch();
   const shouldLoad = useRef(true);
   useEffect(()=>{
+    if(buyList.length===0){
+      shouldLoad.current = true;
+    }
     if(shouldLoad.current){
       dispatch(emptyArray());
       dispatch(getBuyListFromServerAsync());

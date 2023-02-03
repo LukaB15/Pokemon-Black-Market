@@ -22,6 +22,7 @@ import Checkout from './routes/Checkout';
 import SinglePokemon from './routes/SinglePokemon';
 import Profile from './routes/Profile';
 import Home from './routes/Home';
+import axios from 'axios';
 
 
 const router = createBrowserRouter([
@@ -66,6 +67,17 @@ const router = createBrowserRouter([
 ]);
 const container = document.getElementById('root')!;
 const root = createRoot(container);
+
+// const checkLoginStatus= () =>{
+//   axios.get("http://localhost:3001/api/auth/login", {withCredentials: true})
+//     .then(response => {
+//       console.log("logged in ?", response);
+//     })
+//     .catch(error =>{
+//       console.log("check login error", error);
+//     })
+// }
+// checkLoginStatus();
 
 root.render(
   <React.StrictMode>

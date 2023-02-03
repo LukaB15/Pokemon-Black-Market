@@ -12,6 +12,7 @@ export default function Register() {
   const [confirmPasswordVis, setConfirmPasswordVis] = useState("password");
   const [safePassword, setSafePassword] = useState(false);
   const [samePassword, setSamePassword] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const escapeHtml=(unsafeString:string)=>{
     return unsafeString
@@ -21,12 +22,10 @@ export default function Register() {
          .replace(/"/g, "&quot;")
          .replace(/'/g, "&#039;");
   }
-
   const checkPassword = (inputString:string)=>{
     const passW = /^[A-Za-z]\w{7,30}$/;
     return inputString.match(passW);
   }
-
   const handleChangeNickname = (e:any) =>{
     setNickName(escapeHtml(e.target.value));
   }
@@ -54,7 +53,6 @@ export default function Register() {
       setSamePassword(false);
     }
   }
-
   const togglePassword = () =>{
     if(passwordVis === "password"){
       setPasswordVis("text");
@@ -62,7 +60,6 @@ export default function Register() {
       setPasswordVis("password");
     }
   }
-
   const toggleConfirmPassword = () =>{
     if(confirmPasswordVis === "password"){
       setConfirmPasswordVis("text");
@@ -82,10 +79,13 @@ export default function Register() {
       email : email
     }
     const response = await axios.post(`http://localhost:3001/api/auth/register`, registerReq);
-    console.log(response);
-    if(response.status === 200){
-      return <Navigate to="/Buy" />
+    if(response.status === 201){
+      setLoggedIn(true);
     }
+  }
+
+  if (loggedIn) {
+    return <Navigate to="/Buy" />;
   }
   return (
   

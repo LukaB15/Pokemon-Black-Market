@@ -1,9 +1,16 @@
 import jwt from "jsonwebtoken";
 
 const verifyToken = (req, res, next) => {
+  console.log("dans verify token");
+  console.log("request", req);
   const autHeader = req.headers.token;
+  //console.log("request.headers  ", req.headers);
+  console.log("autheader : ", autHeader);
   if (autHeader) {
+
     const token = autHeader && autHeader.split(" ")[1];
+    console.log("token : ",token);
+    
     if (token == null) return res.status(401);
     jwt.verify(token, process.env.JWT_SEC, (err, user) => {
       if (err) {

@@ -49,9 +49,11 @@ router.post("/login", async (req, res) => {
     );
     const { hidepassword, ...others } = user;
     console.log("avant cookie");
-    let cookie = res.cookie("PokeCookie", accesToken, {
+    res.cookie("PokeCookie", accesToken, {
       httpOnly: true,
       maxAge: 86400000,
+      sameSite: "none",
+      secure: true,
     });
 
     res.status(200).json({ ...others, accesToken });

@@ -1,22 +1,18 @@
 import jwt from "jsonwebtoken";
 
 const verifyToken = (req, res, next) => {
-  //console.log("dans verify token");
-  console.log("request", req.cookie);
-  const autHeader = req.headers.token;
-  //console.log("request.headers  ", req.headers);
-  //console.log("autheader : ", autHeader);
-  if (autHeader) {
+  const autHeader = req.cookies.PokeCookie;
 
-    const token = autHeader && autHeader.split(" ")[1];
-    console.log("token : ",token);
-    
+  if (autHeader) {
+    const token = autHeader;
+
     if (token == null) return res.status(401);
     jwt.verify(token, process.env.JWT_SEC, (err, user) => {
       if (err) {
         return res.status(403).json("Token is not valid");
       }
       req.user = user;
+
       next();
     });
   } else {

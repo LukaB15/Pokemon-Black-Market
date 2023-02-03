@@ -42,8 +42,8 @@ export default function Buy() {
             <span>Fly</span>
           </a>
         </div>
-        <section className="py-10 bg-bck h-screen overflow-y-scroll">
-          <div className="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <section className="py-10 bg-bck h-full  pt-32">
+          <div className="mx-auto grid max-w-7xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {buyList.length === 0 ? "loading" : buyList.map((pkmn)=>
               <BuyPokemon key={uuidv4()} {...pkmn} />
             )}

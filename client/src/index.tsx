@@ -22,6 +22,7 @@ import Checkout from './routes/Checkout';
 import SinglePokemon from './routes/SinglePokemon';
 import Profile from './routes/Profile';
 import Home from './routes/Home';
+import Mysale from './routes/MySale';
 
 
 const router = createBrowserRouter([
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "/Profile",
         element: <Profile />,
+      },
+      {
+        path: "/MySale",
+        element: <Mysale />,
       },
     ],
   },

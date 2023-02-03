@@ -10,7 +10,6 @@ import {
 //CREATE
 
 router.post("/", verifyToken, async (req, res) => {
-  console.log(req.user._id);
   let savedProduct;
   for (let i = 0; i < req.body.qty; i++) {
     const newProduct = new Product({
@@ -22,7 +21,7 @@ router.post("/", verifyToken, async (req, res) => {
       flavorText: req.body.flavorText,
       level: req.body.lvl,
       price: req.body.price,
-      idSeller: req.user._id,
+      idSeller: req.user.id,
       idOrder: "",
     });
 

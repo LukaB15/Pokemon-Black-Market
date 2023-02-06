@@ -110,5 +110,18 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
     res.status(500).json(err);
   }
 });
+//GET PRODUCT BY ORDER
 
+router.get(
+  "findPokemonByOrder/:idOrder",
+  verifyTokenAndAuthorization,
+  async (req, res) => {
+    try {
+      const pokemonOrder = await Product.find({ idOrder: req.params.idOrder });
+      res.status(200).json(pokemonOrder);
+    } catch (error) {
+      res.status(500).json(err);
+    }
+  }
+);
 export default router;

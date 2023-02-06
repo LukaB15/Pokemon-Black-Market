@@ -36,7 +36,7 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
 
 // //DELETE
 
-router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {
     await Users.findByIdAndDelete(req.params.id);
     res.status(200).json("User has been deleted...");
@@ -46,7 +46,7 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //GET USER
-router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
+router.get("/find/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {
     const user = await Users.findById(req.params.id);
     const { password, ...others } = user._doc;
@@ -76,6 +76,36 @@ router.put("/credits/:id", verifyTokenAndAuthorization, async (req, res) => {
     });
 
     res.status(200).json(addCredits);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//GET CREDITS OF USER
+
+router.get("/credits/:id", verifyToken, async (req, res) => {
+  try {
+    const userCredits = await Users.aggregate(
+      [
+        {
+          $match: {
+            $expr: {
+              $eq: ["$_id", req.params.id],
+            },
+          },
+        },
+        {
+          $project: {
+            credits: "$credits",
+            _id: 0,
+          },
+        },
+      ],
+      {
+        allowDiskUse: true,
+      }
+    );
+    res.status(200).json(userCredits);
   } catch (err) {
     res.status(500).json(err);
   }

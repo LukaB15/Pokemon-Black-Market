@@ -82,11 +82,16 @@ export default function Register() {
     if(response.status === 201){
       setLoggedIn(true);
     }
+    else{
+      console.log(response)
+    }
   }
 
   if (loggedIn) {
     return <Navigate to="/Buy" />;
+    
   }
+ 
   return (
   
     <>

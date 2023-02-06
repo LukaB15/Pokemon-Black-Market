@@ -23,7 +23,7 @@ export default function Register() {
          .replace(/'/g, "&#039;");
   }
   const checkPassword = (inputString:string)=>{
-    const passW = /^[A-Za-z]\w{7,30}$/;
+    const passW = /^[A-Za-z0-9_]\w{7,30}$/;
     return inputString.match(passW);
   }
   const handleChangeNickname = (e:any) =>{
@@ -69,10 +69,6 @@ export default function Register() {
   }
 
   const handleRegister = async () =>{
-    console.log("nickName : "+nickName);
-    console.log("email : "+email);
-    console.log("password : "+password);
-    console.log("confirmPassword : "+confirmPassword);
     const registerReq = {
       username : nickName,
       password : password,

@@ -31,6 +31,7 @@ router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await Users.findOne({ username: username });
+
     if (!user) {
       return res.status(401).json("Wrong credentials");
     }

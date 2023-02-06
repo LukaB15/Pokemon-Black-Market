@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 
 //register
 router.post("/register", async (req, res) => {
-  let passwFormat = /^[A-Za-z]\w{7,30}$/;
+  let passwFormat = /^[A-Za-z0-9_]\w{7,30}$/;
   const password = req.body.password;
 
   if (!password.match(passwFormat)) return "Invalid password";
@@ -48,7 +48,7 @@ router.post("/login", async (req, res) => {
       { expiresIn: "1d" }
     );
     const { hidepassword, ...others } = user;
-   
+
     res.cookie("PokeCookie", accesToken, {
       httpOnly: true,
       maxAge: 86400000,

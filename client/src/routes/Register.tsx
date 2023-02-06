@@ -1,9 +1,13 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { registerUser, selectUser } from '../features/frontUser/userSlice';
 import "./Login.css";
 
 export default function Register() {
+  const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
   const [nickName, setNickName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -76,6 +80,10 @@ export default function Register() {
     }
     const response = await axios.post(`http://localhost:3001/api/auth/register`, registerReq);
     if(response.status === 201){
+      dispatch(registerUser({
+        userName:nickName,
+        mail:email
+      }))
       setLoggedIn(true);
     }
   }

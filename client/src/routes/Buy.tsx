@@ -2,14 +2,31 @@ import React, { useEffect, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import BuyPokemon from '../components/BuyPokemon';
 import {  buyPokemon, emptyArray, getBuyListFromServerAsync, selectBuyList } from '../features/buyList/buyListSlice';
+import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import "./Buy.css";
+import { cartPokemon, selectCart } from '../features/Cart/cartSlice';
 
 
 export default function Buy() {
+
   const buyList:Array<buyPokemon> = useAppSelector(selectBuyList);
-  const dispatch = useAppDispatch();
+
   const shouldLoad = useRef(true);
+
+  const cartPkmn:Array<cartPokemon> = useAppSelector(selectCart)
+  const getTotalQuantity = () => {
+    let total = 0
+    cartPkmn.forEach((item:any) => {
+      total += item.quantity
+    })
+    return total
+ 
+}
+const dispatch = useAppDispatch();
+
+  
+
   useEffect(()=>{
     if(shouldLoad.current){
       
@@ -51,7 +68,7 @@ export default function Buy() {
         </section>
         <div className='shopping-cart w-1/12' onClick={() => window.location.replace("/Checkout")}>
           <img id='cartIcon' src="pokeball.png"/>
-          <p>5</p>
+          <p>{getTotalQuantity() || 0}</p>
         </div>
       </div>
     </>

@@ -14,7 +14,7 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
     req.body.password = await bcrypt.hash(req.body.password, 10);
   }
   try {
-    let passwFormat = /^[A-Za-z]\w{7,30}$/;
+    let passwFormat = /^[A-Za-z0-9_]\w{7,30}$/;
     if (!password.match(passwFormat)) return "Invalid password";
     const newPassword = await bcrypt.hash(req.body.password, 10);
     const updateUser = await Users.finByIdAndUpdate(

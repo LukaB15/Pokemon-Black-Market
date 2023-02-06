@@ -69,10 +69,10 @@ export default function Register() {
   }
 
   const handleRegister = async () =>{
-    console.log("nickName : "+nickName);
-    console.log("email : "+email);
-    console.log("password : "+password);
-    console.log("confirmPassword : "+confirmPassword);
+    // console.log("nickName : "+nickName);
+    // console.log("email : "+email);
+    // console.log("password : "+password);
+    // console.log("confirmPassword : "+confirmPassword);
     const registerReq = {
       username : nickName,
       password : password,

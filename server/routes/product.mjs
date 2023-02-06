@@ -35,7 +35,7 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 //UPDATE
-router.put("/:_id", verifyTokenAndAuthorization, async (req, res) => {
+router.put("/:_id", verifyToken, async (req, res) => {
   try {
     const updateProduct = await Product.finByIdAndUpdate(
       req.params._id,
@@ -55,7 +55,7 @@ router.put("/:_id", verifyTokenAndAuthorization, async (req, res) => {
 
 //DELETE
 
-router.delete("/delete/:_id", verifyTokenAndAuthorization, async (req, res) => {
+router.delete("/delete/:_id", verifyToken, async (req, res) => {
   try {
     await Product.deleteOne({ _id: req.params._id });
     res.status(200).json("Product has been deleted...");
@@ -64,20 +64,8 @@ router.delete("/delete/:_id", verifyTokenAndAuthorization, async (req, res) => {
   }
 });
 
-//GET SINGLE PRODUCT
-router.get("/find/:namePokemon&:level&:price", async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id);
-    //level nom prix
-
-    res.status(200).json(product);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 //GET ALL Product
-router.get("/", async (req, res) => {
+router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
     let products;
 
@@ -127,49 +115,74 @@ router.get("/", async (req, res) => {
   }
 });
 
-//GET PRODUCT BY USER
-router.get("/findProduct/:username", async (req, res) => {
-  try {
-    const productByUser = await Product.aggregate(
-      [
-        {
-          $match: {
-            $and: [
-              {
-                $expr: {
-                  $eq: ["$users._id", "$orders.idBuyers"],
-                },
-              },
-              {
-                $expr: {
-                  $eq: ["$orders._id", "$products.idOrder"],
-                },
-              },
-              {
-                $expr: {
-                  $eq: ["$users._id", req.params.username],
-                },
-              },
-            ],
-          },
-        },
-      ],
-      {
-        allowDiskUse: true,
-      }
-    );
-    res.status(200).json(productByUser);
-  } catch (err) {
-    res.status(500).json(err);
+//GET PRODUCT BY USER AS A SELLER
+router.get(
+  "/findProduct/:id",
+  verifyTokenAndAuthorization,
+  async (req, res) => {
+    try {
+      const productSellByUser = await Product.find({ idSeller: req.params.id });
+      res.status(200).json(productSellByUser);
+    } catch (err) {
+      res.status(500).json(err);
+    }
   }
-});
+);
+// router.get("/findProduct/:id", async (req, res) => {
+//   try {
+//     const productByUser = await Product.aggregate(
+//       [
+//         {
+//           $match: {
+//             $and: [
+//               {
+//                 $expr: {
+//                   $eq: ["$users._id", "$orders.idBuyers"],
+//                 },
+//               },
+//               {
+//                 $expr: {
+//                   $eq: ["$orders._id", "$products.idOrder"],
+//                 },
+//               },
+//               {
+//                 $expr: {
+//                   $eq: ["$users._id", req.params.id],
+//                 },
+//               },
+//             ],
+//           },
+//         },
+//       ],
+//       {
+//         allowDiskUse: true,
+//       }
+//     );
+//     res.status(200).json(productByUser);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 //GET ALL PRODUCT FOR ADMIN
 router.get("/admin", verifyTokenAndAdmin, async (req, res) => {
   try {
     const Allproduct = await Product.find().sort({ createdAt: -1 });
 
-    res.status(200).json({ Allproduct });
+    res.status(200).json(Allproduct);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//GET SIMILAR PRODUCT
+
+router.get("findSimilar/:typefirst", verifyToken, async (req, res) => {
+  try {
+    const similarProduct = await Product.find({
+      typeFirst: req.params.typefirst,
+    }).limit(3);
+    res.status(200).json(similarProduct);
   } catch (err) {
     res.status(500).json(err);
   }

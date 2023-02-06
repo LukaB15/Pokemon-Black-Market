@@ -48,7 +48,7 @@ router.post("/login", async (req, res) => {
       { expiresIn: "1d" }
     );
     const { hidepassword, ...others } = user;
-    console.log("avant cookie");
+   
     res.cookie("PokeCookie", accesToken, {
       httpOnly: true,
       maxAge: 86400000,

@@ -65,7 +65,7 @@ router.delete("/delete/:_id", verifyToken, async (req, res) => {
 });
 
 //GET ALL Product
-router.get("/", verifyTokenAndAdmin, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     let products;
 

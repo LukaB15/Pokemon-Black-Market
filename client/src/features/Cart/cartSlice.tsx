@@ -14,7 +14,7 @@ export type cartPokemon = {
 
   }
 
-  export const initialState:Array<cartPokemon> = [];
+export const initialState:Array<cartPokemon> = [];
 
 const cartSlice = createSlice({
   name: "cart",
@@ -33,7 +33,7 @@ const cartSlice = createSlice({
             const item:any = state.find((item:any) => item.idApi === action.payload);
             item['COUNT(*)']++;
           },
-          decrementQuantity: (state, action) => {
+      decrementQuantity: (state, action) => {
             const item:any = state.find((item:any) => item.idApi === action.payload);
             if (item['COUNT(*)'] === 1) {
               item['COUNT(*)'] = 1
@@ -41,7 +41,7 @@ const cartSlice = createSlice({
               item['COUNT(*)']--;
             }
           },
-          removeItem: (state, action) => {
+      removeItem: (state, action) => {
             const removeItem = state.filter((item:any) => item.idApi !== action.payload);
             state = removeItem;
           },

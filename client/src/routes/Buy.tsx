@@ -11,21 +11,19 @@ import { cartPokemon, selectCart } from '../features/Cart/cartSlice';
 export default function Buy() {
 
   const buyList:Array<buyPokemon> = useAppSelector(selectBuyList);
+  const cartPkmn:Array<cartPokemon> = useAppSelector(selectCart)
+  const dispatch = useAppDispatch();
 
   const shouldLoad = useRef(true);
 
-  const cartPkmn:Array<cartPokemon> = useAppSelector(selectCart)
   const getTotalQuantity = () => {
     let total = 0
     cartPkmn.forEach((item:any) => {
-      total += item.quantity
+      total += item['COUNT(*)']
     })
     return total
  
 }
-const dispatch = useAppDispatch();
-
-  
 
   useEffect(()=>{
     if(shouldLoad.current){

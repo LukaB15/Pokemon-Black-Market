@@ -18,11 +18,11 @@ export default function Buy() {
   const shouldLoad = useRef(true);
 
   const getTotalQuantity = () => {
-    // let total = 0
-    // cartPkmn.forEach((item:any) => {
-    //   total += item['COUNT(*)']
-    // })
-    return cartPkmn.length
+    let total = 0
+    cartPkmn.forEach((item:any) => {
+      total += item.qty
+    })
+    return total
  
 }
 

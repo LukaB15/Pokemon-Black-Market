@@ -35,11 +35,11 @@ export default function SinglePokemon() {
       qty: 1
     }
     const getTotalQuantity = () => {
-      // let total = 0
-      // cartPkmn.forEach((item:any) => {
-      //   total += item['COUNT(*)']
-      // })
-      return cartPkmn.length
+      let total = 0
+      cartPkmn.forEach((item:any) => {
+        total += item.qty
+      })
+      return total
    
   }
   

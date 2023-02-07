@@ -1,9 +1,11 @@
-import { incrementQuantity, decrementQuantity, removeItem} from '../features/Cart/cartSlice'
+import { incrementQuantity, decrementQuantity, removeItem, selectCart} from '../features/Cart/cartSlice'
 import { useDispatch } from 'react-redux'
 import { cartPokemon } from '../features/Cart/cartSlice'
 import "../routes/Buy.css"
+import { useAppSelector } from '../app/hooks';
 
 function CartItem(props:cartPokemon) {
+  const cartPkmn:Array<cartPokemon> = useAppSelector(selectCart);
   const dispatch = useDispatch()
 
   return (

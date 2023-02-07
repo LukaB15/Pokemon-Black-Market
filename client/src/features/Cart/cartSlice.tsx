@@ -31,19 +31,20 @@ const cartSlice = createSlice({
       },
       incrementQuantity: (state, action) => {
             const item:any = state.find((item:any) => item.idApi === action.payload);
-            item['COUNT(*)']++;
+            item.qty++;
           },
       decrementQuantity: (state, action) => {
             const item:any = state.find((item:any) => item.idApi === action.payload);
-            if (item['COUNT(*)'] === 1) {
-              item['COUNT(*)'] = 1
+            if (item.qty === 1) {
+              item.qty = 1
             } else {
-              item['COUNT(*)']--;
+              item.qty--;
             }
           },
       removeItem: (state, action) => {
-            const removeItem = state.filter((item:any) => item.idApi !== action.payload);
-            state = removeItem;
+            const removeItem= state.findIndex((item:cartPokemon) => item.idApi !== action.payload.idApi);
+            return state.filter((_, i) => i !== removeItem);
+           
           },
   }
 });

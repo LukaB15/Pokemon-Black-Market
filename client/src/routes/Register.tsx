@@ -86,11 +86,16 @@ export default function Register() {
       }))
       setLoggedIn(true);
     }
+    else{
+      console.log(response)
+    }
   }
 
   if (loggedIn) {
     return <Navigate to="/Buy" />;
+    
   }
+ 
   return (
   
     <>

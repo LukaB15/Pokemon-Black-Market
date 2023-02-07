@@ -3,6 +3,7 @@ import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/t
 import singleReducer from '../features/singlePokemon/singlePkmnSlice';
 import sellPkmnReducer from '../features/sellPokemon/sellPkmnSlice';
 import buyListReducer from '../features/buyList/buyListSlice';
+import cartReducer from "../features/Cart/cartSlice"
 import userReducer  from '../features/frontUser/userSlice';
 import storage from 'redux-persist/lib/storage';
 import {
@@ -27,6 +28,7 @@ const reducers = combineReducers({
   user: persistReducer(persistConfig, userReducer),
   sellPkmn: sellPkmnReducer,
   buyList: buyListReducer,
+  cartList : cartReducer,
 })
 
 export const store = configureStore({
@@ -49,8 +51,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
-
-
 
 
 

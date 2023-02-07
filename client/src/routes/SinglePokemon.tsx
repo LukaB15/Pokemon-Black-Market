@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { fillState, getFlavorTextAsync, selectSinglePkmn } from '../features/singlePokemon/singlePkmnSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import "./Buy.css";
@@ -7,10 +7,12 @@ import { selectBuyList } from '../features/buyList/buyListSlice';
 import {buyPokemon} from '../features/buyList/buyListSlice';
 import { log } from 'console';
 import BuyPokemon from '../components/BuyPokemon';
+import { addToCart, cartPokemon, selectCart } from '../features/Cart/cartSlice';
 
 
 export default function SinglePokemon() {
     const singlePokemon = useAppSelector(selectSinglePkmn);
+    const cartPkmn:Array<cartPokemon> = useAppSelector(selectCart);
     const name:string | undefined = useParams().name;
     const price: string | undefined = useParams().price;
     const level: string | undefined = useParams().level;
@@ -20,6 +22,31 @@ export default function SinglePokemon() {
     const filteredBuyList :Array<buyPokemon> = buyList.filter(
       (buy: buyPokemon) => buy.level === +level! && buy.namePokemon === name && buy.price === +price!
     );
+
+    const itemPokemon: cartPokemon = {
+      idApi: singlePokemon.idApi,
+      name: singlePokemon.namePokemon,
+      imgUrl: singlePokemon.imgUrl,
+      typeFirst: singlePokemon.typeFirst,
+      typeSecond: singlePokemon.typeSecond,
+      flavorText: singlePokemon.flavorText,
+      price: singlePokemon.price,
+      lvl: singlePokemon.level,
+      qty: 1
+    }
+    const getTotalQuantity = () => {
+      // let total = 0
+      // cartPkmn.forEach((item:any) => {
+      //   total += item['COUNT(*)']
+      // })
+      return cartPkmn.length
+   
+  }
+  
+    const SendToCart = () => {
+      dispatch(addToCart(itemPokemon));
+      // console.log(cartPkmn)
+    };
     
     useEffect(()=>{
       window.scrollTo(0, 0);
@@ -65,7 +92,7 @@ export default function SinglePokemon() {
            </div>
 
            <button className='bg-white mt-5 rounded-lg px-8 pt-2 pb-2 border border-29
-           9 border-transparent  hover:text-red-rocket  transition ease-in-out'>Add to Cart</button>
+           9 border-transparent  hover:text-red-rocket  transition ease-in-out '  onClick={SendToCart}>Add to Cart</button>
         </div>
         </div>
 
@@ -78,6 +105,12 @@ export default function SinglePokemon() {
          
         </div>
         </div>
+        <Link to={{pathname: `/Checkout`}}>
+        <div className='shopping-cart w-1/12'>
+          <img id='cartIcon' src="../../../pokeball.png"/>
+          <p>{getTotalQuantity() || 0}</p>
+        </div>
+        </Link>
       </div>
      
       </>

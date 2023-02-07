@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import "./Buy.css";
 import { cartPokemon, selectCart } from '../features/Cart/cartSlice';
+import { Link } from 'react-router-dom';
 
 
 export default function Buy() {
@@ -13,15 +14,15 @@ export default function Buy() {
   const buyList:Array<buyPokemon> = useAppSelector(selectBuyList);
   const cartPkmn:Array<cartPokemon> = useAppSelector(selectCart)
   const dispatch = useAppDispatch();
-
+  // console.log(cartPkmn)
   const shouldLoad = useRef(true);
 
   const getTotalQuantity = () => {
-    let total = 0
-    cartPkmn.forEach((item:any) => {
-      total += item['COUNT(*)']
-    })
-    return total
+    // let total = 0
+    // cartPkmn.forEach((item:any) => {
+    //   total += item['COUNT(*)']
+    // })
+    return cartPkmn.length
  
 }
 
@@ -64,10 +65,12 @@ export default function Buy() {
             )}
           </div>
         </section>
-        <div className='shopping-cart w-1/12' onClick={() => window.location.replace("/Checkout")}>
+        <Link to={{pathname: `/Checkout`}}>
+        <div className='shopping-cart w-1/12'>
           <img id='cartIcon' src="pokeball.png"/>
           <p>{getTotalQuantity() || 0}</p>
         </div>
+        </Link>
       </div>
     </>
   )

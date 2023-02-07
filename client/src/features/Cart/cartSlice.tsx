@@ -21,12 +21,12 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
       addToCart: (state,action) => {
-            const itemInCart:any = state.find((item:any) => item.idApi === action.payload.idApi);
+            const itemInCart:cartPokemon|undefined = state.find((item:cartPokemon) => item.idApi === action.payload.idApi);
             if(itemInCart){
-                  itemInCart['COUNT(*)']++;
+                  itemInCart.qty!++;
             }
             else{
-                  state.push({ ...action.payload, 'COUNT(*)': 1 });
+                  state.push({ ...action.payload });
             }
       },
       incrementQuantity: (state, action) => {

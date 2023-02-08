@@ -83,7 +83,8 @@ router.put("/credits/:id", verifyTokenAndAuthorization, async (req, res) => {
 
 //GET CREDITS OF USER
 
-router.get("/credits/:id", verifyToken, async (req, res) => {
+router.get("/credits/:id", /*verifyToken,*/ async (req, res) => {
+  console.log(req.params.id)
   try {
     const userCredits = await Users.aggregate(
       [

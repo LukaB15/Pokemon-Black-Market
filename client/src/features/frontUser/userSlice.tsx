@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store';
-import { sendMoneyToDB } from './userSliceAPI';
+import { getMoneyFromDB, sendMoneyToDB } from './userSliceAPI';
 
 export type userType = {
     userId : string | null,
@@ -30,6 +30,15 @@ export const saveToDBAsync = createAsyncThunk(
         return response;
     }
 );
+
+export const getMoneyAsync = createAsyncThunk(
+    'userSlice/getMoney',
+    async (id:string) => {
+        const response = await getMoneyFromDB(id);
+        return response;
+    }
+);
+
 
 const userSlice = createSlice({
   name: "userSlice",
@@ -62,6 +71,10 @@ const userSlice = createSlice({
     builder
         .addCase(saveToDBAsync.fulfilled, (state, action)=>{
             console.log(action.payload);
+        })
+        .addCase(getMoneyAsync.fulfilled, (state, action)=>{
+            console.log(action.payload);
+            state.credits = action.payload;
         })
 }
 });

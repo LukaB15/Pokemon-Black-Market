@@ -1,9 +1,15 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import { useAppSelector } from '../app/hooks';
-import { selectUser } from '../features/frontUser/userSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { getMoneyAsync, selectUser } from '../features/frontUser/userSlice';
 
 export default function Profile() {
     const user = useAppSelector(selectUser);
+    const dispatch = useAppDispatch()
+    useEffect(()=>{
+        console.log(user.userId)
+        dispatch(getMoneyAsync(user.userId!));
+    },[])
 
   return (
     <>

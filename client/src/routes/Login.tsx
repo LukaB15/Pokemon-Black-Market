@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, Navigate, redirect } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { selectUser, storeUser } from "../features/frontUser/userSlice";
 import "./Login.css";
 
 export default function Login() {
+  const dispatch = useAppDispatch();
   const [nickName, setNickName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVis, setPasswordVis] = useState("password");
@@ -35,8 +38,6 @@ export default function Login() {
   };
 
   const logUserIn = async () => {
-    console.log(nickName);
-    console.log(password);
     const response = await axios.post(
       `http://localhost:3001/api/auth/login`,
       {
@@ -45,9 +46,14 @@ export default function Login() {
       },
       { withCredentials: true }
     );
-    console.log(response);
-    
     if(response.status === 200){
+      dispatch(storeUser({
+        userId:response.data._doc._id,
+        userName:response.data._doc.username,
+        credits:response.data._doc.credits,
+        mail:response.data._doc.email,
+        isAdmin:response.data._doc.isAdmin
+      }))
       setLoggedIn(true);
     }
   };

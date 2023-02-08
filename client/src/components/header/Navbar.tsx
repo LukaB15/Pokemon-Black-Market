@@ -9,6 +9,11 @@ export default function Navbar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const dispatch = useAppDispatch();
 
+  const logOut = () =>{
+    dispatch(userLogout());
+    localStorage.clear();
+  }
+
   return (
    <>
 <nav className="fixed top-0 left-0 z-20 w-full border-b border-gray-200 bg-white py-2.5 px-6 sm:px-4">
@@ -30,7 +35,7 @@ export default function Navbar() {
       </>
       :
       <>
-        <button type="button" onClick={() => dispatch(userLogout())} className="btn_login rounde mr-3 hidden border py-1.5 px-6 text-center text-sm font-medium focus:outline-none focus:ring-4  md:inline-block rounded-lg">logout</button>
+        <button type="button" onClick={logOut} className="btn_login rounde mr-3 hidden border py-1.5 px-6 text-center text-sm font-medium focus:outline-none focus:ring-4  md:inline-block rounded-lg">logout</button>
         <Link to={`/Profile`}>
           <button type="button" className="rounde mr-3 hidden bg-blue-700 py-1.5 px-6 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 md:mr-0 md:inline-block rounded-lg btn_register">My Profile</button>
         </Link>

@@ -80,16 +80,7 @@ const router = createBrowserRouter([
 const container = document.getElementById("root")!;
 const root = createRoot(container);
 
-// const checkLoginStatus= () =>{
-//   axios.get("http://localhost:3001/api/auth/login", {withCredentials: true})
-//     .then(response => {
-//       console.log("logged in ?", response);
-//     })
-//     .catch(error =>{
-//       console.log("check login error", error);
-//     })
-// }
-// checkLoginStatus();
+
 
 root.render(
   <React.StrictMode>

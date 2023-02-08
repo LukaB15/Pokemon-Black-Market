@@ -84,7 +84,7 @@ export default function Sell() {
                 <h3 className="Pokemon mt-5 mb-2">Enter informations here</h3>
                 <form className="flex flex-col">
                   <input
-                    className="w-6/12 mt-2 mb-2"
+                    className="w-10/12 sm:w-6/12 mt-2 mb-2"
                     type="text"
                     name="Price"
                     placeholder="Price"
@@ -92,7 +92,7 @@ export default function Sell() {
                     value={sellPkmn.price ? sellPkmn.price : ""}
                   />
                   <input
-                    className="w-6/12 mt-2 mb-2"
+                    className="w-10/12 sm:w-6/12 mt-2 mb-2"
                     type="text"
                     name="Level"
                     placeholder="Level"
@@ -100,7 +100,7 @@ export default function Sell() {
                     value={sellPkmn.lvl ? sellPkmn.lvl : ""}
                   />
                   <input
-                    className="w-6/12 mt-2 mb-2"
+                    className="w-10/12 sm:w-6/12 mt-2 mb-2"
                     type="text"
                     name="Quantity"
                     placeholder="Qty"
@@ -126,7 +126,7 @@ export default function Sell() {
                 </div>
               </div>
             </div>
-            <div className="flex items-center space-x-1.5 rounded-lg bg-white w-2/12 px-4 py-1.5 text-black duration-100  hover:text-red-rocket hover:border border mt-6 ">
+            <div className="flex items-center space-x-1.5 rounded-lg bg-white w-6/12 lg:w-2/12 px-4 py-1.5 text-black duration-100  hover:text-red-rocket hover:border border mt-6 ">
               <button
                 className="text-lg ml-auto mr-auto"
                 disabled={

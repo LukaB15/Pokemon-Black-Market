@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { buyPokemon } from '../features/buyList/buyListSlice'
+import { buyPokemon, selectBuyList } from '../features/buyList/buyListSlice'
 import { useDispatch } from 'react-redux';
 import {addToCart, cartPokemon, selectCart} from '../features/Cart/cartSlice';
 import { useAppSelector } from '../app/hooks';
@@ -9,6 +9,7 @@ import { useAppSelector } from '../app/hooks';
 
 export default function BuyPokemon(props:buyPokemon) {
   const cartPkmn:Array<cartPokemon> = useAppSelector(selectCart);
+  const buyList = useAppSelector(selectBuyList);
   const dispatch = useDispatch();
   const itemPokemon: cartPokemon = {
     idApi: props.idApi,
@@ -22,17 +23,21 @@ export default function BuyPokemon(props:buyPokemon) {
     qty: 1
   }
 
+  const filteredPokemonList :Array<buyPokemon> = buyList.filter(
+    (buy: buyPokemon) => buy.typeFirst ===  || buy.typeSecond === filterType
+  );
+
   const SendToCart = () => {
     dispatch(addToCart(itemPokemon));
   };
   return (
-    <div className='flex flex-col hover:scale-105 duration-200 ease-in-out'>
+    <div className='flex flex-col hover:scale-100 sm:hover:scale-105 duration-200 ease-in-out'>
     <Link to={{pathname: `/SinglePokemon/${props.namePokemon}/${props.level}/${props.price}`}}>
-    <article className="rounded-t-xl  bg-white p-3 shadow-lg hover:shadow-xl   article">
+    <article className="rounded-t-xl  bg-white p-3 shadow-lg hover:shadow-xl  article">
      
         <div className="relative flex flex-col items-center overflow-hidden rounded-xl">
           <img src={props.imgUrl} alt="Pokemon_Product" />
-          <p className='text-darkest mt-4 mb-4 Pokemon capitalize'>
+          <p className='text-darkest text-sm mt-4 mb-4 Pokemon capitalize'>
             {props.namePokemon}
           </p>
           <div className='flex flex-row pt-4 pb-4 h-24 items-center ml-auto mr-auto border-t border-b border-red-rocket '>

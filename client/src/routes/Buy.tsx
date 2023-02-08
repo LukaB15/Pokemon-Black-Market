@@ -16,7 +16,7 @@ export default function Buy() {
   const dispatch = useAppDispatch();
   // console.log(cartPkmn)
   const shouldLoad = useRef(true);
-
+  var typerecherche:string = '';
   const getTotalQuantity = () => {
     let total = 0
     cartPkmn.forEach((item:any) => {
@@ -25,6 +25,12 @@ export default function Buy() {
     return total
  
 }
+
+const switchType = (type:string) => (event:any) =>
+{
+  typerecherche = type;
+}
+
 
   useEffect(()=>{
     if(shouldLoad.current){
@@ -43,11 +49,11 @@ export default function Buy() {
         <div className="flex flex-wrap items-center  overflow-x-auto overflow-y-hidden py-10 justify-center   bg-white text-gray-800 ">
           <a rel="noopener noreferrer" href="#" className="flex items-center flex-shrink-0 px-5 py-3 space-x-2text-gray-600 hover:text-red-rocket">
             <img className='w-8 h-8' src='fire.png' />
-            <span>Fire</span>
+            <span onClick={ switchType('fire') }>Fire</span>
           </a>
           <a rel="noopener noreferrer" href="#" className="flex items-center flex-shrink-0 px-5 py-3 space-x-2 rounded-t-lg text-gray-900 hover:text-red-rocket">
             <img className='w-8 h-8' src='water.png' />
-            <span>Water</span>
+            <span onClick={switchType('water')}>Water</span>
           </a>
           <a rel="noopener noreferrer" href="#" className="flex items-center flex-shrink-0 px-5 py-3 space-x-2  text-gray-600 hover:text-red-rocket">
           <img className='w-8 h-8' src='grass.png' />
@@ -61,12 +67,12 @@ export default function Buy() {
         <section className="py-10 bg-bck h-full  pt-32">
           <div className="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {buyList.length === 0 ? "loading" : buyList.map((pkmn)=>
-              <BuyPokemon key={uuidv4()} {...pkmn} />
+              <BuyPokemon key={uuidv4()} {...pkmn} type={typerecherche} />
             )}
           </div>
         </section>
         <Link to={{pathname: `/Checkout`}}>
-        <div className='shopping-cart w-1/12'>
+        <div className='shopping-cart w-20 sm:w-32'>
           <img id='cartIcon' src="pokeball.png"/>
           <p>{getTotalQuantity() || 0}</p>
         </div>

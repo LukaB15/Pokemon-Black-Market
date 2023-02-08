@@ -85,27 +85,8 @@ router.put("/credits/:id", verifyTokenAndAuthorization, async (req, res) => {
 
 router.get("/credits/:id", verifyToken, async (req, res) => {
   try {
-    const userCredits = await Users.aggregate(
-      [
-        {
-          $match: {
-            $expr: {
-              $eq: ["$_id", req.params.id],
-            },
-          },
-        },
-        {
-          $project: {
-            credits: "$credits",
-            _id: 0,
-          },
-        },
-      ],
-      {
-        allowDiskUse: true,
-      }
-    );
-    res.status(200).json(userCredits);
+    const userCredits = await Users.find({ _id: req.params.id });
+    res.status(200).json(userCredits[0]["credits"]);
   } catch (err) {
     res.status(500).json(err);
   }

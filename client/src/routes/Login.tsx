@@ -39,21 +39,23 @@ export default function Login() {
 
   const logUserIn = async () => {
     const response = await axios.post(
-      `http://localhost:3001/api/auth/login`,
+      `https://black-market-pokemon-server.onrender.com/api/auth/login`,
       {
         username: nickName,
         password: password,
       },
       { withCredentials: true }
     );
-    if(response.status === 200){
-      dispatch(storeUser({
-        userId:response.data._doc._id,
-        userName:response.data._doc.username,
-        credits:response.data._doc.credits,
-        mail:response.data._doc.email,
-        isAdmin:response.data._doc.isAdmin
-      }))
+    if (response.status === 200) {
+      dispatch(
+        storeUser({
+          userId: response.data._doc._id,
+          userName: response.data._doc.username,
+          credits: response.data._doc.credits,
+          mail: response.data._doc.email,
+          isAdmin: response.data._doc.isAdmin,
+        })
+      );
       setLoggedIn(true);
     }
   };

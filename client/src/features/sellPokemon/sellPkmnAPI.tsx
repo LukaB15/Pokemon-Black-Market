@@ -2,9 +2,13 @@ import axios from "axios";
 import { SellPkmnState } from "./sellPkmnSlice";
 
 export async function sendToSellAsync(pkmnToSell: SellPkmnState) {
-  const request = axios.post(`http://localhost:3001/api/product/`, pkmnToSell, {
-    withCredentials: true,
-  });
+  const request = axios.post(
+    `https://black-market-pokemon-server.onrender.com/api/product/`,
+    pkmnToSell,
+    {
+      withCredentials: true,
+    }
+  );
   return request.then((response) => response.data);
 }
 

@@ -17,9 +17,13 @@ mongoose
     console.log(err);
   });
 
-//app.use(express.static("client/src/index.tsx"));
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(
+  cors({
+    credentials: true,
+    origin: "https://black-market-pokemon.onrender.com/",
+  })
+);
 app.use(express.json());
 app.use("/api/product", productRoute);
 app.use("/api/user", userRoute);

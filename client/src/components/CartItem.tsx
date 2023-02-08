@@ -1,11 +1,11 @@
-import { incrementQuantity, decrementQuantity, removeItem, selectCart} from '../features/Cart/cartSlice'
+import { incrementQuantity, decrementQuantity, removeItem, selectCart, listCart} from '../features/Cart/cartSlice'
 import { useDispatch } from 'react-redux'
 import { cartPokemon } from '../features/Cart/cartSlice'
 import "../routes/Buy.css"
 import { useAppSelector } from '../app/hooks';
 
 function CartItem(props:cartPokemon) {
-  const cartPkmn:Array<cartPokemon> = useAppSelector(selectCart);
+  const cartPkmn:listCart = useAppSelector(selectCart);
   const dispatch = useDispatch()
 
   return (
@@ -27,7 +27,7 @@ function CartItem(props:cartPokemon) {
                 <p className="text-sm">{props.price} $</p>
                 <button
                     className='cartItem__removeButton' 
-                    onClick={() => dispatch(removeItem(props.idApi))}>
+                    onClick={() => dispatch(removeItem(props.idApi!))}>
                       Remove
                 </button>
               </div>

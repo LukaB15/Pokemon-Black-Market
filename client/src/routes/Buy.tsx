@@ -5,21 +5,20 @@ import {  buyPokemon, emptyArray, getBuyListFromServerAsync, selectBuyList } fro
 import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import "./Buy.css";
-import { cartPokemon, selectCart } from '../features/Cart/cartSlice';
+import { cartPokemon, listCart, selectCart } from '../features/Cart/cartSlice';
 import { Link } from 'react-router-dom';
 
 
 export default function Buy() {
 
   const buyList:Array<buyPokemon> = useAppSelector(selectBuyList);
-  const cartPkmn:Array<cartPokemon> = useAppSelector(selectCart)
+  let cartPkmn:listCart = useAppSelector(selectCart);
   const dispatch = useAppDispatch();
-  // console.log(cartPkmn)
   const shouldLoad = useRef(true);
 
   const getTotalQuantity = () => {
     let total = 0
-    cartPkmn.forEach((item:any) => {
+    cartPkmn.list.forEach((item:any) => {
       total += item.qty
     })
     return total

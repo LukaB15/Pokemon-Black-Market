@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./Navbar.css";
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectUser, userLogout } from '../../features/frontUser/userSlice';
+import { persistor } from "../../app/store";
 
 export default function Navbar() {
   const user = useAppSelector(selectUser);
@@ -11,7 +12,7 @@ export default function Navbar() {
 
   const logOut = () =>{
     dispatch(userLogout());
-    localStorage.clear();
+    persistor.purge();
   }
 
   return (

@@ -7,12 +7,12 @@ import { selectBuyList } from '../features/buyList/buyListSlice';
 import {buyPokemon} from '../features/buyList/buyListSlice';
 import { log } from 'console';
 import BuyPokemon from '../components/BuyPokemon';
-import { addToCart, cartPokemon, selectCart } from '../features/Cart/cartSlice';
+import { addToCart, cartPokemon, listCart, selectCart } from '../features/Cart/cartSlice';
 
 
 export default function SinglePokemon() {
     const singlePokemon = useAppSelector(selectSinglePkmn);
-    const cartPkmn:Array<cartPokemon> = useAppSelector(selectCart);
+    let cartPkmn:listCart = useAppSelector(selectCart);
     const name:string | undefined = useParams().name;
     const price: string | undefined = useParams().price;
     const level: string | undefined = useParams().level;
@@ -36,7 +36,7 @@ export default function SinglePokemon() {
     }
     const getTotalQuantity = () => {
       let total = 0
-      cartPkmn.forEach((item:any) => {
+      cartPkmn.list.forEach((item:any) => {
         total += item.qty
       })
       return total

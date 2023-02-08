@@ -24,6 +24,7 @@ app.use(
     origin: "https://black-market-pokemon.onrender.com",
   })
 );
+
 app.use(express.json());
 app.use("/api/product", productRoute);
 app.use("/api/user", userRoute);

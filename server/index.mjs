@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: "https://black-market-pokemon.onrender.com/",
+    origin: "https://black-market-pokemon.onrender.com",
   })
 );
 app.use(express.json());

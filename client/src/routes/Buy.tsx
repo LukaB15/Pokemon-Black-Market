@@ -14,8 +14,6 @@ import { cartPokemon, selectCart } from "../features/Cart/cartSlice";
 import { Link } from "react-router-dom";
 
 export default function Buy() {
-  console.log(process.env.PORTLINK);
-
   const buyList: Array<buyPokemon> = useAppSelector(selectBuyList);
   const cartPkmn: Array<cartPokemon> = useAppSelector(selectCart);
   const dispatch = useAppDispatch();

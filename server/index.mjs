@@ -30,6 +30,6 @@ app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/order", orderRoute);
 
-app.listen(process.env.PORT || 3001, () => {
+app.listen(process.env.PORT, () => {
   console.log("Backend server is running!");
 });

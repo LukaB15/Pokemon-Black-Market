@@ -64,7 +64,7 @@ export default function Sell() {
     </div>
     </div> */}
 
-      <div className="bg-bck flex flex-col min-h-screen">
+      <div className="bg-bck flex flex-col min-h-screen pb-96">
         <div className="bg-white h-96 w-6/12 sm:w-4/12 ml-28 mt-32 rounded-lg static">
           <img
             className="hidden lg:block w-4/12 h-6/12"

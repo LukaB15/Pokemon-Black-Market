@@ -15,7 +15,7 @@ export default function Checkout() {
       <h1 className="mb-10 text-center text-2xl font-bold text-red-rocket">Cart Items</h1>
       <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
         <div className="rounded-lg md:w-2/3">
-          <div className="justify-between rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start overflow-y-scroll h-96 flex flex-col border-b border-2 border-red-rocket">
+          <div className="justify-between rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start overflow-y-scroll max-h-96 flex flex-col border-b border-2 border-red-rocket">
             {cartPkmn?.map((item:cartPokemon) => (
             <CartItem
               key={item.idApi}

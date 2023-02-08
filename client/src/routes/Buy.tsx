@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 export default function Buy() {
 
   const buyList:Array<buyPokemon> = useAppSelector(selectBuyList);
-  const cartPkmn:Array<cartPokemon> = useAppSelector(selectCart)
+  let cartPkmn:Array<cartPokemon> = useAppSelector(selectCart)
   const dispatch = useAppDispatch();
   // console.log(cartPkmn)
   const shouldLoad = useRef(true);
@@ -59,7 +59,7 @@ export default function Buy() {
           </a>
         </div>
         <section className="py-10 bg-bck h-full  pt-32">
-          <div className="mx-auto grid max-w-7xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <div className="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {buyList.length === 0 ? "loading" : buyList.map((pkmn)=>
               <BuyPokemon key={uuidv4()} {...pkmn} />
             )}

@@ -27,8 +27,8 @@ const reducers = combineReducers({
   singlePkmn: persistReducer(persistConfig, singleReducer),
   user: persistReducer(persistConfig, userReducer),
   sellPkmn: sellPkmnReducer,
-  buyList: buyListReducer,
-  cartList :  cartReducer,
+  buyList: buyListReducer ,
+  cartList : cartReducer,
 })
 
 export const store = configureStore({

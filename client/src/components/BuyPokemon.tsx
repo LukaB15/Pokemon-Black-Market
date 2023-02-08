@@ -24,10 +24,9 @@ export default function BuyPokemon(props:buyPokemon) {
 
   const SendToCart = () => {
     dispatch(addToCart(itemPokemon));
-    // console.log(cartPkmn)
   };
   return (
-    <div className='flex flex-col hover:scale-110 duration-200 ease-in-out'>
+    <div className='flex flex-col hover:scale-105 duration-200 ease-in-out'>
     <Link to={{pathname: `/SinglePokemon/${props.namePokemon}/${props.level}/${props.price}`}}>
     <article className="rounded-t-xl  bg-white p-3 shadow-lg hover:shadow-xl   article">
      

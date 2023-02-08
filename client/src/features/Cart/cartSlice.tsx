@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, current } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store';
 
 export type cartPokemon = {
@@ -42,7 +42,7 @@ const cartSlice = createSlice({
             }
           },
       removeItem: (state, action) => {
-            const removeItem= state.findIndex((item:cartPokemon) => item.idApi !== action.payload.idApi);
+            const removeItem= state.findIndex((item:cartPokemon) => item.idApi === action.payload);
             return state.filter((_, i) => i !== removeItem);
            
           },

@@ -32,6 +32,7 @@ const switchType = (type:string) => (event:any) =>
 
 
   useEffect(()=>{
+    window.scrollTo(0, 0);
     if(shouldLoad.current){
       
       dispatch(emptyArray());
@@ -66,7 +67,7 @@ const switchType = (type:string) => (event:any) =>
         <section className="py-10 bg-bck h-full  pt-32">
           <div className="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {buyList.length === 0 ? "loading" : buyList.map((pkmn)=>
-              <BuyPokemon key={uuidv4()} {...pkmn} />
+              <BuyPokemon key={uuidv4()} {...pkmn} typerecherche={typerecherche} />
             )}
           </div>
         </section>

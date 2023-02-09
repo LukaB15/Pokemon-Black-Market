@@ -1,9 +1,14 @@
 import {useSelector} from 'react-redux'
 import { useAppSelector } from '../app/hooks';
 import { cartPokemon, listCart, selectCart } from '../features/Cart/cartSlice';
+import { selectUser, userType } from '../features/frontUser/userSlice';
 
 function Total(){
 const cartPkmn:listCart = useAppSelector(selectCart);
+const user:userType = useAppSelector(selectUser);
+
+const activated = "mt-6 w-full rounded-md bg-red-rocket py-1.5 font-medium text-blue-50 hover:bg-white hover:text-red-rocket border border-red-rocket hover:border hover:border-red-rocket";
+const disActivated = "mt-6 w-full rounded-md bg-light py-1.5 font-medium text-blue-50 border border-red-rocket";
 
 const getTotal = () => {
   let totalQuantity = 0
@@ -29,7 +34,7 @@ return(
             <p className="mb-1 text-lg font-bold">${getTotal().totalPrice}</p>
           </div>
         </div>
-        <button className="mt-6 w-full rounded-md bg-red-rocket py-1.5 font-medium text-blue-50 hover:bg-white hover:text-red-rocket border border-red-rocket hover:border hover:border-red-rocket">Check out</button>
+        <button disabled={user.credits! < getTotal().totalPrice || cartPkmn.list.length === 0 } className={user.credits! >= getTotal().totalPrice && cartPkmn.list.length > 0 ? activated : disActivated}>Check out</button>
       </div> 
       </>
 )

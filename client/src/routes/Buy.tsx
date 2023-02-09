@@ -119,7 +119,7 @@ const switchType = (type:string) => (event:any) =>
           <img className='w-8 h-8' src='steel.svg' />
             <span onClick={switchType('steel')} >Steel</span>
           </a>
-          <button data-active className=" flex items-center flex-shrink-0 px-5 py-3 space-x-2  text-gray-600 hover:text-red-rocket">
+          <button className="flex items-center flex-shrink-0 px-5 py-3 space-x-2  text-gray-600 hover:text-red-rocket">
           <img className='w-8 h-8' src='fairy.svg' />
             <span onClick={switchType('fairy')} >Fairy</span>
           </button>

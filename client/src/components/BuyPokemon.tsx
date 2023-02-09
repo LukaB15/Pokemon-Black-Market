@@ -7,7 +7,7 @@ import { useAppSelector } from '../app/hooks';
 
 
 
-export default function BuyPokemon(props:buyPokemon) {
+export default function BuyPokemon(props:buyPokemon,) {
   const cartPkmn:Array<cartPokemon> = useAppSelector(selectCart);
   const buyList = useAppSelector(selectBuyList);
   const dispatch = useDispatch();
@@ -23,9 +23,10 @@ export default function BuyPokemon(props:buyPokemon) {
     qty: 1
   }
 
-  const filteredPokemonList :Array<buyPokemon> = buyList.filter(
-    (buy: buyPokemon) => buy.typeFirst ===  || buy.typeSecond === filterType
-  );
+  // const filteredPokemonList :Array<buyPokemon> = buyList.filter(
+  //   (buy: buyPokemon) => buy.typeFirst === type || buy.typeSecond === type
+  // );
+
 
   const SendToCart = () => {
     dispatch(addToCart(itemPokemon));

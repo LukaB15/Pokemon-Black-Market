@@ -49,7 +49,7 @@ const switchType = (type:string) => (event:any) =>
         <div className="flex flex-wrap items-center  overflow-x-auto overflow-y-hidden py-10 justify-center   bg-white text-gray-800 ">
           <a rel="noopener noreferrer" href="#" className="flex items-center flex-shrink-0 px-5 py-3 space-x-2text-gray-600 hover:text-red-rocket">
             <img className='w-8 h-8' src='fire.png' />
-            <span onClick={ switchType('fire') }>Fire</span>
+            <span onClick={ switchType('Fire') }>Fire</span>
           </a>
           <a rel="noopener noreferrer" href="#" className="flex items-center flex-shrink-0 px-5 py-3 space-x-2 rounded-t-lg text-gray-900 hover:text-red-rocket">
             <img className='w-8 h-8' src='water.png' />
@@ -67,7 +67,7 @@ const switchType = (type:string) => (event:any) =>
         <section className="py-10 bg-bck h-full  pt-32">
           <div className="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {buyList.length === 0 ? "loading" : buyList.map((pkmn)=>
-              <BuyPokemon key={uuidv4()} {...pkmn} type={typerecherche} />
+              <BuyPokemon key={uuidv4()} {...pkmn} />
             )}
           </div>
         </section>

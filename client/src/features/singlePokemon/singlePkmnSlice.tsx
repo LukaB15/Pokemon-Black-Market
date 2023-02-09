@@ -14,7 +14,7 @@ const initialState:buyPokemon = {
     imgUrl: '',
     typeFirst: '',
     typeSecond: '',
-    flavorText: ''
+    flavorText: '',
 }
 
 export const singlePokeballGoAsync = createAsyncThunk(

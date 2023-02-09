@@ -10,22 +10,25 @@ import {
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import "./Buy.css";
-import { cartPokemon, selectCart } from "../features/Cart/cartSlice";
+import { cartPokemon, listCart, selectCart } from "../features/Cart/cartSlice";
 import { Link } from "react-router-dom";
 
 export default function Buy() {
   const buyList: Array<buyPokemon> = useAppSelector(selectBuyList);
-  const cartPkmn: Array<cartPokemon> = useAppSelector(selectCart);
+  let cartPkmn: listCart = useAppSelector(selectCart);
   const dispatch = useAppDispatch();
-  // console.log(cartPkmn)
   const shouldLoad = useRef(true);
-
+  var typerecherche: string = "";
   const getTotalQuantity = () => {
     let total = 0;
-    cartPkmn.forEach((item: any) => {
+    cartPkmn.list.forEach((item: any) => {
       total += item.qty;
     });
     return total;
+  };
+
+  const switchType = (type: string) => (event: any) => {
+    typerecherche = type;
   };
 
   useEffect(() => {
@@ -50,7 +53,7 @@ export default function Buy() {
             className="flex items-center flex-shrink-0 px-5 py-3 space-x-2text-gray-600 hover:text-red-rocket"
           >
             <img className="w-8 h-8" src="fire.png" />
-            <span>Fire</span>
+            <span onClick={switchType("Fire")}>Fire</span>
           </a>
           <a
             rel="noopener noreferrer"
@@ -58,7 +61,7 @@ export default function Buy() {
             className="flex items-center flex-shrink-0 px-5 py-3 space-x-2 rounded-t-lg text-gray-900 hover:text-red-rocket"
           >
             <img className="w-8 h-8" src="water.png" />
-            <span>Water</span>
+            <span onClick={switchType("water")}>Water</span>
           </a>
           <a
             rel="noopener noreferrer"
@@ -78,14 +81,14 @@ export default function Buy() {
           </a>
         </div>
         <section className="py-10 bg-bck h-full  pt-32">
-          <div className="mx-auto grid max-w-7xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <div className="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {buyList.length === 0
               ? "loading"
               : buyList.map((pkmn) => <BuyPokemon key={uuidv4()} {...pkmn} />)}
           </div>
         </section>
         <Link to={{ pathname: `/Checkout` }}>
-          <div className="shopping-cart w-1/12">
+          <div className="shopping-cart w-20 sm:w-32">
             <img id="cartIcon" src="pokeball.png" />
             <p>{getTotalQuantity() || 0}</p>
           </div>

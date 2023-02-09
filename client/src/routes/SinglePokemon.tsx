@@ -7,12 +7,12 @@ import { selectBuyList } from '../features/buyList/buyListSlice';
 import {buyPokemon} from '../features/buyList/buyListSlice';
 import { log } from 'console';
 import BuyPokemon from '../components/BuyPokemon';
-import { addToCart, cartPokemon, selectCart } from '../features/Cart/cartSlice';
+import { addToCart, cartPokemon, listCart, selectCart } from '../features/Cart/cartSlice';
 
 
 export default function SinglePokemon() {
     const singlePokemon = useAppSelector(selectSinglePkmn);
-    const cartPkmn:Array<cartPokemon> = useAppSelector(selectCart);
+    let cartPkmn:listCart = useAppSelector(selectCart);
     const name:string | undefined = useParams().name;
     const price: string | undefined = useParams().price;
     const level: string | undefined = useParams().level;
@@ -36,7 +36,7 @@ export default function SinglePokemon() {
     }
     const getTotalQuantity = () => {
       let total = 0
-      cartPkmn.forEach((item:any) => {
+      cartPkmn.list.forEach((item:any) => {
         total += item.qty
       })
       return total
@@ -73,14 +73,14 @@ export default function SinglePokemon() {
            </div>
 
           <h3 className='Pokemon mt-5 mb-2'>Type(s)</h3>
-           <div className='mt-4 flex flex-row'>
+           <div className='mt-4 flex flex-row items-center'>
             <p className="mr-1 Pokemon md:text-xl text-white uppercase text-xs">{singlePokemon.typeFirst}</p>
-            <img src={`https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/${singlePokemon.typeFirst}.svg`} className="w-8" />
+            <img src={`../../../${singlePokemon.typeFirst}.svg`} className="w-10 h-10 p-1 bg-white rounded-full " />
 
             {singlePokemon.typeSecond ? 
             <>
             <p className="mr-1 Pokemon md:text-xl text-white uppercase text-xs ml-5">{singlePokemon.typeSecond}</p>
-            <img src={`https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/${singlePokemon.typeSecond}.svg`} className="w-8" />
+            <img src={`../../../${singlePokemon.typeSecond}.svg`} className="w-10 h-10 p-1 bg-white rounded-full " />
             </>
             : "" }
 

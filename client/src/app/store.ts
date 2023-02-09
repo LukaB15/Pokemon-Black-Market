@@ -6,6 +6,7 @@ import buyListReducer from '../features/buyList/buyListSlice';
 import cartReducer from "../features/Cart/cartSlice"
 import userReducer  from '../features/frontUser/userSlice';
 import storage from 'redux-persist/lib/storage';
+import hardSet from 'redux-persist/es/stateReconciler/hardSet';
 import {
   persistStore,
   persistReducer,
@@ -17,18 +18,28 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-const persistConfig = {
-  key: 'root',
-  storage,
+const singlePkmnPersistConfig = {
+  key: 'singlePkmn',
+  storage: storage,
+}
+
+const userPersistConfig ={
+  key: 'user',
+  storage: storage,
+}
+
+const cartPersistConfig={
+  key:'cartList',
+  storage: storage,
 }
 
 // combine all reducers
 const reducers = combineReducers({
-  singlePkmn: persistReducer(persistConfig, singleReducer),
-  user: persistReducer(persistConfig, userReducer),
+  singlePkmn: persistReducer(singlePkmnPersistConfig, singleReducer),
+  user: persistReducer(userPersistConfig, userReducer),
   sellPkmn: sellPkmnReducer,
   buyList: buyListReducer,
-  cartList :  cartReducer,
+  cartList : persistReducer(cartPersistConfig,cartReducer),
 })
 
 export const store = configureStore({

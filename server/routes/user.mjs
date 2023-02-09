@@ -83,8 +83,7 @@ router.put("/credits/:id", verifyTokenAndAuthorization, async (req, res) => {
 
 //GET CREDITS OF USER
 
-router.get("/credits/:id", /*verifyToken,*/ async (req, res) => {
-  console.log(req.params.id)
+router.get("/credits/:id", verifyToken, async (req, res) => {
   try {
     const userCredits = await Users.find({ _id: req.params.id });
     res.status(200).json(userCredits[0]["credits"]);

@@ -128,41 +128,6 @@ router.get(
     }
   }
 );
-// router.get("/findProduct/:id", async (req, res) => {
-//   try {
-//     const productByUser = await Product.aggregate(
-//       [
-//         {
-//           $match: {
-//             $and: [
-//               {
-//                 $expr: {
-//                   $eq: ["$users._id", "$orders.idBuyers"],
-//                 },
-//               },
-//               {
-//                 $expr: {
-//                   $eq: ["$orders._id", "$products.idOrder"],
-//                 },
-//               },
-//               {
-//                 $expr: {
-//                   $eq: ["$users._id", req.params.id],
-//                 },
-//               },
-//             ],
-//           },
-//         },
-//       ],
-//       {
-//         allowDiskUse: true,
-//       }
-//     );
-//     res.status(200).json(productByUser);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 
 //GET ALL PRODUCT FOR ADMIN
 router.get("/admin", verifyTokenAndAdmin, async (req, res) => {

@@ -2,14 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { buyPokemon, selectBuyList } from '../features/buyList/buyListSlice'
 import { useDispatch } from 'react-redux';
-import {addToCart, cartPokemon, selectCart} from '../features/Cart/cartSlice';
+import {addToCart, cartPokemon, listCart, selectCart} from '../features/Cart/cartSlice';
 import { useAppSelector } from '../app/hooks';
 
 
 
-export default function BuyPokemon(props:buyPokemon,) {
-  const cartPkmn:Array<cartPokemon> = useAppSelector(selectCart);
-  const buyList = useAppSelector(selectBuyList);
+export default function BuyPokemon(props:buyPokemon) {
+  const cartPkmn:listCart = useAppSelector(selectCart);
   const dispatch = useDispatch();
   const itemPokemon: cartPokemon = {
     idApi: props.idApi,

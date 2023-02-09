@@ -1,14 +1,14 @@
 import {useSelector} from 'react-redux'
 import { useAppSelector } from '../app/hooks';
-import { cartPokemon, selectCart } from '../features/Cart/cartSlice';
+import { cartPokemon, listCart, selectCart } from '../features/Cart/cartSlice';
 
 function Total(){
-const cartPkmn:Array<cartPokemon> = useAppSelector(selectCart);
+const cartPkmn:listCart = useAppSelector(selectCart);
 
 const getTotal = () => {
   let totalQuantity = 0
   let totalPrice = 0
-  cartPkmn.forEach((item:any) => {
+  cartPkmn.list.forEach((item:any) => {
     totalQuantity += item.qty
     totalPrice += item.price * item.qty
   })

@@ -63,4 +63,14 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//LOG OUT
+
+router.delete("/logout", async (req, res) => {
+  try {
+    res.status(200).clearCookie("PokeCookie").json("Cookie is cleared");
+  } catch (err) {
+    response.status(500).json(err);
+  }
+});
+
 export default router;

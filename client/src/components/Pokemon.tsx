@@ -22,6 +22,7 @@ const dispatch = useAppDispatch();
                               return val
                         }
                   }
+                  
                   ).map((p:any) => (
                         <div  key={uuidv4()} onClick={()=> dispatch(getFromListAsync(p.name))}  className="cursor-pointer hover:text-red-rocket">   
                         <div className="pokemon" >

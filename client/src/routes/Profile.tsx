@@ -30,13 +30,13 @@ export default function Profile() {
                 <p className='text-sm Pokemon'>$</p>
                 </div>
             </div>
-            <div className="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
+            {/* <div className="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
                 <div className="flex items-center space-x-4 mt-2">
                     <button className="flex items-center bg-red-700 hover:bg-white text-white hover:text-red-700 border border-transparent hover:border-red-700 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                        <span>Delete Profile</span>
                     </button>
                 </div>
-            </div>
+            </div> */}
         </div>
 
         <div className="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">

@@ -7,20 +7,21 @@ import { useAppSelector } from '../app/hooks';
 
 
 
-export default function BuyPokemon(props:buyPokemon) {
+export default function BuyPokemon(props:any) {
   const cartPkmn:listCart = useAppSelector(selectCart);
   const dispatch = useDispatch();
   const itemPokemon: cartPokemon = {
     idApi: props.idApi,
-    name: props.namePokemon,
-    imgUrl: props.imgUrl,
-    typeFirst: props.typeFirst,
-    typeSecond: props.typeSecond,
-    flavorText: props.flavorText,
-    price: props.price,
-    lvl: props.level,
+    name:  props.namePokemon,
+    imgUrl:  props.imgUrl,
+    typeFirst:  props.typeFirst,
+    typeSecond:  props.typeSecond,
+    flavorText:  props.flavorText,
+    price:  props.price,
+    lvl:  props.level,
     qty: 1
   }
+  console.log(props.typerecherche)
 
   // const filteredPokemonList :Array<buyPokemon> = buyList.filter(
   //   (buy: buyPokemon) => buy.typeFirst === type || buy.typeSecond === type
@@ -32,32 +33,32 @@ export default function BuyPokemon(props:buyPokemon) {
   };
   return (
     <div className='flex flex-col hover:scale-100 sm:hover:scale-105 duration-200 ease-in-out'>
-    <Link to={{pathname: `/SinglePokemon/${props.namePokemon}/${props.level}/${props.price}`}}>
+    <Link to={{pathname: `/SinglePokemon/${ props.namePokemon}/${ props.level}/${ props.price}`}}>
     <article className="rounded-t-xl  bg-white p-3 shadow-lg hover:shadow-xl  article">
      
         <div className="relative flex flex-col items-center overflow-hidden rounded-xl">
-          <img src={props.imgUrl} alt="Pokemon_Product" />
+          <img src={ props.imgUrl} alt="Pokemon_Product" />
           <p className='text-darkest text-sm mt-4 mb-4 Pokemon capitalize'>
-            {props.namePokemon}
+            { props.namePokemon}
           </p>
           <div className='flex flex-row pt-4 pb-4 h-24 items-center ml-auto mr-auto border-t border-b border-red-rocket '>
             <div className='w-8 flex flex-col items-center'>
               <p className='Pokemon text-xs'>Type</p>
-              <p>{props.typeFirst}</p>
-              <p>{props.typeSecond ? props.typeSecond: "" }</p>
+              <p>{ props.typeFirst}</p>
+              <p>{ props.typeSecond ?  props.typeSecond: "" }</p>
             </div>
             <div className='flex flex-col items-center border-l-4 border-red-rocket border-r-4 ml-5 pl-3 mr-3 pr-3'>
               <p className='Pokemon text-xs'>Level</p>
-              <p>{props.level}</p>
+              <p>{ props.level}</p>
             </div>
             <div className='w-14 flex flex-col items-center'>
               <p className='Pokemon text-xs'>Qty</p>
-              <p>{props['COUNT(*)']}</p>
+              <p>{ props['COUNT(*)']}</p>
             </div>
           </div>
           <div className='mt-8 mb-4 flex flex-col justify-center items-center'>
             <div className='flex flex-row'>
-              <p className=" mr-2 Pokemon mt-1">{props.price} $</p>
+              <p className=" mr-2 Pokemon mt-1">{ props.price} $</p>
               
             </div>
   

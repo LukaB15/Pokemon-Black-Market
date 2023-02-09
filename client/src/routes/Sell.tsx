@@ -126,7 +126,7 @@ export default function Sell() {
                 </div>
               </div>
             </div>
-            <div className="flex items-center space-x-1.5 rounded-lg bg-white w-6/12 lg:w-2/12 px-4 py-1.5 text-black duration-100  hover:text-red-rocket hover:border border mt-6 ">
+            <div className="flex items-center space-x-1.5 rounded-lg bg-white w-6/12 lg:w-2/12 px-4 py-1.5 text-black duration-100  hover:text-red-rocket hover:border border mt-6 " onClick={sendStateToServer}>
               <button
                 className="text-lg ml-auto mr-auto"
                 disabled={
@@ -135,7 +135,7 @@ export default function Sell() {
                   !sellPkmn.price ||
                   !sellPkmn.qty
                 }
-                onClick={sendStateToServer}
+                
               >
                 {!sellPkmn.lvl ||
                 !sellPkmn.name ||

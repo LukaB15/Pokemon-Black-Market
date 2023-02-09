@@ -7,7 +7,7 @@ export default function Profile() {
     const user = useAppSelector(selectUser);
     const dispatch = useAppDispatch()
     useEffect(()=>{
-        console.log(user.userId)
+        window.scroll(0,0);
         dispatch(getMoneyAsync(user.userId!));
     },[])
 

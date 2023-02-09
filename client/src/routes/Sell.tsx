@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import PokeList from "../components/PokeList";
 import {
@@ -31,6 +31,10 @@ export default function Sell() {
   const sendStateToServer = () => {
     dispatch(sellPkmnSliceAsync(sellPkmn));
   };
+
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  },[]);
 
   return (
     <>

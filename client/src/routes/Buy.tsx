@@ -33,6 +33,7 @@ const switchType = (type:string) => (event:any) =>
 
 
   useEffect(()=>{
+    window.scrollTo(0, 0);
     if(shouldLoad.current){
       
       dispatch(emptyArray());

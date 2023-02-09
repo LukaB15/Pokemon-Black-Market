@@ -23,6 +23,7 @@ export default function BuyPokemon(props:any) {
   }
   console.log(props.typerecherche)
 
+
   // const filteredPokemonList :Array<buyPokemon> = buyList.filter(
   //   (buy: buyPokemon) => buy.typeFirst === type || buy.typeSecond === type
   // );

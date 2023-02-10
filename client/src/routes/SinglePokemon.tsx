@@ -106,7 +106,7 @@ export default function SinglePokemon() {
         </div>
         </div>
         <Link to={{pathname: `/Checkout`}}>
-        <div className='shopping-cart w-1/12'>
+        <div className='shopping-cart w-20 sm:w-32'>
           <img id='cartIcon' src="../../../pokeball.png"/>
           <p>{getTotalQuantity() || 0}</p>
         </div>

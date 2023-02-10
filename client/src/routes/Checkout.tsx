@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useAppSelector } from '../app/hooks';
 import CartItem from '../components/CartItem';
@@ -8,7 +8,9 @@ import { cartPokemon, listCart, selectCart } from '../features/Cart/cartSlice';
 
 export default function Checkout() {
   const cartPkmn:listCart= useAppSelector(selectCart);
-  console.log(cartPkmn)
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  },[]);
   return (
     <>
     <div className="h-screen bg-gray-100 pt-20 pb-96">

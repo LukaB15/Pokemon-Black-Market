@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import Pokemon from "./Pokemon";
-
-import Loading from "./Loading";
+import LoadingSell from "./LoadingSell";
 
 export default function PokeList(searchTerm:any) {
 
@@ -27,7 +26,7 @@ export default function PokeList(searchTerm:any) {
           
           
         
-          if (loading) return <Loading />
+          if (loading) return <LoadingSell />
           
   return (
       <>

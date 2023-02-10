@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { registerUser, selectUser } from "../features/frontUser/userSlice";
@@ -94,6 +94,10 @@ export default function Register() {
       console.log(response);
     }
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (loggedIn) {
     return <Navigate to="/Buy" />;

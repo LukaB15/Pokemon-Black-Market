@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Navigate, redirect } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { selectUser, storeUser } from "../features/frontUser/userSlice";
@@ -59,7 +59,9 @@ export default function Login() {
       setLoggedIn(true);
     }
   };
-
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  },[]);
   if (loggedIn) {
     return <Navigate to="/Buy" />;
   }

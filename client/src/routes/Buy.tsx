@@ -128,7 +128,7 @@ const switchType = (type:string) => (event:any) =>
         <section className="py-10 bg-bck h-full  pt-32">
           <div className="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {buyList.length === 0 ? <Loading/> : buyList.map((pkmn)=> pkmn.typeFirst === typerecherche || pkmn.typeSecond ===typerecherche || typerecherche === "" ? 
-              <BuyPokemon key={uuidv4()} {...pkmn} type={typerecherche} />
+              <BuyPokemon key={uuidv4()} {...pkmn} />
             : "")}
           </div>
         </section>

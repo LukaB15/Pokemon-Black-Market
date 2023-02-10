@@ -6,8 +6,7 @@ import {addToCart, cartPokemon, listCart, selectCart} from '../features/Cart/car
 import { useAppSelector } from '../app/hooks';
 
 
-
-export default function BuyPokemon(props:any) {
+export default function BuyPokemon(props:buyPokemon) {
   const cartPkmn:listCart = useAppSelector(selectCart);
   const dispatch = useDispatch();
   const itemPokemon: cartPokemon = {
@@ -21,8 +20,6 @@ export default function BuyPokemon(props:any) {
     lvl:  props.level,
     qty: 1
   }
-  console.log(props.typerecherche)
-
 
   // const filteredPokemonList :Array<buyPokemon> = buyList.filter(
   //   (buy: buyPokemon) => buy.typeFirst === type || buy.typeSecond === type
@@ -31,6 +28,7 @@ export default function BuyPokemon(props:any) {
 
   const SendToCart = () => {
     dispatch(addToCart(itemPokemon));
+    console.log(cartPkmn.list.filter(pkmn=>pkmn.idApi === props.idApi));
   };
   return (
     <div className='flex flex-col hover:scale-100 sm:hover:scale-105 duration-200 ease-in-out'>

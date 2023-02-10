@@ -8,7 +8,6 @@ import { cartPokemon, listCart, selectCart } from '../features/Cart/cartSlice';
 
 export default function Checkout() {
   const cartPkmn:listCart= useAppSelector(selectCart);
-  console.log(cartPkmn)
   useEffect(()=>{
     window.scrollTo(0, 0);
   },[]);

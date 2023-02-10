@@ -32,7 +32,7 @@ const switchType = (type:string) => (event:any) =>
 {
   setTypeRecherche(type);
 }
-const activated = "flex items-center justify-center flex-shrink-0 px-3 py-2 space-x-2  text-gray-600 hover:text-white border-2 border-darkest bg-lightest rounded-3xl"
+const activated = "flex items-center justify-center flex-shrink-0 px-3 py-2 space-x-2 text-gray-300 hover:opacity-80 border-2 border-darkest bg-bck rounded-3xl"
 const disActivated = "flex items-center justify-center flex-shrink-0 px-3 py-2 space-x-2 text-gray-600 hover:text-red-rocket border-2 border-darkest bg-red rounded-3xl"
 
 function classNames(...classes:any) {
@@ -54,7 +54,7 @@ function classNames(...classes:any) {
         <div className="pt-32  bg-white">
           <h1 className="text-center text-2xl font-bold text-gray-800 Pokemon">Let's buy them all !</h1>
         </div>
-        <div className='flex items-center justify-center lg:hidden pb-8 pt-8'>
+        <div className='flex items-center justify-center xl:hidden pb-8 pt-8'>
         <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
@@ -76,265 +76,322 @@ function classNames(...classes:any) {
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (
+                <div className='flex flex-row items-center justify-center'  onClick={ switchType('')}>
+                  <img className='w-8 h-8' src='pokeball.png' />
                 <button
-                onClick={ switchType('')}
+               
                   className={classNames(
-                    active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                    'block px-4 py-2 text-sm w-full'
+                    active ? 'bg-gray-100 text-gray-900 w-full text-2xl' : 'text-gray-700 ',
+                    'block px-4 py-2 text-xl '
                   )}
                 >
+                  
                   All
                 </button>
+                </div>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
+                <div className='flex flex-row items-center justify-center'  onClick={ switchType('fire')}>
+                <img className='w-8 h-8' src='fire.svg' />
                 <button
-                onClick={ switchType('fire')}
+               
                   className={classNames(
-                    active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                    'block px-4 py-2 text-sm w-full'
+                    active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700',
+                    'block px-4 py-2 text-xl'
                   )}
                 >
                   Fire
                 </button>
+                </div>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
+                <div className='flex flex-row items-center justify-center' onClick={ switchType('water')}>
+                <img className='w-8 h-8' src='water.svg' />
                 <button
-                onClick={ switchType('water')}
+                
                   className={classNames(
-                    active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                    'block px-4 py-2 text-sm w-full'
+                    active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700',
+                    'block px-4 py-2 text-xl'
                   )}
                 >
                   Water
                 </button>
+                </div>
               )}
             </Menu.Item>
             
               <Menu.Item>
                 {({ active }) => (
+                  <div className='flex flex-row items-center justify-center' onClick={ switchType('grass')}>
+                  <img className='w-8 h-8' src='grass.svg' />
                  <button
-                 onClick={ switchType('grass')}
+                 
                    className={classNames(
-                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                     'block px-4 py-2 text-sm w-full'
+                     active ? 'bg-gray-100 text-gray-900 w-full ' : 'text-gray-700 ',
+                     'block px-4 py-2 text-xl'
                    )}
                  >
                    Grass
                  </button>
+                 </div>
                 )}
               </Menu.Item>
 
               <Menu.Item>
                 {({ active }) => (
+                    <div className='flex flex-row items-center justify-center'  onClick={ switchType('flying')}>
+                    <img className='w-8 h-8' src='flying.svg' />
                  <button
-                 onClick={ switchType('flying')}
+                
                    className={classNames(
-                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                     'block px-4 py-2 text-sm w-full'
+                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700',
+                     'block px-4 py-2 text-xl'
                    )}
                  >
                    Flying
                  </button>
+                 </div>
                 )}
               </Menu.Item>
 
               <Menu.Item>
                 {({ active }) => (
+                    <div className='flex flex-row items-center justify-center' onClick={ switchType('normal')}>
+                    <img className='w-8 h-8' src='normal.svg' />
                  <button
-                 onClick={ switchType('normal')}
+                 
                    className={classNames(
-                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                     'block px-4 py-2 text-sm w-full'
+                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700',
+                     'block px-4 py-2 text-xl'
                    )}
                  >
                    Normal
                  </button>
+                 </div>
                 )}
               </Menu.Item>
 
               <Menu.Item>
                 {({ active }) => (
+                   <div className='flex flex-row items-center justify-center'  onClick={ switchType('electric')}>
+                   <img className='w-8 h-8' src='electric.svg' />
                  <button
-                 onClick={ switchType('electric')}
+                
                    className={classNames(
-                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                     'block px-4 py-2 text-sm w-full'
+                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700',
+                     'block px-4 py-2 text-xl'
                    )}
                  >
                    Electric
                  </button>
+                 </div>
                 )}
               </Menu.Item>
 
               <Menu.Item>
                 {({ active }) => (
+                   <div className='flex flex-row items-center justify-center' onClick={ switchType('ice')}>
+                   <img className='w-8 h-8' src='ice.svg' />
                  <button
-                 onClick={ switchType('ice')}
+                 
                    className={classNames(
-                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                     'block px-4 py-2 text-sm w-full'
+                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700',
+                     'block px-4 py-2 text-xl '
                    )}
                  >
                    Ice
                  </button>
+                 </div>
                 )}
               </Menu.Item>
 
               <Menu.Item>
                 {({ active }) => (
+                   <div className='flex flex-row items-center justify-center'  onClick={ switchType('fighting')}>
+                   <img className='w-8 h-8' src='fighting.svg' />
                  <button
-                 onClick={ switchType('fighting')}
+                
                    className={classNames(
-                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                     'block px-4 py-2 text-sm w-full'
+                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 ',
+                     'block px-4 py-2 text-xl'
                    )}
                  >
                    Fighting
                  </button>
+                 </div>
                 )}
               </Menu.Item>
 
               <Menu.Item>
                 {({ active }) => (
+                   <div className='flex flex-row items-center justify-center' onClick={ switchType('poison')}>
+                   <img className='w-8 h-8' src='poison.svg' />
                  <button
-                 onClick={ switchType('poison')}
+                 
                    className={classNames(
-                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                     'block px-4 py-2 text-sm w-full'
+                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 ',
+                     'block px-4 py-2 text-xl'
                    )}
                  >
                    Poison
                  </button>
+                 </div>
                 )}
               </Menu.Item>
 
               <Menu.Item>
                 {({ active }) => (
+                   <div className='flex flex-row items-center justify-center'  onClick={ switchType('ground')}>
+                   <img className='w-8 h-8' src='ground.svg' />
                  <button
-                 onClick={ switchType('ground')}
+                
                    className={classNames(
-                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                     'block px-4 py-2 text-sm w-full'
+                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 ',
+                     'block px-4 py-2 text-xl '
                    )}
                  >
                    Ground
                  </button>
+                 </div>
                 )}
               </Menu.Item>
 
               <Menu.Item>
                 {({ active }) => (
+                   <div className='flex flex-row items-center justify-center'  onClick={ switchType('psychic')}>
+                   <img className='w-8 h-8' src='psychic.svg' />
                  <button
-                 onClick={ switchType('psychic')}
+                
                    className={classNames(
-                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                     'block px-4 py-2 text-sm w-full'
+                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700',
+                     'block px-4 py-2 text-xl'
                    )}
                  >
                    Psychic
                  </button>
+                 </div>
                 )}
               </Menu.Item>
 
               <Menu.Item>
                 {({ active }) => (
+                   <div className='flex flex-row items-center justify-center'  onClick={ switchType('bug')}>
+                   <img className='w-8 h-8' src='bug.svg' />
                  <button
-                 onClick={ switchType('bug')}
+                
                    className={classNames(
-                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                     'block px-4 py-2 text-sm w-full'
+                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 ',
+                     'block px-4 py-2 text-xl'
                    )}
                  >
                    Bug
                  </button>
+                 </div>
                 )}
               </Menu.Item>
 
               <Menu.Item>
                 {({ active }) => (
+                   <div className='flex flex-row items-center justify-center' onClick={ switchType('rock')}>
+                   <img className='w-8 h-8' src='rock.svg' />
                  <button
-                 onClick={ switchType('rock')}
+                 
                    className={classNames(
-                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                     'block px-4 py-2 text-sm w-full'
+                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700',
+                     'block px-4 py-2 text-xl'
                    )}
                  >
                    Rock
                  </button>
+                 </div>
                 )}
               </Menu.Item>
            
               <Menu.Item>
                 {({ active }) => (
+                   <div className='flex flex-row items-center justify-center' onClick={ switchType('ghost')}>
+                   <img className='w-8 h-8' src='ghost.svg' />
                  <button
-                 onClick={ switchType('ghost')}
+                 
                    className={classNames(
-                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                     'block px-4 py-2 text-sm w-full'
+                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700',
+                     'block px-4 py-2 text-xl'
                    )}
                  >
                    Ghost
                  </button>
+                 </div>
                 )}
               </Menu.Item>
 
               <Menu.Item>
                 {({ active }) => (
+                   <div className='flex flex-row items-center justify-center' onClick={ switchType('dark')}>
+                   <img className='w-8 h-8' src='dark.svg' />
                  <button
-                 onClick={ switchType('dark')}
+                 
                    className={classNames(
-                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                     'block px-4 py-2 text-sm w-full'
+                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700',
+                     'block px-4 py-2 text-xl'
                    )}
                  >
                    Dark
                  </button>
+                 </div>
                 )}
               </Menu.Item>
 
               <Menu.Item>
                 {({ active }) => (
+                   <div className='flex flex-row items-center justify-center' onClick={ switchType('dragon')}>
+                   <img className='w-8 h-8' src='dragon.svg' />
                  <button
-                 onClick={ switchType('dragon')}
+                 
                    className={classNames(
-                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                     'block px-4 py-2 text-sm w-full'
+                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700',
+                     'block px-4 py-2 text-xl'
                    )}
                  >
                    Dragon
                  </button>
+                 </div>
                 )}
               </Menu.Item>
 
               <Menu.Item>
                 {({ active }) => (
+                   <div className='flex flex-row items-center justify-center'  onClick={ switchType('steel')}>
+                   <img className='w-8 h-8' src='steel.svg' />
                  <button
-                 onClick={ switchType('steel')}
+                
                    className={classNames(
-                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                     'block px-4 py-2 text-sm w-full'
+                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700',
+                     'block px-4 py-2 text-xl'
                    )}
                  >
                    Steel
                  </button>
+                 </div>
                 )}
               </Menu.Item>
 
               <Menu.Item>
                 {({ active }) => (
+                   <div className='flex flex-row items-center justify-center' onClick={ switchType('fairy')}>
+                   <img className='w-8 h-8' src='fairy.svg' />
                  <button
-                 onClick={ switchType('fairy')}
                    className={classNames(
-                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700 w-full',
-                     'block px-4 py-2 text-sm w-full'
+                     active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700',
+                     'block px-4 py-2 text-xl '
                    )}
                  >
                    Fairy
                  </button>
+                 </div>
                 )}
               </Menu.Item>
           </div>
@@ -342,7 +399,7 @@ function classNames(...classes:any) {
       </Transition>
     </Menu>
     </div>
-        <div className="hidden lg:visiblemx-auto lg:grid max-w-1xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-8 xl:grid-cols-10 overflow-y-hidden py-10    bg-white text-gray-800 ">
+        <div className="hidden xl:visible mx-auto xl:grid max-w-1xl  grid-cols-1 gap-6 p-6  xl:grid-cols-7 overflow-y-hidden py-10    bg-white text-gray-800 ">
         <button className={typerecherche === '' ? activated : disActivated } onClick={ switchType('') }>
             <img className='w-8 h-8' src='pokeball.png' />
             <span>All</span>

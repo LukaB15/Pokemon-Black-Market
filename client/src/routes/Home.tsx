@@ -79,7 +79,7 @@ export default function Home() {
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white team_title">Our Team</h2>
           <p className="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">Check who is behind this amazing website !</p>
       </div> 
-      <div className="grid gap-8 mb-6 lg:mb-16 md:grid-cols-3 ">
+      <div className="grid gap-8 mb-6 lg:mb-16 xl:grid-cols-3 ">
           <div className="h-full w-full items-center justify-start bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700 hover:-translate-y-4 transition ease-in-out duration-1000">
 
                   <img className="w-4/12 rounded-lg sm:rounded-none sm:rounded-l-lg max-w-lg" src="rocket.jpeg" alt="Bonnie Avatar" />

@@ -1,14 +1,48 @@
-import { useEffect } from 'react';
+import axios from 'axios';
+import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../app/hooks';
+import LoadingSell from '../components/LoadingSell';
+import { cartPokemon } from '../features/Cart/cartSlice';
 import { getMoneyAsync, selectUser } from '../features/frontUser/userSlice';
 
+export interface order{
+    __v:number,
+    _id:string,
+    createdAt:string,
+    idBuyers:string,
+    ordersItem:Array<cartPokemon>,
+    total:number,
+    updatedAt:string
+}
+
+export type ordersArray = Array<order>;
+
 export default function Profile() {
+    const initialOrders:ordersArray = [];
+    const [orders, setOrders] = useState(initialOrders);
     const user = useAppSelector(selectUser);
     const dispatch = useAppDispatch()
-    useEffect(()=>{
+
+    
+
+    const getOrdersUser = async() =>{
+        const response = await axios.get(`http://localhost:3001/api/order/find/${user.userId}`, {
+            withCredentials: true,
+        })
+        .then(function(response){
+            setOrders(response.data.orders);
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    }
+
+    useEffect( ()=>{
         window.scroll(0,0);
         dispatch(getMoneyAsync(user.userId!));
+        getOrdersUser();
     },[])
 
   return (
@@ -69,103 +103,21 @@ export default function Profile() {
                 <div className="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
                     <h4 className="text-xl text-gray-900 font-bold">Historique de commandes</h4>
                     <div className="relative px-4 overflow-y-scroll h-96">
-                        <div className="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
-
-                        
-                        <div className="flex items-center w-full my-6 -ml-1.5">
-                            <div className="w-1/12 z-10">
-                                <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <div className="w-11/12">
-                                <div className="flex flex-row items-center">
-                                <p className="text-sm text-red-rocket">ACHAT</p><p className="text-sm"> - Salamèche</p>
+                       {orders.length === 0 ? <LoadingSell /> : orders.map((order) =>
+                        <div key={order._id}>
+                            <div className="flex items-center w-full my-6 -ml-1.5">
+                                <div className="w-1/12 z-10">
+                                    <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
                                 </div>
-                                <p className="text-xs text-gray-500">3 min ago</p>
+                                <div className="w-11/12">
+                                    <div className="flex flex-row items-center">
+                                    <p className="text-sm text-red-rocket">VENTE---</p><p className="text-sm">  {order._id}</p>
+                                    </div>
+                                    <p className="text-xs text-gray-500">{dayjs(order.createdAt).format("DD MMM YYYY")}</p>
+                                </div>
                             </div>
                         </div>
-                       
-                        <div className="flex items-center w-full my-6 -ml-1.5">
-                            <div className="w-1/12 z-10">
-                                <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <div className="w-11/12">
-                                <div className="flex flex-row items-center">
-                                <p className="text-sm text-red-rocket">VENTE</p><p className="text-sm"> - Bulbizarre</p>
-                                </div>
-                                <p className="text-xs text-gray-500">3 min ago</p>
-                            </div>
-                        </div>
-                     
-                        <div className="flex items-center w-full my-6 -ml-1.5">
-                            <div className="w-1/12 z-10">
-                                <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <div className="w-11/12">
-                                <div className="flex flex-row items-center">
-                                <p className="text-sm text-red-rocket">VENTE</p><p className="text-sm"> - Bulbizarre</p>
-                                </div>
-                                <p className="text-xs text-gray-500">3 min ago</p>
-                            </div>
-                        </div>
-                      
-                        <div className="flex items-center w-full my-6 -ml-1.5">
-                            <div className="w-1/12 z-10">
-                                <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <div className="w-11/12">
-                                <div className="flex flex-row items-center">
-                                <p className="text-sm text-red-rocket">VENTE</p><p className="text-sm"> - Bulbizarre</p>
-                                </div>
-                                <p className="text-xs text-gray-500">3 min ago</p>
-                            </div>
-                        </div>
-                    
-                        <div className="flex items-center w-full my-6 -ml-1.5">
-                            <div className="w-1/12 z-10">
-                                <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <div className="w-11/12">
-                                <div className="flex flex-row items-center">
-                                <p className="text-sm text-red-rocket">VENTE</p><p className="text-sm"> - Bulbizarre</p>
-                                </div>
-                                <p className="text-xs text-gray-500">3 min ago</p>
-                            </div>
-                        </div>
-                
-                        <div className="flex items-center w-full my-6 -ml-1.5">
-                            <div className="w-1/12 z-10">
-                                <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <div className="w-11/12">
-                                <div className="flex flex-row items-center">
-                                <p className="text-sm text-red-rocket">VENTE</p><p className="text-sm"> - Bulbizarre</p>
-                                </div>
-                                <p className="text-xs text-gray-500">3 min ago</p>
-                            </div>
-                        </div>
-                        <div className="flex items-center w-full my-6 -ml-1.5">
-                            <div className="w-1/12 z-10">
-                                <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <div className="w-11/12">
-                                <div className="flex flex-row items-center">
-                                <p className="text-sm text-red-rocket">VENTE</p><p className="text-sm"> - Bulbizarre</p>
-                                </div>
-                                <p className="text-xs text-gray-500">3 min ago</p>
-                            </div>
-                        </div>
-                        <div className="flex items-center w-full my-6 -ml-1.5">
-                            <div className="w-1/12 z-10">
-                                <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <div className="w-11/12">
-                                <div className="flex flex-row items-center">
-                                <p className="text-sm text-red-rocket">VENTE</p><p className="text-sm"> - Bulbizarre</p>
-                                </div>
-                                <p className="text-xs text-gray-500">3 min ago</p>
-                            </div>
-                        </div>
-                
+                        )}
                     </div>
                 </div>
             </div>
@@ -193,11 +145,11 @@ export default function Profile() {
                             </div>
                             <div className="flex items-center justify-between mt-6">
                                 <div>
-                                <svg className="w-12 h-12 p-2.5 bg-indigo-600 bg-opacity-20 rounded-full text-green-600 border border-indigo-600" fill="none" stroke="blue" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                                <svg className="w-12 h-12 p-2.5 bg-indigo-600 bg-opacity-20 rounded-full text-green-600 border border-indigo-600" fill="none" stroke="blue" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                                 </div>
                                 <div className="flex flex-col">
                                     <div className="flex items-end">
-                                        <span className="text-2xl 2xl:text-3xl font-bold">5</span>
+                                        <span className="text-2xl 2xl:text-3xl font-bold">{orders.length}</span>
                                         <div className="flex items-center ml-2 mb-1">
                                             
                                         </div>
@@ -212,7 +164,7 @@ export default function Profile() {
                             </div>
                             <div className="flex items-center justify-between mt-6">
                                 <div>
-                                    <svg className="w-12 h-12 p-2.5 bg-green-400 bg-opacity-20 rounded-full text-green-600 border border-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                                    <svg className="w-12 h-12 p-2.5 bg-green-400 bg-opacity-20 rounded-full text-green-600 border border-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                                 </div>
                                 <div className="flex flex-col">
                                     <div className="flex items-end">

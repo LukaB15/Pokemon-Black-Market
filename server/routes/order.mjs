@@ -20,9 +20,7 @@ router.post("/", verifyToken, async (req, res) => {
   });
   try {
     let savedOrder = await newOrder.save();
-    console.log("savedOrder : ", savedOrder._id);
     const savedId = savedOrder._id.valueOf();
-    console.log("savedId : ", savedId);
     const idOrder = await Order.find(
       {
         idBuyers: req.body.idBuyers,
@@ -66,7 +64,9 @@ router.post("/", verifyToken, async (req, res) => {
 //GET user Order
 router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
   try {
+    console.log("Bonne route");
     const orders = await Order.find({ idBuyers: req.params.userId });
+    //console.log("orders : ", orders);
     const numberOrder = await Order.aggregate(
       [
         {
@@ -95,8 +95,11 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
         allowDiskUse: true,
       }
     );
-
-    res.status(200).json(orders, numberOrder);
+    const nbAndOrders = {
+      numberOrder:numberOrder,
+      orders:orders
+    }
+    res.status(200).json(nbAndOrders);
   } catch (err) {
     res.status(500).json(err);
   }

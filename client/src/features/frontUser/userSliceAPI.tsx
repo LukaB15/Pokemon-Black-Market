@@ -11,6 +11,5 @@ export async function getMoneyFromDB(id:string){
   const response = await axios.get(`http://localhost:3001/api/user/credits/${id}`, {
     withCredentials: true,
   });
-  console.log(response.data);
   return response.data;
 }

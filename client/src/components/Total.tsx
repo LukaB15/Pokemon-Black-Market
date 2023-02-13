@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {useSelector} from 'react-redux'
 import { useAppSelector } from '../app/hooks';
 import { cartPokemon, listCart, selectCart } from '../features/Cart/cartSlice';
@@ -19,6 +20,28 @@ const getTotal = () => {
   })
   return {totalPrice, totalQuantity}
 }
+
+const checkoutGo = () =>{
+  const total = getTotal().totalPrice;
+  axios.post(`http://localhost:3001/api/order/`,
+  {
+    idBuyers : user.userId,
+    ordersItems : cartPkmn.list,
+    total: total
+  },
+   {
+    withCredentials: true,
+  })
+  .then(function(response){
+    console.log(response);
+    
+  })
+  .catch(function(error){
+    //console.log(error);
+    
+  })
+}
+
 return(
       <>
        <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
@@ -34,7 +57,7 @@ return(
             <p className="mb-1 text-lg font-bold">${getTotal().totalPrice}</p>
           </div>
         </div>
-        <button disabled={user.credits! < getTotal().totalPrice || cartPkmn.list.length === 0 } className={user.credits! >= getTotal().totalPrice && cartPkmn.list.length > 0 ? activated : disActivated}>Check out</button>
+        <button disabled={user.credits! < getTotal().totalPrice || cartPkmn.list.length === 0 } className={user.credits! >= getTotal().totalPrice && cartPkmn.list.length > 0 ? activated : disActivated} onClick={checkoutGo}>Check out</button>
       </div> 
       </>
 )

@@ -17,36 +17,37 @@ router.post("/", verifyToken, async (req, res) => {
   const newOrder = new Order({
     idBuyers: req.body.idBuyers,
     ordersItems: arrayItemsOrdered,
+    total:req.body.total,
   });
-
   try {
     let savedOrder = await newOrder.save();
     const idOrder = await Order.find(
       {
         idBuyers: req.body.idBuyers,
         ordersItems: arrayItemsOrdered,
+        total:req.body.total,
       },
       {
         _id: "$_id",
       }
     );
-
+    console.log("apres order : ");
     arrayItemsOrdered.forEach(async (element) => {
       for (let i = 0; i < element.qty; i++) {
-        let oldestPokemon = await Product.find([
+        let oldestPokemon = await Product.findOneAndUpdate(
           {
-            $match: {
-              $and: [
-                { namePokemon: element.name },
-                { level: element.lvl },
-                { price: element.price },
-              ],
-            },
-          },
-          { $sort: { createdAt: -1 } },
-          { $limit: 1 },
-        ]);
-
+            "namePokemon" : element.name,
+            "level" : element.lvl,
+            "price" : element.price,
+            "idOrder":"",
+          }
+        ).sort(
+          {
+              "createdAt" : 1
+          }
+        ).limit(1);
+        console.log("oldestPokemon : ",oldestPokemon);
+        
         ArrayPokemonWithId.push(oldestPokemon);
     }
     });

@@ -13,7 +13,6 @@ import {
 
 router.post("/", verifyToken, async (req, res) => {
   const arrayItemsOrdered = req.body.ordersItems;
-  let ArrayPokemonWithId = [];
   const newOrder = new Order({
     idBuyers: req.body.idBuyers,
     ordersItems: arrayItemsOrdered,
@@ -21,6 +20,9 @@ router.post("/", verifyToken, async (req, res) => {
   });
   try {
     let savedOrder = await newOrder.save();
+    console.log("savedOrder : ", savedOrder._id);
+    const savedId = savedOrder._id.valueOf();
+    console.log("savedId : ", savedId);
     const idOrder = await Order.find(
       {
         idBuyers: req.body.idBuyers,
@@ -31,45 +33,31 @@ router.post("/", verifyToken, async (req, res) => {
         _id: "$_id",
       }
     );
-    console.log("apres order : ");
     arrayItemsOrdered.forEach(async (element) => {
       for (let i = 0; i < element.qty; i++) {
-        let oldestPokemon = await Product.findOneAndUpdate(
+        await Product.findOneAndUpdate(
           {
-            "namePokemon" : element.name,
-            "level" : element.lvl,
-            "price" : element.price,
-            "idOrder":"",
-          }
-        ).sort(
-          {
-              "createdAt" : 1
-          }
-        ).limit(1);
-        console.log("oldestPokemon : ",oldestPokemon);
-        
-        ArrayPokemonWithId.push(oldestPokemon);
-    }
-    });
-    ArrayPokemonWithId.forEach(async (element) => {
-      await Product.updateOne(
-        { _id: element._id },
-        {
-          $set: {
-            idOrder: idOrder,
+            namePokemon: element.name,
+            level: element.lvl,
+            price: element.price,
+            idOrder: "",
           },
-        }
-      );
+          { $set: { idOrder: savedId } }
+        );
+      }
     });
-    await Users.updateOne(
-      { _id: idBuyers },
+    const total = -req.body.total;
+    const buyersId = req.body.idBuyers;
+    await Users.findOneAndUpdate(
+      { _id: buyersId },
       {
         $inc: {
-          credits: -req.body.total,
+          credits: total,
         },
       }
     );
     res.status(200).json(savedOrder);
+  
   } catch (err) {
     res.status(500).json(err);
   }

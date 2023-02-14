@@ -8,6 +8,7 @@ import {buyPokemon} from '../features/buyList/buyListSlice';
 import { log } from 'console';
 import BuyPokemon from '../components/BuyPokemon';
 import { addToCart, cartPokemon, listCart, selectCart } from '../features/Cart/cartSlice';
+import RecommandationsList from './RecommandationsList';
 
 
 export default function SinglePokemon() {
@@ -99,10 +100,11 @@ export default function SinglePokemon() {
         <div className='bg-red-rocket  bg-opacity-90 w-9/12 mt-96 sm:md-72 mb-28 ml-auto mr-auto rounded-xl flex flex-col items-center'>
           <h2 className='text-white text-xs md:text-xl Pokemon mt-5'>Recommandations</h2>
           <div className='flex flex-col sm:flex-row items-center justify-center pt-5 pb-5'>
-          <img className='w-6/12 sm:w-3/12 max-w-sm hover:border hover:border-white hover:rounded-xl p-2 border border-transparent transition ease-in-out' src="../../../charizard.png" alt="recommandations_poke" />
+          {/* <img className='w-6/12 sm:w-3/12 max-w-sm hover:border hover:border-white hover:rounded-xl p-2 border border-transparent transition ease-in-out' src="../../../charizard.png" alt="recommandations_poke" />
           <img className='w-6/12 sm:w-3/12 max-w-sm hover:border hover:border-white hover:rounded-xl p-2 border border-transparent transition ease-in-out' src="../../../charizard.png" alt="recommandations_poke" />
           <img className='w-6/12 sm:w-3/12 max-w-sm hover:border hover:border-white hover:rounded-xl p-2 border border-transparent transition ease-in-out' src="../../../charizard.png" alt="recommandations_poke"/>
-         
+          */}
+          <RecommandationsList  {...singlePokemon}/>
         </div>
         </div>
         <Link to={{pathname: `/Checkout`}}>

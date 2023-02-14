@@ -18,6 +18,8 @@ module.exports = {
       },
       backgroundImage: {
         'bck': "url('../public/bck.jpg')",
+        'pokeball': "url('../public/pokeball.png')",
+        'rocket': "url('../public/rocketlogo.png')",
       }
     },
   },

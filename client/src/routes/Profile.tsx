@@ -6,13 +6,14 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import LoadingSell from '../components/LoadingSell';
 import { cartPokemon } from '../features/Cart/cartSlice';
 import { getMoneyAsync, selectUser } from '../features/frontUser/userSlice';
+import HistoryList from './HistoryList';
 
 export interface order{
     __v:number,
     _id:string,
     createdAt:string,
     idBuyers:string,
-    ordersItem:Array<cartPokemon>,
+    ordersItems:Array<cartPokemon>,
     total:number,
     updatedAt:string
 }
@@ -101,22 +102,10 @@ export default function Profile() {
                     </ul>
                 </div>
                 <div className="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
-                    <h4 className="text-xl text-gray-900 font-bold">Historique de commandes</h4>
+                    <h4 className="text-xl text-gray-900 font-bold">History of commands</h4>
                     <div className="relative px-4 overflow-y-scroll h-96">
                        {orders.length === 0 ? <LoadingSell /> : orders.map((order) =>
-                        <div key={order._id}>
-                            <div className="flex items-center w-full my-6 -ml-1.5">
-                                <div className="w-1/12 z-10">
-                                    <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                                </div>
-                                <div className="w-11/12">
-                                    <div className="flex flex-row items-center">
-                                    <p className="text-sm text-red-rocket">VENTE---</p><p className="text-sm">  {order._id}</p>
-                                    </div>
-                                    <p className="text-xs text-gray-500">{dayjs(order.createdAt).format("DD MMM YYYY")}</p>
-                                </div>
-                            </div>
-                        </div>
+                            <HistoryList key={order._id} {...order} />
                         )}
                     </div>
                 </div>
@@ -168,7 +157,7 @@ export default function Profile() {
                                 </div>
                                 <div className="flex flex-col">
                                     <div className="flex items-end">
-                                        <span className="text-2xl 2xl:text-3xl font-bold">217</span>
+                                        <span className="text-2xl 2xl:text-3xl font-bold">{orders.length}</span>
                                         <div className="flex items-center ml-2 mb-1">
                                            
                                         </div>

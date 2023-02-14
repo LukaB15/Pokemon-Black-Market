@@ -10,7 +10,10 @@ import {
 } from "./verifyToken.mjs";
 
 //CREATE
-
+/*
+*Route pour la vente
+*Normalement OK
+*/
 router.post("/", verifyToken, async (req, res) => {
   const arrayItemsOrdered = req.body.ordersItems;
   const newOrder = new Order({
@@ -62,6 +65,9 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 //GET user Order
+/*Route pour avoir la liste des commandes
+*Normalement OK
+*/
 router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
   try {
     console.log("Bonne route");
@@ -104,8 +110,11 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
     res.status(500).json(err);
   }
 });
-//GET PRODUCT BY ORDER
 
+
+//GET PRODUCT BY ORDER
+/*Retourne une commande avec l'ID
+*/
 router.get(
   "findPokemonByOrder/:idOrder",
   verifyTokenAndAuthorization,

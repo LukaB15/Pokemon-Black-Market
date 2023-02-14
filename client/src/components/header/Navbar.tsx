@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./Navbar.css";
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
@@ -9,10 +9,13 @@ export default function Navbar() {
   const user = useAppSelector(selectUser);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const logOut = () =>{
+    setIsNavOpen(false);
     dispatch(userLogout());
     persistor.purge();
+    navigate("/");
   }
 
   return (

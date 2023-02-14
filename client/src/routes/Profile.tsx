@@ -168,7 +168,7 @@ export default function Profile() {
                                 </div>
                                 <div className="flex flex-col">
                                     <div className="flex items-end">
-                                        <span className="text-2xl 2xl:text-3xl font-bold">217</span>
+                                        <span className="text-2xl 2xl:text-3xl font-bold">{orders.length}</span>
                                         <div className="flex items-center ml-2 mb-1">
                                            
                                         </div>

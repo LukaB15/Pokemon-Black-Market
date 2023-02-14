@@ -1,12 +1,10 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { fillState, getFlavorTextAsync, selectSinglePkmn } from '../features/singlePokemon/singlePkmnSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import "./Buy.css";
 import { selectBuyList } from '../features/buyList/buyListSlice';
 import {buyPokemon} from '../features/buyList/buyListSlice';
-import { log } from 'console';
-import BuyPokemon from '../components/BuyPokemon';
 import { addToCart, cartPokemon, listCart, selectCart } from '../features/Cart/cartSlice';
 
 
@@ -18,6 +16,7 @@ export default function SinglePokemon() {
     const level: string | undefined = useParams().level;
     const dispatch = useAppDispatch();
     const buyList = useAppSelector(selectBuyList);
+    const [enoughStock, setEnoughStock] = useState(true);
    
     const filteredBuyList :Array<buyPokemon> = buyList.filter(
       (buy: buyPokemon) => buy.level === +level! && buy.namePokemon === name && buy.price === +price!
@@ -44,8 +43,22 @@ export default function SinglePokemon() {
   }
   
     const SendToCart = () => {
-      dispatch(addToCart(itemPokemon));
-      // console.log(cartPkmn)
+      const buyQty = buyList.find(item =>{
+        return  item.namePokemon === singlePokemon.namePokemon &&
+                item.level === singlePokemon.level &&
+                item.price === singlePokemon.price
+      })
+      const cartQty = cartPkmn.list.find(item => {
+        return  item.name === singlePokemon.namePokemon &&
+                item.lvl === singlePokemon.level &&
+                item.price === singlePokemon.price
+      })
+      if(cartQty === undefined || buyQty!['COUNT(*)'] > cartQty.qty!){
+        dispatch(addToCart(itemPokemon));
+      }else{
+        setEnoughStock(false);
+      }
+      
     };
     
     useEffect(()=>{
@@ -93,6 +106,7 @@ export default function SinglePokemon() {
 
            <button className='bg-white mt-5 rounded-lg px-8 pt-2 pb-2 border border-29
            9 border-transparent  hover:text-red-rocket  transition ease-in-out '  onClick={SendToCart}>Add to Cart</button>
+           <span className={enoughStock? "invisible" : "text-lightest"}>*Stock limit reached*</span>
         </div>
         </div>
 

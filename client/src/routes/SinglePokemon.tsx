@@ -118,7 +118,7 @@ export default function SinglePokemon() {
           <img className='w-6/12 sm:w-3/12 max-w-sm hover:border hover:border-white hover:rounded-xl p-2 border border-transparent transition ease-in-out' src="../../../charizard.png" alt="recommandations_poke" />
           <img className='w-6/12 sm:w-3/12 max-w-sm hover:border hover:border-white hover:rounded-xl p-2 border border-transparent transition ease-in-out' src="../../../charizard.png" alt="recommandations_poke"/>
           */}
-          <RecommandationsList  {...singlePokemon}/>
+          <RecommandationsList />
         </div>
         </div>
         <Link to={{pathname: `/Checkout`}}>

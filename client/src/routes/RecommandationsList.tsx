@@ -7,28 +7,18 @@ import { v4 as uuidv4 } from 'uuid';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { buyPokemon, selectBuyList } from '../features/buyList/buyListSlice';
 import { useAppSelector } from '../app/hooks';
-import { fillState } from '../features/singlePokemon/singlePkmnSlice';
+import singlePkmnSlice, { fillState, selectSinglePkmn } from '../features/singlePokemon/singlePkmnSlice';
 
-export interface pkmn{
-      'COUNT(*)': number,
-      level: number,
-      namePokemon: string,
-      price: number,
-      idApi: number,
-      imgUrl: string,
-      typeFirst: string,
-      typeSecond: string,
-      flavorText: string,
-  }
-  
-  export type pkmnArray = Array<pkmn>;
 
-export default function RecommandationsList(props:buyPokemon) {
+export type pkmnArray = Array<buyPokemon>;
+
+export default function RecommandationsList() {
+      const singlePokemon = useAppSelector(selectSinglePkmn);
       const initialOrders:pkmnArray = [];
       const [reco, setReco] = useState(initialOrders);
 
       const getRecommandations = async() =>{
-            const response = await axios.get(`http://localhost:3001/api/product/findSimilar/${props.typeFirst}`, {
+            const response = await axios.get(`http://localhost:3001/api/product/findSimilar/${singlePokemon.typeFirst}`, {
                 withCredentials: true,
             })
             .then(function(response){

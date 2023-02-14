@@ -33,12 +33,17 @@ const cartPersistConfig={
   storage: storage,
 }
 
+const buyListPersistConfig={
+  key:'buyList',
+  storage: storage,
+}
+
 // combine all reducers
 const reducers = combineReducers({
   singlePkmn: persistReducer(singlePkmnPersistConfig, singleReducer),
   user: persistReducer(userPersistConfig, userReducer),
   sellPkmn: sellPkmnReducer,
-  buyList: buyListReducer,
+  buyList: persistReducer(buyListPersistConfig, buyListReducer) ,
   cartList : persistReducer(cartPersistConfig,cartReducer),
 })
 

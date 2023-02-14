@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import BuyPokemon from '../components/BuyPokemon';
-import {  buyPokemon, emptyArray, getBuyListFromServerAsync, selectBuyList } from '../features/buyList/buyListSlice';
+import {  buyPokemon, emptyArray, getBuyListFromServerAsync, listBuy, selectBuyList } from '../features/buyList/buyListSlice';
 import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import "./Buy.css";
@@ -15,7 +15,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 export default function Buy() {
   const [typerecherche, setTypeRecherche] = useState("");
-  const buyList:Array<buyPokemon> = useAppSelector(selectBuyList);
+  const buyList:listBuy = useAppSelector(selectBuyList);
   let cartPkmn:listCart = useAppSelector(selectCart);
   const dispatch = useAppDispatch();
   const shouldLoad = useRef(true);
@@ -497,7 +497,7 @@ function classNames(...classes:any) {
         </div>
         <section className="py-10 bg-bck h-full  pt-32">
           <div className="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {buyList.length === 0 ? <Loading/> : buyList.map((pkmn)=> pkmn.typeFirst === typerecherche || pkmn.typeSecond ===typerecherche || typerecherche === "" ? 
+            {buyList.list.length === 0 ? <Loading/> : buyList.list.map((pkmn)=> pkmn.typeFirst === typerecherche || pkmn.typeSecond ===typerecherche || typerecherche === "" ? 
               <BuyPokemon key={uuidv4()} {...pkmn} />
             : "")}
           </div>

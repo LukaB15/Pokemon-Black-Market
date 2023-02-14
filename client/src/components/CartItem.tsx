@@ -3,16 +3,16 @@ import { useDispatch } from 'react-redux'
 import { cartPokemon } from '../features/Cart/cartSlice'
 import "../routes/Buy.css"
 import { useAppSelector } from '../app/hooks';
-import { buyPokemon, selectBuyList } from '../features/buyList/buyListSlice';
+import { buyPokemon, listBuy, selectBuyList } from '../features/buyList/buyListSlice';
 import { useState } from 'react';
 
 function CartItem(props:cartPokemon) {
-  const buyList:Array<buyPokemon> = useAppSelector(selectBuyList);
+  const buyList:listBuy= useAppSelector(selectBuyList);
   const dispatch = useDispatch()
   const [enoughStock, setEnoughStock] = useState(true);
 
   const incrementHandler = () =>{
-    const buyItem:buyPokemon = buyList.find(item => {
+    const buyItem:buyPokemon = buyList.list.find(item => {
       return  item.namePokemon === props.name &&
               item.level === props.lvl &&
               item.price === props.price

@@ -18,7 +18,7 @@ export default function SinglePokemon() {
     const buyList = useAppSelector(selectBuyList);
     const [enoughStock, setEnoughStock] = useState(true);
    
-    const filteredBuyList :Array<buyPokemon> = buyList.filter(
+    const filteredBuyList :Array<buyPokemon> = buyList.list.filter(
       (buy: buyPokemon) => buy.level === +level! && buy.namePokemon === name && buy.price === +price!
     );
 
@@ -43,7 +43,7 @@ export default function SinglePokemon() {
   }
   
     const SendToCart = () => {
-      const buyQty = buyList.find(item =>{
+      const buyQty = buyList.list.find(item =>{
         return  item.namePokemon === singlePokemon.namePokemon &&
                 item.level === singlePokemon.level &&
                 item.price === singlePokemon.price
@@ -63,7 +63,7 @@ export default function SinglePokemon() {
     
     useEffect(()=>{
       window.scrollTo(0, 0);
-      if(buyList.length > 0){
+      if(buyList.list.length > 0){
         dispatch(fillState(filteredBuyList[0]));
         dispatch(getFlavorTextAsync(""+filteredBuyList[0].idApi))
       }

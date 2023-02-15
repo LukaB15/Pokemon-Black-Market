@@ -7,6 +7,7 @@ import LoadingSell from '../components/LoadingSell';
 import { cartPokemon } from '../features/Cart/cartSlice';
 import { getMoneyAsync, selectUser } from '../features/frontUser/userSlice';
 import HistoryList from './HistoryList';
+import PokedexList from './PokedexList';
 
 export interface order{
     __v:number,
@@ -113,14 +114,10 @@ export default function Profile() {
             <div className="flex flex-col w-full 2xl:w-2/3">
                 <div className="flex-1 bg-white rounded-lg shadow-xl p-8">
                     <h4 className="text-xl text-gray-900 font-bold">My Pokedex</h4>
-                    <div className="mt-2 mb-2 flex flex-row flex-wrap">
-                        <img src='charizard.png' className='w-2/12 ml-2 mr-2'/>
-                        <img src='charizard.png' className='w-2/12 ml-2 mr-2'/>
-                        <img src='charizard.png' className='w-2/12 ml-2 mr-2'/>
-                        <img src='charizard.png' className='w-2/12 ml-2 mr-2'/>
-                        <img src='charizard.png' className='w-2/12 ml-2 mr-2'/>
-                        <img src='charizard.png' className='w-2/12 ml-2 mr-2'/>
-                        <img src='charizard.png' className='w-2/12 ml-2 mr-2'/>
+                    <div className="mt-2 mb-2 flex flex-row flex-wrap overflow-y-scroll h-96">
+                    {orders.length === 0 ? <LoadingSell /> : orders.map((order) =>
+                            <PokedexList key={order._id} {...order} />
+                        )}
                     </div>
                 </div>
                 <div className="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">

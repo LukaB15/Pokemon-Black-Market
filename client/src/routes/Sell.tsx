@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import PokeList from "../components/PokeList";
+import { selectUser, userType } from "../features/frontUser/userSlice";
 import {
   selectSellPkmn,
   sellPkmnSliceAsync,
@@ -12,9 +14,11 @@ import {
 
 export default function Sell() {
   const [searchTerm, setSearchTerm] = useState("");
+  const user:userType = useAppSelector(selectUser);
 
   const sellPkmn: SellPkmnState = useAppSelector(selectSellPkmn);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate() 
 
   const sellStorePrice = (e: any) => {
     const sellValue: number = +e.target.value;
@@ -32,41 +36,27 @@ export default function Sell() {
     dispatch(sellPkmnSliceAsync(sellPkmn));
   };
 
+  const disabledMessage = () => {
+    if(user.userName === null){
+      return "Please login to continue"
+    }else if(!sellPkmn.lvl || !sellPkmn.name || !sellPkmn.price || !sellPkmn.qty){
+      return "All Fields are required"
+    }else{
+      return "Sell"
+    }
+  }
+
   useEffect(()=>{
     window.scrollTo(0, 0);
+    if(user.userName===null){
+      if (window.confirm("Please login to checkout.")) {
+        navigate("/Login");
+      }      
+    }
   },[]);
 
   return (
     <>
-      {/* <div className='w-full h-max  pt-48 md:pb-96 bg-bck'>
-    <div className='flex flex-col-reverse md:flex-col-reverse lg:flex-row items-center ml-auto mr-auto w-fit '>
-      <article className="rounded-xl bg-white p-3 shadow-lg article w-6/12 lg:mr-12 mb-16 lg:mb-0">
-     
-        <div className="relative flex flex-col items-center overflow-hidden rounded-xl">
-          <img src={sellPkmn.imgUrl ? sellPkmn.imgUrl: "pokeball.png" } className="w-64" alt="Pokemon_Product" />
-          <p className='text-darkest mt-4 mb-4 Pokemon'>
-            {sellPkmn.name}
-          </p>
-          <form className='flex flex-row justify-around'>
-            <input className='w-3/12' type="text" name="Price" placeholder='Price' onChange={sellStorePrice} />
-            <input className='w-3/12' type="text" name="Level" placeholder='Level' onChange={sellStoreLvl} />
-            <input className='w-3/12' type="text" name="Quantity" placeholder='Qty' onChange={sellStoreQty} />
-          </form>
-
-          <div className="flex items-center space-x-1.5 rounded-lg bg-red-rocket px-4 py-1.5 text-white duration-100 hover:bg-white hover:text-red-rocket hover:border border mt-6 ">
-              <button className="text-lg w-24" onClick={sendStateToServer}>Sell</button>
-          </div>
-        </div>
-
-    </article>
-      <div className="rounded-xl bg-white p-3 shadow-lg article w-96 h-80  flex flex-col items-center mb-16 lg:mb-0">
-      <div className='searchbardiv'>
-            <input className='searchbar' type="text" placeholder='Search a Pokemon' onChange={event=>{setSearchTerm(event.target.value)}}/>
-        </div>
-            <PokeList searchTerm={searchTerm}/>
-      </div>
-    </div>
-    </div> */}
 
       <div className="bg-bck flex flex-col min-h-screen pb-96">
         <div className="bg-white h-96 w-6/12 sm:w-4/12 ml-28 mt-32 rounded-lg static">
@@ -137,16 +127,12 @@ export default function Sell() {
                   !sellPkmn.lvl ||
                   !sellPkmn.name ||
                   !sellPkmn.price ||
-                  !sellPkmn.qty
+                  !sellPkmn.qty ||
+                  user.userName === null
                 }
                 
               >
-                {!sellPkmn.lvl ||
-                !sellPkmn.name ||
-                !sellPkmn.price ||
-                !sellPkmn.qty
-                  ? "All Fields are required"
-                  : "Sell"}
+                {disabledMessage()}
               </button>
             </div>
           </div>

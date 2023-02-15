@@ -1,15 +1,24 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../app/hooks';
 import CartItem from '../components/CartItem';
 import Total from '../components/Total';
 import { cartPokemon, listCart, selectCart } from '../features/Cart/cartSlice';
+import { selectUser, userType } from '../features/frontUser/userSlice';
 
 
 export default function Checkout() {
   const cartPkmn:listCart= useAppSelector(selectCart);
+  const user:userType = useAppSelector(selectUser);
+  const navigate = useNavigate() 
   useEffect(()=>{
     window.scrollTo(0, 0);
+    if(user.userName===null){
+      if (window.confirm("Please login to checkout.")) {
+        navigate("/Login");
+      }      
+    }
   },[]);
   return (
     <>

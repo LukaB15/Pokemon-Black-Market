@@ -1,12 +1,13 @@
 import axios from 'axios';
 import {useSelector} from 'react-redux'
-import { useAppSelector } from '../app/hooks';
-import { cartPokemon, listCart, selectCart } from '../features/Cart/cartSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { cartPokemon, emptyCart, listCart, selectCart } from '../features/Cart/cartSlice';
 import { selectUser, userType } from '../features/frontUser/userSlice';
 
 function Total(){
 const cartPkmn:listCart = useAppSelector(selectCart);
 const user:userType = useAppSelector(selectUser);
+const dispatch = useAppDispatch();
 
 const activated = "mt-6 w-full rounded-md bg-red-rocket py-1.5 font-medium text-blue-50 hover:bg-white hover:text-red-rocket border border-red-rocket hover:border hover:border-red-rocket";
 const disActivated = "mt-6 w-full rounded-md bg-light py-1.5 font-medium text-blue-50 border border-red-rocket";
@@ -34,7 +35,7 @@ const checkoutGo = () =>{
   })
   .then(function(response){
     console.log(response);
-    
+    dispatch(emptyCart());
   })
   .catch(function(error){
     //console.log(error);

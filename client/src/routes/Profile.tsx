@@ -143,7 +143,7 @@ export default function Profile() {
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-4">
                         <div className="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl">
                             <div className="flex items-center justify-between">
-                                <span className="font-bold text-sm text-indigo-600">Number of Sell</span>
+                                <span className="font-bold text-sm text-indigo-600">Number of Sales</span>
                     
                             </div>
                             <div className="flex items-center justify-between mt-6">

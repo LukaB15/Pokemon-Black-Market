@@ -19,7 +19,7 @@ export type buyPokemon = {
       level:number | null;
       price:number | null;
       idSeller: string
-      isOrder: string
+      idOrder: string | null
       __v:number,
       createdAt:string,
       updatedAt:string,
@@ -50,19 +50,22 @@ export default function SalesList() {
             getSales();
         },[])
 
-      //   console.log(sales[0].ordersItems.imgUrl);
-      // console.log(sales.length);
-      
-      
+        console.log(sales);
         
-
   return (
     <>
      
-      {sales.length === 0 ? <LoadingSell /> : sales.map((sale) =>
-      <Link to={{pathname: `/SinglePokemon/${ sale.namePokemon}/${ sale.level}/${ sale.price}`}}>
-             <img src={sale!.imgUrl!} className='ml-2 mr-2 w-4/6'/>
+      {sales.length === 0 ? <LoadingSell /> : sales.map((sale) => sale.idOrder  ===  "" ? 
+            <Link to={{pathname: `/SinglePokemon/${ sale.namePokemon}/${ sale.level}/${ sale.price}`}}>
+                  <img src={sale!.imgUrl!} className='ml-2 mr-2 w-4/6'/>
              </Link>
+             :
+            
+                  <div className='relative'>
+                  <img src={sale!.imgUrl!} className='ml-2 mr-2 w-4/6 z-20'/>
+                  <p className='absolute top-16 right-28 Pokemon text-xl text-red-rocket uppercase bg-white bg-opacity-80 p-4 rounded-2xl'>sold</p>
+                  </div>
+             
         )}
         
     </>

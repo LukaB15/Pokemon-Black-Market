@@ -8,6 +8,7 @@ import { cartPokemon } from '../features/Cart/cartSlice';
 import { getMoneyAsync, selectUser } from '../features/frontUser/userSlice';
 import HistoryList from './HistoryList';
 import PokedexList from './PokedexList';
+import SalesList from './SalesList';
 
 export interface order{
     __v:number,
@@ -25,8 +26,8 @@ export default function Profile() {
     const initialOrders:ordersArray = [];
     const [orders, setOrders] = useState(initialOrders);
     const user = useAppSelector(selectUser);
-    const dispatch = useAppDispatch()
-
+    const dispatch = useAppDispatch();
+    const [sales, setSales] = useState<any[]>([]);
     
 
     const getOrdersUser = async() =>{
@@ -41,11 +42,27 @@ export default function Profile() {
         })
     }
 
+    const getSales = async() =>{
+        const response = await axios.get(`http://localhost:3001/api/product/findProduct/${user.userId}`, {
+            withCredentials: true,
+        })
+        .then(function(response){
+              setSales(response.data);
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    }
+
+
     useEffect( ()=>{
         window.scroll(0,0);
         dispatch(getMoneyAsync(user.userId!));
         getOrdersUser();
+        getSales();
     },[])
+
+    console.log(sales);
 
   return (
     <>
@@ -135,7 +152,7 @@ export default function Profile() {
                                 </div>
                                 <div className="flex flex-col">
                                     <div className="flex items-end">
-                                        <span className="text-2xl 2xl:text-3xl font-bold">{orders.length}</span>
+                                        <span className="text-2xl 2xl:text-3xl font-bold">{sales!.length}</span>
                                         <div className="flex items-center ml-2 mb-1">
                                             
                                         </div>
@@ -173,18 +190,8 @@ export default function Profile() {
                 <h4 className="text-xl text-gray-900 font-bold">My sales</h4>
                 
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-8 mt-8">
-                    <Link to={"/MySale"}>
-                        <img src='charizard.png' className='ml-2 mr-2'/>
-                        </Link>
-                        <img src='charizard.png' className='ml-2 mr-2'/>
-                        <img src='charizard.png' className='ml-2 mr-2'/>
-                        <img src='charizard.png' className='ml-2 mr-2'/>
-                        <img src='charizard.png' className='ml-2 mr-2'/>
-                        <img src='charizard.png' className='ml-2 mr-2'/>
-                        <img src='charizard.png' className='ml-2 mr-2'/>
-                  
-               
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-6 gap-8 mt-8 h-96 overflow-y-scroll">
+                             <SalesList  />
             </div>
         </div>
     </div>

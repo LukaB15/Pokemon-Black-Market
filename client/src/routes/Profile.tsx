@@ -62,7 +62,7 @@ export default function Profile() {
         getSales();
     },[])
 
-    console.log(sales);
+
 
   return (
     <>
@@ -120,7 +120,7 @@ export default function Profile() {
                     </ul>
                 </div>
                 <div className="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
-                    <h4 className="text-xl text-gray-900 font-bold">History of commands</h4>
+                    <h4 className="text-xl text-gray-900 font-bold">History of purchases</h4>
                     <div className="relative px-4 overflow-y-scroll h-96">
                        {orders.length === 0 ? <LoadingSell /> : orders.map((order) =>
                             <HistoryList key={order._id} {...order} />
@@ -131,7 +131,7 @@ export default function Profile() {
             <div className="flex flex-col w-full 2xl:w-2/3">
                 <div className="flex-1 bg-white rounded-lg shadow-xl p-8">
                     <h4 className="text-xl text-gray-900 font-bold">My Pokedex</h4>
-                    <div className="mt-2 mb-2 flex flex-row flex-wrap overflow-y-scroll h-96">
+                    <div className="mt-2 mb-2 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-8 overflow-y-scroll overflow-x-hidden h-96">
                     {orders.length === 0 ? <LoadingSell /> : orders.map((order) =>
                             <PokedexList key={order._id} {...order} />
                         )}
@@ -190,7 +190,7 @@ export default function Profile() {
                 <h4 className="text-xl text-gray-900 font-bold">My sales</h4>
                 
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-6 gap-8 mt-8 h-96 overflow-y-scroll">
+            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-5 gap-8 mt-8 h-96 overflow-y-scroll overflow-x-hidden">
                              <SalesList  />
             </div>
         </div>

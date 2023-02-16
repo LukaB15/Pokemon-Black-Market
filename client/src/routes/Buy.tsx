@@ -32,7 +32,7 @@ const switchType = (type:string) => (event:any) =>
 {
   setTypeRecherche(type);
 }
-const activated = "flex items-center justify-center flex-shrink-0 px-3 py-2 space-x-2 text-gray-300 hover:opacity-80 border-2 border-darkest bg-bck rounded-3xl"
+const activated = "flex items-center justify-center flex-shrink-0 px-3 py-2 space-x-2 text-gray-300 hover:opacity-80 border-2 border-darkest bg-bckfilter rounded-3xl"
 const disActivated = "flex items-center justify-center flex-shrink-0 px-3 py-2 space-x-2 text-gray-600 hover:text-red-rocket border-2 border-darkest bg-red rounded-3xl"
 
 function classNames(...classes:any) {
@@ -495,7 +495,7 @@ function classNames(...classes:any) {
             <span>Fairy</span>
           </button>
         </div>
-        <section className="py-10 bg-bck h-full  pt-32">
+        <section className="py-10 bg-bck h-full min-h-screen  pt-32">
           <div className="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {buyList.list.length === 0 ? <Loading/> : buyList.list.map((pkmn)=> pkmn.typeFirst === typerecherche || pkmn.typeSecond ===typerecherche || typerecherche === "" ? 
               <BuyPokemon key={uuidv4()} {...pkmn} />

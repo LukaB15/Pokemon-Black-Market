@@ -28,7 +28,6 @@ export default function RecommandationsList() {
                 console.log(error);
             })
         }
-        console.log(reco);
         
         
     useEffect( ()=>{

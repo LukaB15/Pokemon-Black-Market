@@ -50,7 +50,6 @@ export default function SalesList() {
             getSales();
         },[])
 
-        console.log(sales);
         
   return (
     <>
@@ -63,7 +62,7 @@ export default function SalesList() {
             
                   <div className='relative'>
                   <img src={sale!.imgUrl!} className='ml-2 mr-2 w-4/6 z-20'/>
-                  <p className='absolute top-16 right-28 Pokemon text-xl text-red-rocket uppercase bg-white bg-opacity-80 p-4 rounded-2xl'>sold</p>
+                  <p className='absolute top-1/4 right-1/4 lg:2/4 lg:right-20 2xl:right-28 origin-center rotate-12 border border-red-rocket Pokemon text-xl text-red-rocket uppercase bg-white bg-opacity-80 p-4 rounded-2xl'>sold</p>
                   </div>
              
         )}

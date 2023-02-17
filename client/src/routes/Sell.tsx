@@ -49,7 +49,7 @@ export default function Sell() {
   useEffect(()=>{
     window.scrollTo(0, 0);
     if(user.userName===null){
-      if (window.confirm("Please login to checkout.")) {
+      if (window.confirm("Please login to proceed.")) {
         navigate("/Login");
       }      
     }

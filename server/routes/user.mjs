@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router();
+import bcrypt from "bcrypt";
 import Users from "../models/Users.mjs";
 
 import {
@@ -10,24 +11,34 @@ import {
 
 //UPDATE
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
-  if (req.body.password) {
-    req.body.password = await bcrypt.hash(req.body.password, 10);
-  }
+  let passwFormat = /^[A-Za-z0-9_]\w{7,30}$/;
+    if (!req.body.password.match(passwFormat)){
+      console.log("password");
+      return "Invalid password"
+    };
+  // if (req.body.password) {
+  //   req.body.password = await bcrypt.hash(req.body.password, 10);
+  // }
   try {
-    let passwFormat = /^[A-Za-z0-9_]\w{7,30}$/;
-    if (!password.match(passwFormat)) return "Invalid password";
     const newPassword = await bcrypt.hash(req.body.password, 10);
+    console.log("id : ",req.params.id);
+    console.log("username : ", req.body.username);
+    console.log("email : ", req.body.email);
+    console.log("req.body.password : ", req.body.password);
+    console.log("newPassword: ", newPassword);
     const updateUser = await Users.finByIdAndUpdate(
       req.params.id,
       {
-        $set: {
+        
           username: req.body.username,
           email: req.body.email,
           password: newPassword,
-        },
+        
       },
       { new: true }
     );
+    console.log("bonne route"); 
+
     res.status(200).json(updateUser);
   } catch (err) {
     res.status(500).json(err);

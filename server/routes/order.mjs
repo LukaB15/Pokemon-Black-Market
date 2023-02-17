@@ -32,31 +32,19 @@ router.post("/", verifyToken, async (req, res) => {
     );
 
     arrayItemsOrdered.forEach(async (element) => {
-      let oldestPokemon = await Product.find([
-        {
-          $match: {
-            $and: [
-              { namePokemon: element.namePokemon },
-              { level: element.level },
-              { price: element.price },
-            ],
+      for (let i = 0; i < element.qty; i++) {
+        await Product.findOneandUpdate(
+          {
+            namePokemon: element.name,
+            level: element.lvl,
+            price: element.price,
+            idOrder: "",
           },
-        },
-        { $sort: { createdAt: -1 } },
-        { $limit: 1 },
-      ]);
-
-      ArrayPokemonWithId.push(oldestPokemon);
-    });
-    ArrayPokemonWithId.forEach(async (element) => {
-      await Product.updateOne(
-        { _id: element._id },
-        {
-          $set: {
-            idOrder: idOrder,
-          },
-        }
-      );
+          { $sort: { createdAt: 1 } },
+          { $limit: 1 },
+          { $set: { idOrder: idOrder } }
+        );
+      }
     });
     await Users.updateOne(
       { _id: idBuyers },

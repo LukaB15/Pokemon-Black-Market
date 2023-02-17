@@ -15,7 +15,15 @@ export type buyPokemon = {
 }
 
 
-export const initialState:Array<buyPokemon> = [];
+export type buyList=Array<buyPokemon>;
+
+export interface listBuy{
+    list:buyList;
+}
+
+export const initialState:listBuy = {
+    list:[],
+}
 
 
 export const getBuyListFromServerAsync = createAsyncThunk(
@@ -31,14 +39,14 @@ const buyListSlice = createSlice({
   initialState,
   reducers: {
     emptyArray:(state)=>{
-        state.splice(0, state.length);
+        state.list.splice(0, state.list.length);
     }
   },
   extraReducers:(builder) => {
       builder
         .addCase(getBuyListFromServerAsync.fulfilled, (state, action) => {
             action.payload.forEach((element:buyPokemon) => {
-                return state.push(element)
+                return state.list.push(element)
             });
             
         })

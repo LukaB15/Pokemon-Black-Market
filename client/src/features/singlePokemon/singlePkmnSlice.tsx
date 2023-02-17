@@ -57,7 +57,7 @@ export const singlePkmnSlice = createSlice({
 
         })
         .addCase(getFlavorTextAsync.fulfilled, (state, action)=>{
-            if(action.payload==="No description found"){
+            if(action.payload==="No description found" || action.payload.flavor_text_entries.length === 0){
                 state.flavorText = "No description found";
             }else{
                 let i:number = 0;

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./Navbar.css";
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
@@ -9,10 +9,13 @@ export default function Navbar() {
   const user = useAppSelector(selectUser);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const logOut = () =>{
+    setIsNavOpen(false);
     dispatch(userLogout());
     persistor.purge();
+    navigate("/");
   }
 
   return (
@@ -83,12 +86,25 @@ export default function Navbar() {
               <li className="border-b border-gray-400 my-8 uppercase">
                 <Link to={`/Sell`} onClick={() => setIsNavOpen(false)} className="block rounded py-2 pl-3 pr-4 text-red-rocket  md:p-0  " aria-current="page">Sell</Link>
               </li>
+              {!user.userName ? 
+              <>
               <li className="border-b border-gray-400 my-8 uppercase">
                 <Link to={`/Login`} onClick={() => setIsNavOpen(false)} className="block rounded py-2 pl-3 pr-4 text-red-rocket  md:p-0  " aria-current="page">Login</Link>
               </li>
               <li className="border-b border-gray-400 my-8 uppercase">
                 <Link to={`/Register`} onClick={() => setIsNavOpen(false)} className="block rounded py-2 pl-3 pr-4 text-red-rocket  md:p-0 " aria-current="page">Register</Link>
               </li>
+              </>
+              :
+              <>
+              <li className="border-b border-gray-400 my-8 uppercase cursor-pointer" onClick={logOut}>
+                <p className="block rounded py-2 pl-3 pr-4 text-red-rocket  md:p-0  " aria-current="page">Logout</p>
+              </li>
+              <li className="border-b border-gray-400 my-8 uppercase">
+                <Link to={`/Profile`} onClick={() => setIsNavOpen(false)} className="block rounded py-2 pl-3 pr-4 text-red-rocket  md:p-0 " aria-current="page">Profile</Link>
+              </li>
+              </>
+              }
             </ul>
           </div>
   </div>

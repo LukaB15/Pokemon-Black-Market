@@ -10,47 +10,50 @@ import {
 } from "./verifyToken.mjs";
 
 //CREATE
-
+/*
+ *Route pour la vente
+ *Normalement OK
+ */
 router.post("/", verifyToken, async (req, res) => {
   const arrayItemsOrdered = req.body.ordersItems;
-  let ArrayPokemonWithId = [];
   const newOrder = new Order({
     idBuyers: req.body.idBuyers,
     ordersItems: arrayItemsOrdered,
+    total: req.body.total,
   });
-
   try {
     let savedOrder = await newOrder.save();
+    const savedId = savedOrder._id.valueOf();
     const idOrder = await Order.find(
       {
         idBuyers: req.body.idBuyers,
         ordersItems: arrayItemsOrdered,
+        total: req.body.total,
       },
       {
         _id: "$_id",
       }
     );
-
     arrayItemsOrdered.forEach(async (element) => {
       for (let i = 0; i < element.qty; i++) {
-        await Product.findOneandUpdate(
+        await Product.findOneAndUpdate(
           {
             namePokemon: element.name,
             level: element.lvl,
             price: element.price,
             idOrder: "",
           },
-          { $sort: { createdAt: 1 } },
-          { $limit: 1 },
-          { $set: { idOrder: idOrder } }
+          { $set: { idOrder: savedId } }
         );
       }
     });
-    await Users.updateOne(
-      { _id: idBuyers },
+    const total = -req.body.total;
+    const buyersId = req.body.idBuyers;
+    await Users.findOneAndUpdate(
+      { _id: buyersId },
       {
         $inc: {
-          credits: -req.body.total,
+          credits: total,
         },
       }
     );
@@ -61,9 +64,14 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 //GET user Order
+/*Route pour avoir la liste des commandes
+ *Normalement OK
+ */
 router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
   try {
+    console.log("Bonne route");
     const orders = await Order.find({ idBuyers: req.params.userId });
+    //console.log("orders : ", orders);
     const numberOrder = await Order.aggregate(
       [
         {
@@ -92,14 +100,19 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
         allowDiskUse: true,
       }
     );
-
-    res.status(200).json(orders, numberOrder);
+    const nbAndOrders = {
+      numberOrder: numberOrder,
+      orders: orders,
+    };
+    res.status(200).json(nbAndOrders);
   } catch (err) {
     res.status(500).json(err);
   }
 });
-//GET PRODUCT BY ORDER
 
+//GET PRODUCT BY ORDER
+/*Retourne une commande avec l'ID
+ */
 router.get(
   "findPokemonByOrder/:idOrder",
   verifyTokenAndAuthorization,

@@ -18,6 +18,9 @@ module.exports = {
       },
       backgroundImage: {
         'bck': "url('../public/bck.jpg')",
+        'bckfilter': "url('../public/filter.jpg')",
+        'pokeball': "url('../public/pokeball.png')",
+        'rocket': "url('../public/rocketlogo.png')",
       }
     },
   },

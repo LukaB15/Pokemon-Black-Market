@@ -1,13 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { fillState, getFlavorTextAsync, selectSinglePkmn } from '../features/singlePokemon/singlePkmnSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import "./Buy.css";
 import { selectBuyList } from '../features/buyList/buyListSlice';
 import {buyPokemon} from '../features/buyList/buyListSlice';
-import { log } from 'console';
-import BuyPokemon from '../components/BuyPokemon';
 import { addToCart, cartPokemon, listCart, selectCart } from '../features/Cart/cartSlice';
+import RecommandationsList from './RecommandationsList';
 
 
 export default function SinglePokemon() {
@@ -18,8 +17,9 @@ export default function SinglePokemon() {
     const level: string | undefined = useParams().level;
     const dispatch = useAppDispatch();
     const buyList = useAppSelector(selectBuyList);
+    const [enoughStock, setEnoughStock] = useState(true);
    
-    const filteredBuyList :Array<buyPokemon> = buyList.filter(
+    const filteredBuyList :Array<buyPokemon> = buyList.list.filter(
       (buy: buyPokemon) => buy.level === +level! && buy.namePokemon === name && buy.price === +price!
     );
 
@@ -44,13 +44,27 @@ export default function SinglePokemon() {
   }
   
     const SendToCart = () => {
-      dispatch(addToCart(itemPokemon));
-      // console.log(cartPkmn)
+      const buyQty = buyList.list.find(item =>{
+        return  item.namePokemon === singlePokemon.namePokemon &&
+                item.level === singlePokemon.level &&
+                item.price === singlePokemon.price
+      })
+      const cartQty = cartPkmn.list.find(item => {
+        return  item.name === singlePokemon.namePokemon &&
+                item.lvl === singlePokemon.level &&
+                item.price === singlePokemon.price
+      })
+      if(cartQty === undefined || buyQty!['COUNT(*)'] > cartQty.qty!){
+        dispatch(addToCart(itemPokemon));
+      }else{
+        setEnoughStock(false);
+      }
+      
     };
     
     useEffect(()=>{
       window.scrollTo(0, 0);
-      if(buyList.length > 0){
+      if(buyList.list.length > 0){
         dispatch(fillState(filteredBuyList[0]));
         dispatch(getFlavorTextAsync(""+filteredBuyList[0].idApi))
       }
@@ -93,20 +107,22 @@ export default function SinglePokemon() {
 
            <button className='bg-white mt-5 rounded-lg px-8 pt-2 pb-2 border border-29
            9 border-transparent  hover:text-red-rocket  transition ease-in-out '  onClick={SendToCart}>Add to Cart</button>
+           <span className={enoughStock? "invisible" : "text-lightest"}>*Stock limit reached*</span>
         </div>
         </div>
 
         <div className='bg-red-rocket  bg-opacity-90 w-9/12 mt-96 sm:md-72 mb-28 ml-auto mr-auto rounded-xl flex flex-col items-center'>
           <h2 className='text-white text-xs md:text-xl Pokemon mt-5'>Recommandations</h2>
           <div className='flex flex-col sm:flex-row items-center justify-center pt-5 pb-5'>
-          <img className='w-6/12 sm:w-3/12 max-w-sm hover:border hover:border-white hover:rounded-xl p-2 border border-transparent transition ease-in-out' src="../../../charizard.png" alt="recommandations_poke" />
+          {/* <img className='w-6/12 sm:w-3/12 max-w-sm hover:border hover:border-white hover:rounded-xl p-2 border border-transparent transition ease-in-out' src="../../../charizard.png" alt="recommandations_poke" />
           <img className='w-6/12 sm:w-3/12 max-w-sm hover:border hover:border-white hover:rounded-xl p-2 border border-transparent transition ease-in-out' src="../../../charizard.png" alt="recommandations_poke" />
           <img className='w-6/12 sm:w-3/12 max-w-sm hover:border hover:border-white hover:rounded-xl p-2 border border-transparent transition ease-in-out' src="../../../charizard.png" alt="recommandations_poke"/>
-         
+          */}
+          <RecommandationsList />
         </div>
         </div>
         <Link to={{pathname: `/Checkout`}}>
-        <div className='shopping-cart w-1/12'>
+        <div className='shopping-cart w-20 sm:w-32'>
           <img id='cartIcon' src="../../../pokeball.png"/>
           <p>{getTotalQuantity() || 0}</p>
         </div>

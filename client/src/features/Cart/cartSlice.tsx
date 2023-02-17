@@ -51,10 +51,13 @@ const cartSlice = createSlice({
       removeItem:(state , action:PayloadAction<number>) => {
         state.list = state.list.filter((item:cartPokemon)=> item.idApi != action.payload );
       },
+      emptyCart:(state) => {
+        state.list = [];
+      },
   }
 });
 
-export const {addToCart,incrementQuantity,decrementQuantity,removeItem,} = cartSlice.actions;
+export const {addToCart,incrementQuantity,decrementQuantity,removeItem,emptyCart} = cartSlice.actions;
 
 export const selectCart = (state: RootState) => state.cartList;
 

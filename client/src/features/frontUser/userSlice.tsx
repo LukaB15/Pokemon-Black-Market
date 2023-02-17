@@ -73,7 +73,6 @@ const userSlice = createSlice({
             console.log(action.payload);
         })
         .addCase(getMoneyAsync.fulfilled, (state, action)=>{
-            console.log(action.payload);
             state.credits = action.payload;
         })
 }

@@ -129,6 +129,7 @@ router.get(
   }
 );
 
+
 //GET ALL PRODUCT FOR ADMIN
 router.get("/admin", verifyTokenAndAdmin, async (req, res) => {
   try {
@@ -142,7 +143,7 @@ router.get("/admin", verifyTokenAndAdmin, async (req, res) => {
 
 //GET SIMILAR PRODUCT
 
-router.get("findSimilar/:typefirst", verifyToken, async (req, res) => {
+router.get("/findSimilar/:typefirst",/* verifyToken,*/ async (req, res) => {
   try {
     const similarProduct = await Product.find({
       typeFirst: req.params.typefirst,

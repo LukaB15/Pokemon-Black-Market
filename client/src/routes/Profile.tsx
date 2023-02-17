@@ -1,15 +1,68 @@
-import { useEffect } from 'react';
+import axios from 'axios';
+import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../app/hooks';
+import LoadingSell from '../components/LoadingSell';
+import { cartPokemon } from '../features/Cart/cartSlice';
 import { getMoneyAsync, selectUser } from '../features/frontUser/userSlice';
+import HistoryList from './HistoryList';
+import PokedexList from './PokedexList';
+import SalesList from './SalesList';
+
+export interface order{
+    __v:number,
+    _id:string,
+    createdAt:string,
+    idBuyers:string,
+    ordersItems:Array<cartPokemon>,
+    total:number,
+    updatedAt:string
+}
+
+export type ordersArray = Array<order>;
 
 export default function Profile() {
+    const initialOrders:ordersArray = [];
+    const [orders, setOrders] = useState(initialOrders);
     const user = useAppSelector(selectUser);
-    const dispatch = useAppDispatch()
-    useEffect(()=>{
+    const dispatch = useAppDispatch();
+    const [sales, setSales] = useState<any[]>([]);
+    
+
+    const getOrdersUser = async() =>{
+        const response = await axios.get(`http://localhost:3001/api/order/find/${user.userId}`, {
+            withCredentials: true,
+        })
+        .then(function(response){
+            setOrders(response.data.orders);
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    }
+
+    const getSales = async() =>{
+        const response = await axios.get(`http://localhost:3001/api/product/findProduct/${user.userId}`, {
+            withCredentials: true,
+        })
+        .then(function(response){
+              setSales(response.data);
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    }
+
+
+    useEffect( ()=>{
         window.scroll(0,0);
         dispatch(getMoneyAsync(user.userId!));
+        getOrdersUser();
+        getSales();
     },[])
+
+
 
   return (
     <>
@@ -67,119 +120,21 @@ export default function Profile() {
                     </ul>
                 </div>
                 <div className="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
-                    <h4 className="text-xl text-gray-900 font-bold">Historique de commandes</h4>
+                    <h4 className="text-xl text-gray-900 font-bold">History of purchases</h4>
                     <div className="relative px-4 overflow-y-scroll h-96">
-                        <div className="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
-
-                        
-                        <div className="flex items-center w-full my-6 -ml-1.5">
-                            <div className="w-1/12 z-10">
-                                <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <div className="w-11/12">
-                                <div className="flex flex-row items-center">
-                                <p className="text-sm text-red-rocket">ACHAT</p><p className="text-sm"> - Salamèche</p>
-                                </div>
-                                <p className="text-xs text-gray-500">3 min ago</p>
-                            </div>
-                        </div>
-                       
-                        <div className="flex items-center w-full my-6 -ml-1.5">
-                            <div className="w-1/12 z-10">
-                                <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <div className="w-11/12">
-                                <div className="flex flex-row items-center">
-                                <p className="text-sm text-red-rocket">VENTE</p><p className="text-sm"> - Bulbizarre</p>
-                                </div>
-                                <p className="text-xs text-gray-500">3 min ago</p>
-                            </div>
-                        </div>
-                     
-                        <div className="flex items-center w-full my-6 -ml-1.5">
-                            <div className="w-1/12 z-10">
-                                <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <div className="w-11/12">
-                                <div className="flex flex-row items-center">
-                                <p className="text-sm text-red-rocket">VENTE</p><p className="text-sm"> - Bulbizarre</p>
-                                </div>
-                                <p className="text-xs text-gray-500">3 min ago</p>
-                            </div>
-                        </div>
-                      
-                        <div className="flex items-center w-full my-6 -ml-1.5">
-                            <div className="w-1/12 z-10">
-                                <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <div className="w-11/12">
-                                <div className="flex flex-row items-center">
-                                <p className="text-sm text-red-rocket">VENTE</p><p className="text-sm"> - Bulbizarre</p>
-                                </div>
-                                <p className="text-xs text-gray-500">3 min ago</p>
-                            </div>
-                        </div>
-                    
-                        <div className="flex items-center w-full my-6 -ml-1.5">
-                            <div className="w-1/12 z-10">
-                                <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <div className="w-11/12">
-                                <div className="flex flex-row items-center">
-                                <p className="text-sm text-red-rocket">VENTE</p><p className="text-sm"> - Bulbizarre</p>
-                                </div>
-                                <p className="text-xs text-gray-500">3 min ago</p>
-                            </div>
-                        </div>
-                
-                        <div className="flex items-center w-full my-6 -ml-1.5">
-                            <div className="w-1/12 z-10">
-                                <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <div className="w-11/12">
-                                <div className="flex flex-row items-center">
-                                <p className="text-sm text-red-rocket">VENTE</p><p className="text-sm"> - Bulbizarre</p>
-                                </div>
-                                <p className="text-xs text-gray-500">3 min ago</p>
-                            </div>
-                        </div>
-                        <div className="flex items-center w-full my-6 -ml-1.5">
-                            <div className="w-1/12 z-10">
-                                <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <div className="w-11/12">
-                                <div className="flex flex-row items-center">
-                                <p className="text-sm text-red-rocket">VENTE</p><p className="text-sm"> - Bulbizarre</p>
-                                </div>
-                                <p className="text-xs text-gray-500">3 min ago</p>
-                            </div>
-                        </div>
-                        <div className="flex items-center w-full my-6 -ml-1.5">
-                            <div className="w-1/12 z-10">
-                                <div className="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <div className="w-11/12">
-                                <div className="flex flex-row items-center">
-                                <p className="text-sm text-red-rocket">VENTE</p><p className="text-sm"> - Bulbizarre</p>
-                                </div>
-                                <p className="text-xs text-gray-500">3 min ago</p>
-                            </div>
-                        </div>
-                
+                       {orders.length === 0 ? <LoadingSell /> : orders.map((order) =>
+                            <HistoryList key={order._id} {...order} />
+                        )}
                     </div>
                 </div>
             </div>
             <div className="flex flex-col w-full 2xl:w-2/3">
                 <div className="flex-1 bg-white rounded-lg shadow-xl p-8">
                     <h4 className="text-xl text-gray-900 font-bold">My Pokedex</h4>
-                    <div className="mt-2 mb-2 flex flex-row flex-wrap">
-                        <img src='charizard.png' className='w-2/12 ml-2 mr-2'/>
-                        <img src='charizard.png' className='w-2/12 ml-2 mr-2'/>
-                        <img src='charizard.png' className='w-2/12 ml-2 mr-2'/>
-                        <img src='charizard.png' className='w-2/12 ml-2 mr-2'/>
-                        <img src='charizard.png' className='w-2/12 ml-2 mr-2'/>
-                        <img src='charizard.png' className='w-2/12 ml-2 mr-2'/>
-                        <img src='charizard.png' className='w-2/12 ml-2 mr-2'/>
+                    <div className="mt-2 mb-2 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-8 overflow-y-scroll overflow-x-hidden h-96">
+                    {orders.length === 0 ? <LoadingSell /> : orders.map((order) =>
+                            <PokedexList key={order._id} {...order} />
+                        )}
                     </div>
                 </div>
                 <div className="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
@@ -188,16 +143,16 @@ export default function Profile() {
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-4">
                         <div className="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl">
                             <div className="flex items-center justify-between">
-                                <span className="font-bold text-sm text-indigo-600">Number of Sell</span>
+                                <span className="font-bold text-sm text-indigo-600">Number of Sales</span>
                     
                             </div>
                             <div className="flex items-center justify-between mt-6">
                                 <div>
-                                <svg className="w-12 h-12 p-2.5 bg-indigo-600 bg-opacity-20 rounded-full text-green-600 border border-indigo-600" fill="none" stroke="blue" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                                <svg className="w-12 h-12 p-2.5 bg-indigo-600 bg-opacity-20 rounded-full text-green-600 border border-indigo-600" fill="none" stroke="blue" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                                 </div>
                                 <div className="flex flex-col">
                                     <div className="flex items-end">
-                                        <span className="text-2xl 2xl:text-3xl font-bold">5</span>
+                                        <span className="text-2xl 2xl:text-3xl font-bold">{sales!.length}</span>
                                         <div className="flex items-center ml-2 mb-1">
                                             
                                         </div>
@@ -212,11 +167,11 @@ export default function Profile() {
                             </div>
                             <div className="flex items-center justify-between mt-6">
                                 <div>
-                                    <svg className="w-12 h-12 p-2.5 bg-green-400 bg-opacity-20 rounded-full text-green-600 border border-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                                    <svg className="w-12 h-12 p-2.5 bg-green-400 bg-opacity-20 rounded-full text-green-600 border border-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                                 </div>
                                 <div className="flex flex-col">
                                     <div className="flex items-end">
-                                        <span className="text-2xl 2xl:text-3xl font-bold">217</span>
+                                        <span className="text-2xl 2xl:text-3xl font-bold">{orders.length}</span>
                                         <div className="flex items-center ml-2 mb-1">
                                            
                                         </div>
@@ -235,18 +190,8 @@ export default function Profile() {
                 <h4 className="text-xl text-gray-900 font-bold">My sales</h4>
                 
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-8 mt-8">
-                    <Link to={"/MySale"}>
-                        <img src='charizard.png' className='ml-2 mr-2'/>
-                        </Link>
-                        <img src='charizard.png' className='ml-2 mr-2'/>
-                        <img src='charizard.png' className='ml-2 mr-2'/>
-                        <img src='charizard.png' className='ml-2 mr-2'/>
-                        <img src='charizard.png' className='ml-2 mr-2'/>
-                        <img src='charizard.png' className='ml-2 mr-2'/>
-                        <img src='charizard.png' className='ml-2 mr-2'/>
-                  
-               
+            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-5 gap-8 mt-8 h-96 overflow-y-scroll overflow-x-hidden">
+                             <SalesList  />
             </div>
         </div>
     </div>

@@ -46,20 +46,22 @@ export default function Login() {
       },
       { withCredentials: true }
     );
-    if(response.status === 200){
-      dispatch(storeUser({
-        userId:response.data._doc._id,
-        userName:response.data._doc.username,
-        credits:response.data._doc.credits,
-        mail:response.data._doc.email,
-        isAdmin:response.data._doc.isAdmin
-      }))
+    if (response.status === 200) {
+      dispatch(
+        storeUser({
+          userId: response.data._doc._id,
+          userName: response.data._doc.username,
+          credits: response.data._doc.credits,
+          mail: response.data._doc.email,
+          isAdmin: response.data._doc.isAdmin,
+        })
+      );
       setLoggedIn(true);
     }
   };
-  useEffect(()=>{
+  useEffect(() => {
     window.scrollTo(0, 0);
-  },[]);
+  }, []);
   if (loggedIn) {
     return <Navigate to="/Buy" />;
   }

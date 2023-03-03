@@ -54,7 +54,6 @@ router.post("/login", async (req, res) => {
       httpOnly: true,
       maxAge: 86400000,
       sameSite: "none",
-      secure: true,
     });
 
     res.status(200).json({ ...others, accesToken });
